@@ -1,0 +1,56 @@
+<div class="flex flex-col mt-12">
+  <div class="flex justify-center">
+    <div class="bg-white rounded-xl p-2 w-full sm:w-2/4 border-2">
+      <div class="flex flex-col sm:flex-row justify-between">
+        <div class="p-4">
+          <div class="font-bold text-xl">
+            FENERBAHÇE
+          </div>
+          <img src="https://media.api-sports.io/football/teams/611.png" width="100" height="100" class="pt-4"/>
+        </div>
+        <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
+          <div>
+            2
+          </div>
+          <div class="items-center">
+            <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+              MS
+            </div>
+          </div>
+          <div>
+            1
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="font-bold text-xl">
+            Beşiktaş
+          </div>
+          <img src="https://media.api-sports.io/football/teams/549.png" width="100" height="100"/>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <div class="flex flex-row text-sm text-gray-500 items-center">
+          6.03.2024 | Şampiyonlar Ligi | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: Ülker Stadyumu Fenerbahçe Şükrü Saracoğlu Spor Kompleksi
+          | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:gap-40 gap-2 px-4 sm:px-16 mt-4 text-blue-600 border-t pt-2">
+        <button (click)="h2h()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
+          Karşılaştırma
+        </button>
+        <button (click)="matchSummary()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
+          Maç Bilgisi
+        </button>
+        <button (click)="matchStatistics()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
+          İstatistik
+        </button>
+        <button (click)="matchComments()" class="hover:bg-gray-200 hover:rounded-md  hover:text-black p-2 focus:p-1 focus:text-green-400">
+          Yorum
+        </button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
+  </div>
+</div>

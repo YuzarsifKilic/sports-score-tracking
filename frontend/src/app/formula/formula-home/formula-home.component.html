@@ -1,0 +1,221 @@
+<div class="flex justify-center mt-4">
+  <div class="relative mt-2 rounded-md shadow-sm">
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+      <span class="text-gray-500 sm:text-sm"><img src="assets/images/search.svg" width="15" height="15"/></span>
+    </div>
+    <input
+      type="text"
+      name="price"
+      id="price"
+      class="block w-full rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-inset ring-blue-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
+      placeholder="Search..."
+    />
+  </div>
+</div>
+<div class="flex flex-col items-center mt-12">
+  <div *ngFor="let event of events; let i = index" class="bg-white rounded-xl p-2 w-2/4 border-2 mb-4">
+    <button (click)="toggleDetails(i)" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
+      <div class="flex flex-row text-sm gap-6 justify-start">
+        <div class="font-bold">
+          <img src="https://media.api-sports.io/flags/bh.svg" width="30" height="30"/>
+        </div>
+        <div class="font-bold">
+          28 Mart
+        </div>
+      </div>
+      <div class="flex-1 flex justify-center items-center">
+        <div class="flex flex-row gap-2 font-quicksand items-center">
+          <div>
+            Bahrain Grand Prix
+          </div>
+        </div>
+      </div>
+    </button>
+    <div [class.hidden]="openDetails !== i">
+      <div class="flex flex-row gap-4 text-sm">
+        <div class="py-20">
+          <img src="https://media.api-sports.io/formula-1/circuits/1.png" width="300" height="300"/>
+        </div>
+
+        <div class="flex flex-col divide-y-2">
+          <div class="flex flex-row gap-2 py-0.5">
+            <img src="https://media.api-sports.io/flags/bh.svg" width="20" height="20"/>
+            <div>
+              Bahrain Grand Prix'i
+            </div>
+            <div class="text-gray-600">
+              | Bahrain, Sakhir
+            </div>
+          </div>
+          <div class="py-0.5 flex flex-row gap-2">
+            Antrenman 1 |
+            <div class="text-gray-600">
+               2024-03-02
+            </div>
+            <div class="text-gray-600">
+              | UTC 15:00:00
+            </div>
+          </div>
+          <div class="py-0.5 flex flex-row gap-2">
+            Bahrein Uluslarası Pisti
+            <div class="text-gray-600">
+              | 57 Laps
+            </div>
+            <div class="text-gray-600">
+              | 5.412 km
+            </div>
+          </div>
+          <div>
+            <table class="items-center bg-transparent w-full border-collapse mt-4 text-center">
+              <thead>
+              <tr>
+                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Sürücüler
+                </th>
+                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Pozisyon
+                </th>
+                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  En Hızlı Tur
+                </th>
+                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Pit
+                </th>
+                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Takım
+                </th>
+                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Tur
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
+                   <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+                </th>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  1
+                </td>
+                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  1:31:44.742
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  2
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
+                  Red Bull Racing
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  57
+                </td>
+              </tr>
+              <tr>
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
+                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+                </th>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  1
+                </td>
+                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  1:31:44.742
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  2
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
+                  Red Bull Racing
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  57
+                </td>
+              </tr>
+              <tr>
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
+                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+                </th>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  1
+                </td>
+                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  1:31:44.742
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  2
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
+                  Red Bull Racing
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  57
+                </td>
+              </tr>
+              <tr>
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
+                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+                </th>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  1
+                </td>
+                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  1:31:44.742
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  2
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
+                  Red Bull Racing
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  57
+                </td>
+              </tr>
+              <tr>
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
+                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+                </th>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  1
+                </td>
+                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  1:31:44.742
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  2
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
+                  Red Bull Racing
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  57
+                </td>
+              </tr>
+              <tr>
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
+                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+                </th>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  1
+                </td>
+                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  1:31:44.742
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  2
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
+                  Red Bull Racing
+                </td>
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  57
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,56 @@
+<div class="flex flex-col mt-12">
+  <div class="flex justify-center">
+    <div class="bg-white rounded-xl p-2 w-full sm:w-2/4 border-2">
+      <div class="flex flex-col sm:flex-row justify-between">
+        <div class="flex flex-col p-4 items-center">
+          <div class="font-bold text-xl">
+            Brooklyn Nets
+          </div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="100" height="100" class="pt-4"/>
+        </div>
+        <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
+          <div>
+            94
+          </div>
+          <div class="items-center">
+            <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+              MS
+            </div>
+          </div>
+          <div>
+            98
+          </div>
+        </div>
+        <div class="flex flex-col p-4 items-center">
+          <div class="font-bold text-xl">
+            Charlotte Hornets
+          </div>
+          <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="100" height="100" class="pt-4"/>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <div class="flex flex-row text-sm text-gray-500 items-center">
+          6.03.2024 | Standart | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: Spectrum Center
+          | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem: Scott Foster
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:gap-40 gap-2 px-4 sm:px-16 mt-4 text-blue-600 border-t pt-2">
+        <button (click)="matchSummary()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
+          Detay
+        </button>
+        <button (click)="h2h()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
+          Karşılaştırma
+        </button>
+        <button (click)="matchStatistics()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
+          İstatistik
+        </button>
+        <button (click)="matchComments()" class="hover:bg-gray-200 hover:rounded-md  hover:text-black p-2 focus:p-1 focus:text-green-400">
+          Yorum
+        </button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
+  </div>
+</div>

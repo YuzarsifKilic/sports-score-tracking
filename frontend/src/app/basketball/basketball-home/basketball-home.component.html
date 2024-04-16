@@ -1,0 +1,48 @@
+<div class="flex justify-center mt-4">
+  <div class="relative mt-2 rounded-md shadow-sm">
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+      <span class="text-gray-500 sm:text-sm"><img src="assets/images/search.svg" width="15" height="15"/></span>
+    </div>
+    <input
+      type="text"
+      name="price"
+      id="price"
+      class="block w-full rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-inset ring-blue-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
+      placeholder="Search..."
+    />
+  </div>
+</div>
+<div class="flex justify-center mt-12">
+  <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y">
+    <div class="pb-2">
+      Favoriler
+    </div>
+    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
+      <div class="flex flex-row gap-2 text-sm text-center">
+        <div class="italic">
+          16.00
+        </div>
+        <div class="font-bold">
+          MS
+        </div>
+      </div>
+      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
+        <div>
+          Brooklyn Nets
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="25" height="25"/>
+        <div>
+          90 - 80
+        </div>
+        <div>
+          Charlotte Hornets
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30"/>
+      </div>
+      <div class="italic text-gray-300 text-sm">
+        İY 47-37
+      </div>
+    </button>
+
+  </div>
+</div>
