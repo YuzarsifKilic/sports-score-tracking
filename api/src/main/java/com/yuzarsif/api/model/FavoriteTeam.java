@@ -21,7 +21,9 @@ public class FavoriteTeam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long teamId;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @Enumerated(EnumType.STRING)
+    private SportType sportType;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "football_fan_favorite_team",
             joinColumns = @JoinColumn(name = "favorite_team_id"),
             inverseJoinColumns = @JoinColumn(name = "football_fan_id"))
@@ -32,6 +34,7 @@ public class FavoriteTeam {
         return "FavoriteTeam{" +
                 "id=" + id +
                 ", teamId=" + teamId +
+                ", sportType=" + sportType +
                 '}';
     }
 
@@ -40,11 +43,11 @@ public class FavoriteTeam {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FavoriteTeam that = (FavoriteTeam) o;
-        return Objects.equals(id, that.id) && Objects.equals(teamId, that.teamId);
+        return Objects.equals(id, that.id) && Objects.equals(teamId, that.teamId) && Objects.equals(sportType, that.sportType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, teamId);
+        return Objects.hash(id, teamId, sportType);
     }
 }

@@ -20,11 +20,13 @@ public class FavoriteMatch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long matchId;
+    @Enumerated(EnumType.STRING)
+    private SportType sportType;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "football_fan_favorite_match",
             joinColumns = @JoinColumn(name = "football_fan_id"),
             inverseJoinColumns = @JoinColumn(name = "favorite_match_id"))
-    private Set<FootballFan> footballFan;
+    private Set<FootballFan> footballFans;
 
     @Override
     public String toString() {

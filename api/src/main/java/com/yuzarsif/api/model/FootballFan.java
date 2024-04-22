@@ -19,7 +19,7 @@ public class FootballFan extends BaseUser {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "football_fan_favorite_team",
             joinColumns = @JoinColumn(name = "football_fan_id"),
             inverseJoinColumns = @JoinColumn(name = "favorite_team_id"))
@@ -49,11 +49,11 @@ public class FootballFan extends BaseUser {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         FootballFan that = (FootballFan) o;
-        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(favoriteTeams, that.favoriteTeams);
+        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(phoneNumber, that.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, phoneNumber, favoriteTeams);
+        return Objects.hash(super.hashCode(), firstName, lastName, phoneNumber);
     }
 }
