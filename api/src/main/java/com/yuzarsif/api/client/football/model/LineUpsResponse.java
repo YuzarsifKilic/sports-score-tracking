@@ -7,11 +7,6 @@ import java.util.ArrayList;
 @Data
 public class LineUpsResponse {
 
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
-    public Paging paging;
     public ArrayList<Response> response;
 
     @Data
@@ -32,17 +27,6 @@ public class LineUpsResponse {
         public String primary;
         public String number;
         public String border;
-    }
-
-    @Data
-    public static class Paging {
-        public int current;
-        public int total;
-    }
-
-    @Data
-    public static class Parameters {
-        public String fixture;
     }
 
     @Data

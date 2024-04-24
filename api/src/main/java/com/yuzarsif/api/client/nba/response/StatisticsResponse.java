@@ -6,21 +6,11 @@ import java.util.ArrayList;
 
 @Data
 public class StatisticsResponse {
-
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
     public ArrayList<Response> response;
 
     @Data
     public static class Game {
         public int id;
-    }
-
-    @Data
-    public static class Parameters {
-        public String game;
     }
 
     @Data

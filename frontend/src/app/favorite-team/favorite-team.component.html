@@ -1,0 +1,32 @@
+<div class="container mx-auto px-40 mt-20">
+  <div class="bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4">
+    <div class="flex flex-row justify-between">
+      <div class="sm:col-span-3">
+        <div class="flex flex-row">
+          <label for="repository-select" class="block font-quicksand leading-6 text-gray-900">
+            Ülke
+            <div [ngSwitch]="selectedCountry" class="flex flex-row">
+              <img *ngSwitchCase="true" src="{{country.flag}}" width="40" height="40">
+            </div>
+          </label>
+        </div>
+        <div class="mt-2">
+          <select id="repository-select" name="repository-select" (change)="onSelectCountry($event)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option>Ülke Seçiniz...</option>
+            <option *ngFor="let country of countries$">{{country.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="sm:col-span-3">
+          <label for="repository-select" class="block font-quicksand leading-6 text-gray-900">
+            Lig
+          </label>
+        <div class="mt-2">
+          <select id="repository-selct" name="repository-select" [ngModel]="league" (change)="onSelectLeague(league)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option *ngFor="let league of leagues$" [ngValue]="league.league">{{league.league.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

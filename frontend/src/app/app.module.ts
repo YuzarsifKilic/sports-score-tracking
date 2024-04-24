@@ -22,6 +22,9 @@ import { FormulaHomeComponent } from './formula/formula-home/formula-home.compon
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ToastrModule} from "ngx-toastr";
+import { FavoriteTeamComponent } from './favorite-team/favorite-team.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +47,15 @@ import { LoginPageComponent } from './login/login-page/login-page.component';
     FormulaHomeComponent,
     SignUpComponent,
     SignInComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    FavoriteTeamComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

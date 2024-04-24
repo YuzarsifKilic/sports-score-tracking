@@ -37,9 +37,6 @@ public class ApiApplication {
                                                TeamClient teamClient,
                                                StandingsClient standingsClient) {
         return args -> {
-            StandingsResponse standings = standingsClient.findStandings(2023, 203);
-
-            System.out.println(standings);
         };
     }
 

@@ -8,6 +8,7 @@ import {BasketballHomeComponent} from "./basketball/basketball-home/basketball-h
 import {BasketballMatchDetailComponent} from "./basketball/basketball-match-detail/basketball-match-detail.component";
 import {FormulaHomeComponent} from "./formula/formula-home/formula-home.component";
 import {LoginPageComponent} from "./login/login-page/login-page.component";
+import {FavoriteTeamComponent} from "./favorite-team/favorite-team.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,9 +17,10 @@ const routes: Routes = [
   { path: 'football-match-detail', component: FootballMatchDetailComponent },
   { path: 'football-match-detail/h2h', component: FootballH2hComponent },
   { path: 'basketball-home', component: BasketballHomeComponent },
-  { path: 'basketball-match-detail', component: BasketballMatchDetailComponent },
+  { path: 'basketball-match-detail/:matchId', component: BasketballMatchDetailComponent },
   { path: 'formula-home', component: FormulaHomeComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'add-favorite-team', component: FavoriteTeamComponent },
 ];
 
 @NgModule({

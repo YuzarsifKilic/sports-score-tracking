@@ -17,32 +17,33 @@
     <div class="pb-2">
       Favoriler
     </div>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          16.00
+    <div *ngFor="let game of nbaGames">
+      <button (click)="matchDetails(game.id)" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
+        <div class="flex flex-row gap-2 text-sm text-center">
+          <div class="italic">
+            {{game.date.start.split("T")[1].replace(":00.000Z", "")}}
+          </div>
+          <div class="font-bold">
+            MS
+          </div>
         </div>
-        <div class="font-bold">
-          MS
+        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
+          <div>
+            {{game.teams.home.name}}
+          </div>
+          <img src="{{game.teams.home.logo}}" width="25" height="25"/>
+          <div>
+            {{game.scores.home.points}} - {{game.scores.visitors.points}}
+          </div>
+          <div>
+            {{game.teams.visitors.name}}
+          </div>
+          <img src="{{game.teams.visitors.logo}}" width="30" height="30"/>
         </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Brooklyn Nets
+        <div class="italic text-gray-300 text-sm">
+          İY {{(game.scores.home.linescore[0] + game.scores.home.linescore[1])}}-{{(game.scores.visitors.linescore[0] + game.scores.visitors.linescore[1])}}
         </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="25" height="25"/>
-        <div>
-          90 - 80
-        </div>
-        <div>
-          Charlotte Hornets
-        </div>
-        <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30"/>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 47-37
-      </div>
-    </button>
-
+      </button>
+    </div>
   </div>
 </div>

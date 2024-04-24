@@ -54,6 +54,7 @@ public class RaceResponse {
     @Data
     public static class Parameters {
         public String season;
+        public String type;
     }
 
     @Data
@@ -67,7 +68,7 @@ public class RaceResponse {
         public FastestLap fastest_lap;
         public String distance;
         public String timezone;
-        public Date date;
+        public String date;
         public Object weather;
         public String status;
     }

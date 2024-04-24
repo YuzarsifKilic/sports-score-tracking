@@ -4,13 +4,13 @@
       <div class="flex flex-col sm:flex-row justify-between">
         <div class="flex flex-col p-4 items-center">
           <div class="font-bold text-xl">
-            Brooklyn Nets
+            {{game.teams.home.name}}
           </div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="100" height="100" class="pt-4"/>
+          <img src="{{game.teams.home.logo}}" width="100" height="100" class="pt-4"/>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
           <div>
-            94
+            {{game.scores.home.points}}
           </div>
           <div class="items-center">
             <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
@@ -18,19 +18,19 @@
             </div>
           </div>
           <div>
-            98
+            {{game.scores.visitors.points}}
           </div>
         </div>
         <div class="flex flex-col p-4 items-center">
           <div class="font-bold text-xl">
-            Charlotte Hornets
+            {{game.teams.visitors.name}}
           </div>
-          <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="100" height="100" class="pt-4"/>
+          <img src="{{game.teams.visitors.logo}}" width="100" height="100" class="pt-4"/>
         </div>
       </div>
       <div class="flex justify-center">
         <div class="flex flex-row text-sm text-gray-500 items-center">
-          6.03.2024 | Standart | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: Spectrum Center
+          {{game.date.start.split("T")[0]}} | Standart | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: {{game.arena.name}}
           | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem: Scott Foster
         </div>
       </div>

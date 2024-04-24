@@ -1,6 +1,5 @@
 package com.yuzarsif.api.client.nba;
 
-import com.yuzarsif.api.client.nba.response.GameResponse;
 import com.yuzarsif.api.client.nba.response.StatisticsResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,18 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class StatisticClient {
+public class BasketballStatisticClient {
 
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
 
-    public StatisticClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
+    public BasketballStatisticClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
     }
 
-    public StatisticsResponse findStatistics(String gameId) {
-        String url = String.format("https://%s/player/statistics?id=%s", rapidApiProperties.getXRapidApiNbaHost(), gameId);
+    public StatisticsResponse findStatistics(Integer gameId) {
+        String url = String.format("https://%s/players/statistics?game=%s", rapidApiProperties.getXRapidApiNbaHost(), gameId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");

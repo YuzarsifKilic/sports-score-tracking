@@ -1,7 +1,6 @@
 package com.yuzarsif.api.client.nba;
 
-import com.yuzarsif.api.client.nba.response.LeagueResponse;
-import com.yuzarsif.api.client.nba.response.TeamResponse;
+import com.yuzarsif.api.client.nba.response.StandingsResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpEntity;
@@ -12,18 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class TeamClient {
+public class BasketballStandingsClient {
 
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
 
-    public TeamClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
+    public BasketballStandingsClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
     }
 
-    public TeamResponse findTeams() {
-        String url = String.format("https://%s/teams", rapidApiProperties.getXRapidApiNbaHost());
+    public StandingsResponse findStandings(Integer season, String league) {
+        String url = String.format("https://%s/standings?season=%s&league=%s", rapidApiProperties.getXRapidApiNbaHost(), season, league);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -33,7 +32,7 @@ public class TeamClient {
         HttpEntity entity = new HttpEntity(headers);
 
         try {
-            ResponseEntity<TeamResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, TeamResponse.class);
+            ResponseEntity<StandingsResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StandingsResponse.class);
             return response.getBody();
         } catch (Exception e) {
             e.printStackTrace();

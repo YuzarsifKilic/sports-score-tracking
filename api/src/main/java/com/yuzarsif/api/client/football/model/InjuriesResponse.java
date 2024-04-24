@@ -8,11 +8,6 @@ import java.util.Date;
 @Data
 public class InjuriesResponse {
 
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
-    public Paging paging;
     public ArrayList<Response> response;
 
     @Data
@@ -31,17 +26,6 @@ public class InjuriesResponse {
         public String country;
         public String logo;
         public String flag;
-    }
-
-    @Data
-    public static class Paging {
-        public int current;
-        public int total;
-    }
-
-    @Data
-    public static class Parameters {
-        public String fixture;
     }
 
     @Data

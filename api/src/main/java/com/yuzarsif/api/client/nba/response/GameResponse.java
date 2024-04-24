@@ -8,10 +8,6 @@ import java.util.ArrayList;
 @Data
 public class GameResponse {
 
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
     public ArrayList<Response> response;
 
     @Data
@@ -24,8 +20,8 @@ public class GameResponse {
 
     @Data
     public static class Date {
-        public Date start;
-        public Date end;
+        public String start;
+        public String end;
         public String duration;
     }
 
@@ -41,11 +37,6 @@ public class GameResponse {
         public Series series;
         public ArrayList<String> linescore;
         public int points;
-    }
-
-    @Data
-    public static class Parameters {
-        public String season;
     }
 
     @Data

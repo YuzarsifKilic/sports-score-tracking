@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {NbaApiService} from "../../_services/nba-api.service";
+import {NbaGamesResponse} from "../../_models/nba-games";
 
 @Component({
   selector: 'app-basketball-home',
@@ -8,9 +10,27 @@ import {Router} from "@angular/router";
 })
 export class BasketballHomeComponent {
 
-  constructor(private router: Router) { }
+  nbaGames!: NbaGamesResponse[];
 
-  matchDetails() {
-    this.router.navigate(['/basketball-match-detail']);
+  constructor(private router: Router, private nbaApiService: NbaApiService) { }
+
+  matchDetails(id: number) {
+    this.router.navigate(['/basketball-match-detail/' + id]);
+  }
+
+  ngOnInit(): void {
+    console.log(this.dateConvert());
+    this.nbaApiService.getMatchesByDate(this.dateConvert())
+      .then(response => {
+        this.nbaGames = response.response;
+      })
+  }
+
+  dateConvert() {
+    let current = new Date();
+    let day = ("0" + current.getDate()).slice(-2);
+    let month = ("0" + (current.getMonth() + 1)).slice(-2);
+    let year = current.getFullYear();
+    return `${year}-${month}-${day}`;
   }
 }

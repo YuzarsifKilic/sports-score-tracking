@@ -21,8 +21,13 @@ public class CountryClient {
         this.restTemplate = restTemplate;
     }
 
-    public CountryResponse findCountries() {
-        String url = String.format("https://%s/countries", rapidApiProperties.getXRapidApiFootballHost());
+    public CountryResponse findCountries(String countryName) {
+        String url = "";
+        if (countryName != null) {
+             url = String.format("https://%s/countries?name=%s", rapidApiProperties.getXRapidApiFootballHost(), countryName);
+        } else{
+            url = String.format("https://%s/countries", rapidApiProperties.getXRapidApiFootballHost());
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");

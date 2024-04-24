@@ -7,24 +7,7 @@ import java.util.ArrayList;
 @Data
 public class TeamResponse {
 
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
-    public Paging paging;
     public ArrayList<Response> response;
-
-    @Data
-    public static class Paging {
-        public int current;
-        public int total;
-    }
-
-    @Data
-    public static class Parameters {
-        public String season;
-        public String league;
-    }
 
     @Data
     public static class Response {

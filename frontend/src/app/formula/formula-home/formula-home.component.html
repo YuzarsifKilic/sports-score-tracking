@@ -12,57 +12,57 @@
     />
   </div>
 </div>
-<div class="flex flex-col items-center mt-12">
-  <div *ngFor="let event of events; let i = index" class="bg-white rounded-xl p-2 w-2/4 border-2 mb-4">
+<div class="flex flex-col items-center mt-12 px-20">
+  <div *ngFor="let race of races$; let i = index" class="bg-white rounded-xl p-2 w-3/4 border-2 mb-4">
     <button (click)="toggleDetails(i)" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
       <div class="flex flex-row text-sm gap-6 justify-start">
         <div class="font-bold">
-          <img src="https://media.api-sports.io/flags/bh.svg" width="30" height="30"/>
+          <!--<img src="{{countries[i]}}" width="30" height="30"/> -->
         </div>
         <div class="font-bold">
-          28 Mart
+          {{race.date.replace("T", " ").replace("+00:00", " ")}}
         </div>
       </div>
       <div class="flex-1 flex justify-center items-center">
         <div class="flex flex-row gap-2 font-quicksand items-center">
           <div>
-            Bahrain Grand Prix
+            {{race.competition.name}}
           </div>
         </div>
       </div>
     </button>
     <div [class.hidden]="openDetails !== i">
-      <div class="flex flex-row gap-4 text-sm">
+      <div class="flex flex-row gap-4 text-sm bg-blue-600">
         <div class="py-20">
-          <img src="https://media.api-sports.io/formula-1/circuits/1.png" width="300" height="300"/>
+          <img src="{{race.circuit.image}}" width="350" height="350"/>
         </div>
 
         <div class="flex flex-col divide-y-2">
           <div class="flex flex-row gap-2 py-0.5">
-            <img src="https://media.api-sports.io/flags/bh.svg" width="20" height="20"/>
+            <!--<img src="https://media.api-sports.io/flags/bh.svg" width="20" height="20"/> -->
             <div>
-              Bahrain Grand Prix'i
+              {{race.competition.name}}'i
             </div>
             <div class="text-gray-600">
-              | Bahrain, Sakhir
-            </div>
-          </div>
-          <div class="py-0.5 flex flex-row gap-2">
-            Antrenman 1 |
-            <div class="text-gray-600">
-               2024-03-02
-            </div>
-            <div class="text-gray-600">
-              | UTC 15:00:00
+              | {{race.competition.location.country}}, {{race.competition.location.city}}
             </div>
           </div>
           <div class="py-0.5 flex flex-row gap-2">
-            Bahrein Uluslarası Pisti
+            {{race.type}} |
             <div class="text-gray-600">
-              | 57 Laps
+              {{race.date.split("T")[0]}}
             </div>
             <div class="text-gray-600">
-              | 5.412 km
+              | {{race.date.split("T")[1].replace("+00:00", "")}}
+            </div>
+          </div>
+          <div class="py-0.5 flex flex-row gap-2">
+            {{race.circuit.name}}
+            <div class="text-gray-600">
+              | {{race.laps.total}} Tur
+            </div>
+            <div class="text-gray-600">
+              | {{race.distance}}
             </div>
           </div>
           <div>
@@ -90,124 +90,24 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
-                   <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
+              <tr *ngFor="let ranks of ranking$">
+                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-blueGray-700 gap-1 flex flex-row items-center">
+                  <img src="{{ranks.driver.image}}" width="40" height="40">{{ranks.driver.name}}
                 </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                  1
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+                  {{ranks.position}}
                 </td>
                 <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1:31:44.742
+                  {{ranks.time}}
                 </td>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
-                  Red Bull Racing
+                  {{ranks.pits}}
                 </td>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  57
-                </td>
-              </tr>
-              <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
-                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
-                </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                  1
-                </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1:31:44.742
+                  {{ranks.team.name}}
                 </td>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
-                  Red Bull Racing
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  57
-                </td>
-              </tr>
-              <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
-                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
-                </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                  1
-                </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1:31:44.742
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
-                  Red Bull Racing
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  57
-                </td>
-              </tr>
-              <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
-                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
-                </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                  1
-                </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1:31:44.742
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
-                  Red Bull Racing
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  57
-                </td>
-              </tr>
-              <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
-                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
-                </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                  1
-                </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1:31:44.742
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
-                  Red Bull Racing
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  57
-                </td>
-              </tr>
-              <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 gap-1 flex flex-row">
-                  <img src="https://media.api-sports.io/flags/nl.svg" width="20" height="20">Max Verstappen
-                </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                  1
-                </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1:31:44.742
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex flex-row">
-                  Red Bull Racing
-                </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  57
+                  {{ranks.laps}}
                 </td>
               </tr>
               </tbody>

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 public class GameClient {
 
@@ -22,8 +24,13 @@ public class GameClient {
         this.restTemplate = restTemplate;
     }
 
-    public GameResponse findGames(String date) {
-        String url = String.format("https://%s/games?date=%s", rapidApiProperties.getXRapidApiNbaHost(), date);
+    public GameResponse findGames(Optional<String> date, Optional<String> matchId) {
+        String url = "";
+        if (date.isPresent()) {
+            url = String.format("https://%s/games?date=%s", rapidApiProperties.getXRapidApiNbaHost(), date.get());
+        } else if (matchId.isPresent()) {
+            url = String.format("https://%s/games?id=%s", rapidApiProperties.getXRapidApiNbaHost(), matchId.get());
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -39,6 +46,5 @@ public class GameClient {
             e.printStackTrace();
         }
         throw new EntityNotFoundException("Country not found");
-
     }
 }

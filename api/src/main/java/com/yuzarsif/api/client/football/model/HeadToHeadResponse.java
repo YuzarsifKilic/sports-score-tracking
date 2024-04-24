@@ -9,11 +9,6 @@ import java.util.Date;
 @Data
 public class HeadToHeadResponse {
 
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
-    public Paging paging;
     public ArrayList<Response> response;
 
     @Data
@@ -77,17 +72,6 @@ public class HeadToHeadResponse {
         public String flag;
         public int season;
         public String round;
-    }
-
-    @Data
-    public static class Paging {
-        public int current;
-        public int total;
-    }
-
-    @Data
-    public static class Parameters {
-        public String h2h;
     }
 
     @Data

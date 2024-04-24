@@ -2,6 +2,7 @@ package com.yuzarsif.api.client.football;
 
 import com.yuzarsif.api.client.football.model.FixtureResponse;
 import com.yuzarsif.api.client.football.model.StatisticResponse;
+import com.yuzarsif.api.client.nba.response.StatisticsResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpEntity;
@@ -22,7 +23,7 @@ public class StatisticsClient {
         this.restTemplate = restTemplate;
     }
 
-    public StatisticResponse findStatistics(Integer fixtureId) {
+    public StatisticsResponse findStatistics(Integer fixtureId) {
         String url = String.format("https://%s/fixtures/statistics?fixture=%s", rapidApiProperties.getXRapidApiFootballHost(), fixtureId);
 
         HttpHeaders headers = new HttpHeaders();
@@ -33,7 +34,7 @@ public class StatisticsClient {
         HttpEntity entity = new HttpEntity(headers);
 
         try {
-            ResponseEntity<StatisticResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticResponse.class);
+            ResponseEntity<StatisticsResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticsResponse.class);
             return response.getBody();
         } catch (Exception e) {
             e.printStackTrace();

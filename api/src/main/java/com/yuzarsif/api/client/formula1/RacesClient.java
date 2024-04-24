@@ -23,7 +23,7 @@ public class RacesClient {
     }
 
     public RaceResponse findRaces(Integer season) {
-        String url = String.format("https://%s/races?season=%s", rapidApiProperties.getXRapidApiFormula1Host(), season);
+        String url = String.format("https://%s/races?season=%s&type=race", rapidApiProperties.getXRapidApiFormula1Host(), season);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");

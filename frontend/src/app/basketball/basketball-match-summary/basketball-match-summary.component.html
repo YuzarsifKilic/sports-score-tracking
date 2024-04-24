@@ -27,42 +27,42 @@
         <tbody>
         <tr>
           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 flex flex-row items-center gap-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="30" height="30" class="pt-2"/> Brooklyn Nets
+            <img src="{{game.teams.home.logo}}" width="30" height="30" class="pt-2"/> {{game.teams.home.name}}
           </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-            21
+            {{game.scores.home.linescore[0]}}
           </td>
           <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            23
+            {{game.scores.home.linescore[1]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            26
+            {{game.scores.home.linescore[2]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            24
+            {{game.scores.home.linescore[3]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            94
+            {{game.scores.home.points}}
           </td>
         </tr>
         <tr>
           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 flex flex-row items-center gap-4">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30" class="pt-2"/> Charlotte Hornets
+            <img src="{{game.teams.visitors.logo}}" width="30" height="30" class="pt-2"/> {{game.teams.visitors.name}}
           </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-            30
+            {{game.scores.visitors.linescore[0]}}
           </td>
           <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            22
+            {{game.scores.visitors.linescore[1]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            17
+            {{game.scores.visitors.linescore[2]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            29
+            {{game.scores.visitors.linescore[3]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            98
+            {{game.scores.visitors.points}}
           </td>
         </tr>
         </tbody>
