@@ -30,7 +30,7 @@ public class FixtureResponse {
         public int id;
         public String referee;
         public String timezone;
-        public Date date;
+        public String date;
         public int timestamp;
         public Periods periods;
         public Venue venue;

@@ -4,120 +4,30 @@
       <div>
         Karşılaştırma
       </div>
-      <div>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
+      <div *ngFor="let h2h of headToHead.response">
+        <button (click)="matchDetails()" class="grid grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
+          <div class="grid justify-items-start text-sm">
+              {{h2h.fixture.date.split("T")[0]}}
           </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
+          <div class="grid grid-cols-9 col-span-2">
+            <div class="grid justify-items-end col-span-3">
+              {{h2h.teams.home.name}}
+            </div>
+            <div class="grid justify-items-end">
+              <img src="{{h2h.teams.home.logo}}" width="30" height="30"/>
+            </div>
             <div>
-              Fenerbahçe
+              {{h2h.goals.home}} - {{h2h.goals.away}}
             </div>
-            <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-            <div class="hover:border-b hover:border-black">
-              1 - 1
+            <div class="grid justify-items-start">
+              <img src="{{h2h.teams.away.logo}}" width="30" height="30"/>
             </div>
-            <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-            <div>
-              Beşiktaş
+            <div class="grid justify-items-start col-span-3">
+              {{h2h.teams.away.name}}
             </div>
           </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 0-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div class="font-bold">
-              Fenerbahçe
-            </div>
-            <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-            <div class="hover:border-b hover:border-black">
-              2 - 1
-            </div>
-            <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-            <div>
-              Beşiktaş
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div class="font-bold">
-              Beşiktaş
-            </div>
-            <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-            <div class="hover:border-b hover:border-black">
-              2 - 1
-            </div>
-            <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-            <div>
-              Fenerbahçe
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div class="font-bold">
-              Fenerbahçe
-            </div>
-            <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-            <div class="hover:border-b hover:border-black">
-              2 - 1
-            </div>
-            <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-            <div>
-              Beşiktaş
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div>
-              Fenerbahçe
-            </div>
-            <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-            <div class="hover:border-b hover:border-black">
-              0 - 0
-            </div>
-            <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-            <div>
-              Beşiktaş
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 0-0
+          <div class="grid justify-items-end">
+            İY {{h2h.score.halftime.home}}-{{h2h.score.halftime.away}}
           </div>
         </button>
       </div>
@@ -128,79 +38,25 @@
       <div>
         Son Maçlar
       </div>
-      <div class="flex justify-center divide-y-2">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Fenerbahçe
-          </div>
-          <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 0
-          </div>
-          <img src="https://media.api-sports.io/football/teams/607.png" width="30" height="30"/>
-          <div>
-            Konyaspor
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            İstanbul Başakşehir
-          </div>
-          <img src="https://media.api-sports.io/football/teams/564.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            0 - 1
-          </div>
-          <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-          <div>
-            Fenerbahçe
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Fenerbahçe
-          </div>
-          <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 0
-          </div>
-          <img src="https://media.api-sports.io/football/teams/996.png" width="30" height="30"/>
-          <div>
-            Alanyaspor
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Fenerbahçe
-          </div>
-          <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 1
-          </div>
-          <img src="https://media.api-sports.io/football/teams/645.png" width="30" height="30"/>
-          <div>
-            Galatasaray
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Fenerbahçe
-          </div>
-          <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 1
-          </div>
-          <img src="https://media.api-sports.io/football/teams/1002.png" width="30" height="30"/>
-          <div>
-            Sivasspor
-          </div>
+      <div *ngFor="let homeTeamFixture of homeTeamFixtures">
+        <div>
+          <button class="grid grid-cols-5">
+            <div class="grid justify-items-start">
+              {{homeTeamFixture.teams.home.name}}
+            </div>
+            <div class="grid justify-items-start">
+              <img src="{{homeTeamFixture.teams.home.logo}}" width="30" height="30"/>
+            </div>
+            <div>
+              {{homeTeamFixture.score.fulltime.home}} - {{homeTeamFixture.score.fulltime.away}}
+            </div>
+            <div class="grid justify-items-end">
+              <img src="{{homeTeamFixture.teams.away.logo}}" width="30" height="30"/>
+            </div>
+            <div class="grid justify-items-end">
+              {{homeTeamFixture.teams.away.name}}
+            </div>
+          </button>
         </div>
       </div>
     </div>

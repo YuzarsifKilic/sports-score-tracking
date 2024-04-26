@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'football-home', component: FootballHomeComponent },
-  { path: 'football-match-detail', component: FootballMatchDetailComponent },
+  { path: 'football-match-detail/:matchId', component: FootballMatchDetailComponent },
   { path: 'football-match-detail/h2h', component: FootballH2hComponent },
   { path: 'basketball-home', component: BasketballHomeComponent },
   { path: 'basketball-match-detail/:matchId', component: BasketballMatchDetailComponent },

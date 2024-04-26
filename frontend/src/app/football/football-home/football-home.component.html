@@ -1,279 +1,72 @@
-<div class="flex justify-center mt-4">
-  <div class="relative mt-2 rounded-md shadow-sm">
-    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-      <span class="text-gray-500 sm:text-sm"><img src="assets/images/search.svg" width="15" height="15"/></span>
+<div class="grid grid-cols-1 mt-12 mb-4">
+  <div *ngFor="let fixture of fixtures" class="grid justify-items-center mt-8">
+    <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
+      <div class="flex flex-row gap-2 pb-1">
+        <img src="{{fixture.league.flag}}" width="20" height="20"/> {{fixture.league.country}} - {{fixture.league.name}}
+      </div>
+      <div *ngFor="let fixtureResponse of fixture.response">
+        <button (click)="matchDetails(fixtureResponse.fixture.id)" class="grid w-full grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:my-2">
+          <div class="grid justify-items-start text-left">
+            {{fixtureResponse.fixture.date.split("T")[1].replace(":00+00:00", "")}}
+          </div>
+          <div class="grid grid-cols-9 col-span-2">
+            <div class="grid justify-items-end col-span-3 text-sm mt-1">
+              {{fixtureResponse.teams.home.name}}
+            </div>
+            <div class="grid justify-items-end">
+              <img src="{{fixtureResponse.teams.home.logo}}" width="30" height="30"/>
+            </div>
+            <div>
+              {{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}
+            </div>
+            <div class="grid justify-items-start">
+              <img src="{{fixtureResponse.teams.away.logo}}" width="30" height="30"/>
+            </div>
+            <div class="grid justify-items-start col-span-3 text-sm mt-1">
+              {{fixtureResponse.teams.away.name}}
+            </div>
+          </div>
+          <div class="italic text-gray-300 text-sm text-right">
+            İY {{fixtureResponse.score.halftime.home}}-{{fixtureResponse.score.halftime.away}}
+          </div>
+        </button>
+      </div>
     </div>
-    <input
-      type="text"
-      name="price"
-      id="price"
-      class="block w-full rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-inset ring-blue-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
-      placeholder="Search..."
-    />
   </div>
 </div>
-<div class="flex justify-center mt-12">
-  <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
-    <div class="pb-2">
-      Favoriler
-    </div>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          16:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Fenerbahçe
-        </div>
-        <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-        <div>
-          2 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-        <div>
-          Beşiktaş
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 1-1
-      </div>
-    </button>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          19:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          İstanbul Başakşehir
-        </div>
-        <img src="https://media.api-sports.io/football/teams/564.png" width="30" height="30"/>
-        <div>
-          2 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/607.png" width="30" height="30"/>
-        <div>
-          Konyaspor
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 0-0
-      </div>
-    </button>
-  </div>
-</div>
-
-<div class="flex justify-center mt-12">
-  <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
-    <div class="flex flex-row  gap-2 pb-1 mt-2">
-      <img src="https://media.api-sports.io/flags/tr.svg" width="20" height="20"/> Türkiye
-    </div>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          16:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Fenerbahçe
-        </div>
-        <img src="https://media.api-sports.io/football/teams/611.png" width="30" height="30"/>
-        <div>
-          2 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-        <div>
-          Beşiktaş
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 1-1
-      </div>
-    </button>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          19:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          İstanbul Başakşehir
-        </div>
-        <img src="https://media.api-sports.io/football/teams/564.png" width="30" height="30"/>
-        <div>
-          2 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/607.png" width="30" height="30"/>
-        <div>
-          Konyaspor
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 0-0
-      </div>
-    </button>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          19:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Galatasaray
-        </div>
-        <img src="https://media.api-sports.io/football/teams/645.png" width="30" height="30"/>
-        <div>
-          0 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/996.png" width="30" height="30"/>
-        <div>
-          Alanyaspor
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 0-0
-      </div>
-    </button>
-  </div>
-</div>
-
-<div class="flex justify-center mt-12">
-  <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
-    <div class="flex flex-row gap-2 pb-1">
-      <img src="https://media.api-sports.io/flags/gb.svg" width="20" height="20"/>İngiltere
-    </div>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          17:45
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Manchester United
-        </div>
-        <img src="https://media.api-sports.io/football/teams/33.png" width="30" height="30"/>
-        <div>
-          1 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/34.png" width="30" height="30"/>
-        <div>
-          Newcastle
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 1-0
-      </div>
-    </button>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          19:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Bournemouth
-        </div>
-        <img src="https://media.api-sports.io/football/teams/35.png" width="30" height="30"/>
-        <div>
-          0 - 0
-        </div>
-        <img src="https://media.api-sports.io/football/teams/36.png" width="30" height="30"/>
-        <div>
-          Fullham
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 0-0
-      </div>
-    </button>
-  </div>
-</div>
-
+<!--
 <div class="flex justify-center mt-12 mb-4">
   <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
     <div class="flex flex-row gap-2 pb-1">
       <img src="https://media.api-sports.io/flags/fr.svg" width="20" height="20"/>Fransa
     </div>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          18:45
+    <div *ngFor="let fixture of fixtures">
+      <button (click)="matchDetails()" class="grid w-full grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:my-2">
+        <div class="grid justify-items-start text-left">
+            {{fixture.fixture.date.split("T")[1].replace(":00+00:00", "")}}
         </div>
-        <div class="font-bold">
-          MS
+        <div class="grid grid-cols-9 col-span-2">
+          <div class="grid justify-items-end col-span-3 text-sm mt-1">
+            {{fixture.teams.home.name}}
+          </div>
+          <div class="grid justify-items-end">
+            <img src="{{fixture.teams.home.logo}}" width="30" height="30"/>
+          </div>
+          <div>
+            2 - 1
+          </div>
+          <div class="grid justify-items-start">
+            <img src="{{fixture.teams.away.logo}}" width="30" height="30"/>
+          </div>
+          <div class="grid justify-items-start col-span-3 text-sm mt-1">
+            {{fixture.teams.away.name}}
+          </div>
         </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Lille
+        <div class="italic text-gray-300 text-sm text-right">
+          İY 0-0
         </div>
-        <img src="https://media.api-sports.io/football/teams/79.png" width="30" height="30"/>
-        <div>
-          2 - 2
-        </div>
-        <img src="https://media.api-sports.io/football/teams/80.png" width="30" height="30"/>
-        <div>
-          Lyon
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 1-1
-      </div>
-    </button>
-    <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-      <div class="flex flex-row gap-2 text-sm text-center">
-        <div class="italic">
-          19:00
-        </div>
-        <div class="font-bold">
-          MS
-        </div>
-      </div>
-      <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-        <div>
-          Marseille
-        </div>
-        <img src="https://media.api-sports.io/football/teams/81.png" width="30" height="30"/>
-        <div>
-          2 - 1
-        </div>
-        <img src="https://media.api-sports.io/football/teams/82.png" width="30" height="30"/>
-        <div>
-          Monterpiller
-        </div>
-      </div>
-      <div class="italic text-gray-300 text-sm">
-        İY 0-0
-      </div>
-    </button>
+      </button>
+    </div>
   </div>
 </div>
+--->

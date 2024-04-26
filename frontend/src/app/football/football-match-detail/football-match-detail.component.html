@@ -4,13 +4,13 @@
       <div class="flex flex-col sm:flex-row justify-between">
         <div class="p-4">
           <div class="font-bold text-xl">
-            FENERBAHÇE
+            {{fixtureDetail.teams.home.name}}
           </div>
-          <img src="https://media.api-sports.io/football/teams/611.png" width="100" height="100" class="pt-4"/>
+          <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
           <div>
-            2
+            {{fixtureDetail.score.fulltime.home}}
           </div>
           <div class="items-center">
             <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
@@ -18,20 +18,20 @@
             </div>
           </div>
           <div>
-            1
+            {{fixtureDetail.score.fulltime.away}}
           </div>
         </div>
         <div class="p-4">
           <div class="font-bold text-xl">
-            Beşiktaş
+            {{fixtureDetail.teams.home.name}}
           </div>
-          <img src="https://media.api-sports.io/football/teams/549.png" width="100" height="100"/>
+          <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
         </div>
       </div>
       <div class="flex justify-center">
         <div class="flex flex-row text-sm text-gray-500 items-center">
-          6.03.2024 | Şampiyonlar Ligi | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: Ülker Stadyumu Fenerbahçe Şükrü Saracoğlu Spor Kompleksi
-          | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem
+          {{fixtureDetail.fixture.date.split("T")[0]}} | {{fixtureDetail.league.name}} | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: {{fixtureDetail.fixture.venue.name}}
+          | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem: {{fixtureDetail.fixture.referee.split(",") [0]}}
         </div>
       </div>
       <div class="flex flex-col sm:flex-row sm:gap-40 gap-2 px-4 sm:px-16 mt-4 text-blue-600 border-t pt-2">
