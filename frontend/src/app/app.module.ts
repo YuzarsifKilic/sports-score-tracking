@@ -25,6 +25,10 @@ import { LoginPageComponent } from './login/login-page/login-page.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
 import { FavoriteTeamComponent } from './favorite-team/favorite-team.component';
+import {LazyLoadImageModule} from "ng-lazyload-image";
+import { DriversComponent } from './formula/drivers/drivers.component';
+import { BasketballPlayerComponent } from './basketball/basketball-player/basketball-player.component';
+import { FormulaTeamComponent } from './formula/formula-team/formula-team.component';
 
 @NgModule({
   declarations: [
@@ -48,14 +52,18 @@ import { FavoriteTeamComponent } from './favorite-team/favorite-team.component';
     SignUpComponent,
     SignInComponent,
     LoginPageComponent,
-    FavoriteTeamComponent
+    FavoriteTeamComponent,
+    DriversComponent,
+    BasketballPlayerComponent,
+    FormulaTeamComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    FormsModule
+    FormsModule,
+    LazyLoadImageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

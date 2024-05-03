@@ -40,20 +40,20 @@
       </div>
       <div *ngFor="let homeTeamFixture of homeTeamFixtures">
         <div>
-          <button class="grid grid-cols-5">
-            <div class="grid justify-items-start">
+          <button class="grid grid-cols-9 w-full mt-2">
+            <div class="grid justify-items-start col-span-3">
               {{homeTeamFixture.teams.home.name}}
             </div>
-            <div class="grid justify-items-start">
+            <div class="grid justify-items-end">
               <img src="{{homeTeamFixture.teams.home.logo}}" width="30" height="30"/>
             </div>
             <div>
               {{homeTeamFixture.score.fulltime.home}} - {{homeTeamFixture.score.fulltime.away}}
             </div>
-            <div class="grid justify-items-end">
+            <div class="grid justify-items-start">
               <img src="{{homeTeamFixture.teams.away.logo}}" width="30" height="30"/>
             </div>
-            <div class="grid justify-items-end">
+            <div class="grid justify-items-end col-span-3">
               {{homeTeamFixture.teams.away.name}}
             </div>
           </button>
@@ -65,79 +65,25 @@
       <div>
         Son Maçlar
       </div>
-      <div class="flex justify-center divide-y-2">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Beşiktaş
-          </div>
-          <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 0
-          </div>
-          <img src="https://media.api-sports.io/football/teams/607.png" width="30" height="30"/>
-          <div>
-            Konyaspor
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            İstanbul Başakşehir
-          </div>
-          <img src="https://media.api-sports.io/football/teams/564.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            0 - 1
-          </div>
-          <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-          <div>
-            Beşiktaş
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Beşiktaş
-          </div>
-          <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 0
-          </div>
-          <img src="https://media.api-sports.io/football/teams/996.png" width="30" height="30"/>
-          <div>
-            Alanyaspor
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Beşiktaş
-          </div>
-          <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 1
-          </div>
-          <img src="https://media.api-sports.io/football/teams/645.png" width="30" height="30"/>
-          <div>
-            Galatasaray
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center divide-y-2 mt-1">
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
-            Beşiktaş
-          </div>
-          <img src="https://media.api-sports.io/football/teams/549.png" width="30" height="30"/>
-          <div class="hover:border-b hover:border-black">
-            2 - 1
-          </div>
-          <img src="https://media.api-sports.io/football/teams/1002.png" width="30" height="30"/>
-          <div>
-            Sivasspor
-          </div>
+      <div *ngFor="let awayTeamFixture of awayTeamFixtures">
+        <div>
+          <button class="grid grid-cols-9 w-full mt-2">
+            <div class="grid justify-items-start col-span-3">
+              {{awayTeamFixture.teams.home.name}}
+            </div>
+            <div class="grid justify-items-end">
+              <img src="{{awayTeamFixture.teams.home.logo}}" width="30" height="30"/>
+            </div>
+            <div>
+              {{awayTeamFixture.score.fulltime.home}} - {{awayTeamFixture.score.fulltime.away}}
+            </div>
+            <div class="grid justify-items-start">
+              <img src="{{awayTeamFixture.teams.away.logo}}" width="30" height="30"/>
+            </div>
+            <div class="grid justify-items-end col-span-3">
+              {{awayTeamFixture.teams.away.name}}
+            </div>
+          </button>
         </div>
       </div>
     </div>

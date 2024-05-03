@@ -7,10 +7,6 @@ import java.util.ArrayList;
 @Data
 public class DriversResponse {
 
-    public String get;
-    public Parameters parameters;
-    public ArrayList<Object> errors;
-    public int results;
     public ArrayList<Response> response;
 
     @Data
@@ -47,17 +43,17 @@ public class DriversResponse {
         public HighestRaceFinish highest_race_finish;
         public int highest_grid_position;
         public String career_points;
-        public ArrayList<Team> teams;
+        public ArrayList<Teams> teams;
     }
 
     @Data
-    public static class Team {
+    public static class Teams {
         public int season;
         public Team team;
     }
 
     @Data
-    public static class Team2 {
+    public static class Team {
         public int id;
         public String name;
         public String logo;

@@ -11,10 +11,12 @@ import {FootballFixturesResponse} from "../../_models/football-fixtures";
 export class FootballHomeComponent {
 
   fixtures!: FootballFixturesResponse[];
+  fixtures2$!: Promise<FootballFixturesResponse[]>
 
   constructor(private router: Router, private footballApiService: FootballApiService) { }
 
   ngOnInit(): void {
+    this.fixtures2$ = this.footballApiService.getFixturesByDate(this.dateConvert())
     this.footballApiService.getFixturesByDate(this.dateConvert())
       .then(response => {
         this.fixtures = response;

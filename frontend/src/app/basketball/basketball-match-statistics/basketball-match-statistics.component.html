@@ -33,7 +33,7 @@
         <tbody>
         <tr *ngFor="let matchStatistic of matchStatistics">
           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center text-blueGray-700 gap-2 flex flex-row items-center ">
-            <img src="{{matchStatistic.team.logo}}" width="30" height="30"> {{matchStatistic.player.firstname}} {{matchStatistic.player.lastname}}
+            <img src="{{matchStatistic.team.logo}}" width="30" height="30"> <button (click)="playerDetail(matchStatistic.player.id)" class="hover:text-blue-400">{{matchStatistic.player.firstname}} {{matchStatistic.player.lastname}}</button>
           </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
             {{matchStatistic.min}}

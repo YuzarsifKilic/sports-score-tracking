@@ -1,8 +1,12 @@
 package com.yuzarsif.api.client.nba.response;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 public class StatisticsResponse {
@@ -10,48 +14,66 @@ public class StatisticsResponse {
 
     @Data
     public static class Game {
-        public int id;
+        public Integer id;
     }
 
     @Data
     public static class Player {
-        public int id;
+        public Integer id;
         public String firstname;
         public String lastname;
     }
 
     @Data
+    @Builder
     public static class Response {
         public Player player;
         public Team team;
         public Game game;
-        public int points;
+        public Integer points;
         public String pos;
         public String min;
-        public int fgm;
-        public int fga;
+        public Integer fgm;
+        public Integer fga;
         public String fgp;
-        public int ftm;
-        public int fta;
+        public Integer ftm;
+        public Integer fta;
         public String ftp;
-        public int tpm;
-        public int tpa;
+        public Integer tpm;
+        public Integer tpa;
         public String tpp;
-        public int offReb;
-        public int defReb;
-        public int totReb;
-        public int assists;
-        public int pFouls;
-        public int steals;
-        public int turnovers;
-        public int blocks;
+        public Integer offReb;
+        public Integer defReb;
+        public Integer totReb;
+        public Integer assists;
+        public Integer pFouls;
+        public Integer steals;
+        public Integer turnovers;
+        public Integer blocks;
         public String plusMinus;
         public String comment;
     }
 
     @Data
+    @Builder
+    public static class CustomResponse {
+        public Player player;
+        public Team team;
+        public Game game;
+        public Integer points;
+        public Set<String> pos;
+        public String min;
+        public Integer offReb;
+        public Integer defReb;
+        public Integer totReb;
+        public Integer assists;
+        public Integer steals;
+        public Integer blocks;
+    }
+
+    @Data
     public static class Team {
-        public int id;
+        public Integer id;
         public String name;
         public String nickname;
         public String code;

@@ -1,8 +1,5 @@
 export class Country {
-  response!: CountryResponse[];
-}
-
-export class CountryResponse {
+  id!: number;
   name!: string;
   code!: string;
   flag!: string;

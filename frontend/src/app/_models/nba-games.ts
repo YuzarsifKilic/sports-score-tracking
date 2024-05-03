@@ -66,8 +66,8 @@ export class Series {
 export class Status {
   clock!: any;
   halftime!: boolean;
-  myshort!: number;
-  mylong!: string;
+  short!: number;
+  long!: string;
 }
  export class Teams {
   visitors!: Visitors;

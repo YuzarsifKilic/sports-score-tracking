@@ -146,7 +146,7 @@ public class FixtureClient {
                 responseList.add(response2);
             } else {
                 for (FixtureCustomResponse.Response response2 : responseList) {
-                    if (response2.getLeague().getName().equals(fixtureResponse.getLeague().getName())) {
+                    if (response2.getLeague().getName().equals(fixtureResponse.getLeague().getName()) && response2.getLeague().getCountry().equals(fixtureResponse.getLeague().getCountry())) {
                         FixtureCustomResponse.CustomResponse customResponse = FixtureCustomResponse.CustomResponse
                                 .builder()
                                 .score(fixtureResponse.getScore())

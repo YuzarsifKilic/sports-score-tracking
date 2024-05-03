@@ -6,7 +6,7 @@
           <div class="font-bold text-xl">
             {{game.teams.home.name}}
           </div>
-          <img src="{{game.teams.home.logo}}" width="100" height="100" class="pt-4"/>
+          <img src="{{game.teams.home.logo}}" width="125" height="125" class="pt-8"/>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
           <div>
@@ -25,13 +25,13 @@
           <div class="font-bold text-xl">
             {{game.teams.visitors.name}}
           </div>
-          <img src="{{game.teams.visitors.logo}}" width="100" height="100" class="pt-4"/>
+          <img src="{{game.teams.visitors.logo}}" width="125" height="125" class="pt-8"/>
         </div>
       </div>
       <div class="flex justify-center">
         <div class="flex flex-row text-sm text-gray-500 items-center">
           {{game.date.start.split("T")[0]}} | Standart | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: {{game.arena.name}}
-          | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem: Scott Foster
+          | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem: {{game.officials}}
         </div>
       </div>
       <div class="flex flex-col sm:flex-row sm:gap-40 gap-2 px-4 sm:px-16 mt-4 text-blue-600 border-t pt-2">

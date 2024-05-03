@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {FootballApiService} from "../_services/football-api.service";
-import {Country, CountryResponse} from "../_models/country";
+import {Country} from "../_models/country";
 import {League, LeagueResponse, Response} from "../_models/league";
+import {Formula1ApiService} from "../_services/formula1-api.service";
 
 @Component({
   selector: 'app-favorite-team',
@@ -10,28 +11,28 @@ import {League, LeagueResponse, Response} from "../_models/league";
 })
 export class FavoriteTeamComponent {
 
-  countries$!: CountryResponse[];
+  countries$!: Country[];
   countryName!: string;
-  country!: CountryResponse;
+  country!: Country;
   selectedCountry: boolean = false;
   leagues$!: Response[];
   league!: League;
 
-    constructor(private footballApiService: FootballApiService) { }
+    constructor(private footballApiService: FootballApiService, private formula1ApiService: Formula1ApiService) { }
 
   ngOnInit(): void {
     this.footballApiService.getCountries()
       .then(response => {
-        this.countries$ = response.response;
+        this.countries$ = response;
       })
   }
 
   onSelectCountry($event: any) {
     this.countryName = $event.target.value;
     this.selectedCountry = true;
-    this.footballApiService.getCountriesByName(this.countryName.toLowerCase())
+    this.formula1ApiService.getCountriesByName(this.countryName.toLowerCase())
       .then(response => {
-        this.country = response.response[0];
+        this.country = response;
         this.footballApiService.getLeaguesByCountryCode(this.country.code)
           .then(response => {
             this.leagues$ = response.response;

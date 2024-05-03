@@ -11,6 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class DriversClient {
 
@@ -22,8 +27,13 @@ public class DriversClient {
         this.restTemplate = restTemplate;
     }
 
-    public DriversResponse findDrivers(String search) {
-        String url = String.format("https://%s/drivers?search=%s", rapidApiProperties.getXRapidApiFormula1Host(), search);
+    public DriversResponse findDrivers(Optional<String> search, Optional<Integer> driverId) {
+        String url = "";
+        if (search.isPresent()) {
+            url = String.format("https://%s/drivers?search=%s", rapidApiProperties.getXRapidApiFormula1Host(), search.get());
+        } else if (driverId.isPresent()) {
+            url = String.format("https://%s/drivers?id=%s", rapidApiProperties.getXRapidApiFormula1Host(), driverId.get());
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -40,4 +50,5 @@ public class DriversClient {
         }
         throw new EntityNotFoundException("Country not found");
     }
+
 }

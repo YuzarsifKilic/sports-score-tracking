@@ -23,3 +23,5 @@ sport-api:
   x-rapidapi-formula1-host: v1.formula-1.api-sports.io
 
 allowed-origins: http://localhost:4200
+server:
+  port: 8082

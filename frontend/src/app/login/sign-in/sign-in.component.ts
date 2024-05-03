@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import Swal from 'sweetalert2';
+import {AuthService} from "../../_services/auth.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -8,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class SignInComponent {
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   signInForm: FormGroup = this.formBuilder.group({
     email: ['', Validators.required],
@@ -16,7 +18,8 @@ export class SignInComponent {
   })
 
   signIn(): void {
-
+    if (this.signInForm.valid) {
+      this.authService.login(this.signInForm.value.email, this.signInForm.value.password);
+    }
   }
-
 }

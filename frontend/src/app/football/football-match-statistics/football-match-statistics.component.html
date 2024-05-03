@@ -1,138 +1,35 @@
-<div class="flex justify-center flex-col mt-4 gap-2">
-  <div class="flex flex-row justify-center gap-x-60">
-    <div>
-      %40
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div *ngFor="let statistic of statistics[0].statistics; let i = index">
+      <div class="grid grid-cols-3">
+        <div [ngClass]="{
+      'grid justify-items-start text-blue-600': statistics[0].statistics[i].value > statistics[1].statistics[i].value,
+      'grid justify-items-start text-red-600': statistics[0].statistics[i].value < statistics[1].statistics[i].value
+      }">
+          {{statistics[0].statistics[i].value}}
+        </div>
+        <div>
+          {{statistics[0].statistics[i].type}}
+        </div>
+        <div [ngClass]="{
+      'grid justify-items-end text-blue-600': statistics[0].statistics[i].value < statistics[1].statistics[i].value,
+      'grid justify-items-end text-red-600': statistics[0].statistics[i].value > statistics[1].statistics[i].value
+      }">
+          {{statistics[1].statistics[i].value}}
+        </div>
+      </div>
+      <div class="grid grid-cols-2">
+        <div class="grid justify-items-end">
+          <div [style.width.px]="getHeight(statistics[0].statistics[i].value, statistics[1].statistics[i].value)" [ngClass]="{
+        'h-3 bg-blue-500': statistics[0].statistics[i].value > statistics[1].statistics[i].value,
+        'h-3 bg-red-500': statistics[0].statistics[i].value < statistics[1].statistics[i].value
+        }"></div>
+        </div>
+        <div [style.width.px]="getHeight(statistics[1].statistics[i].value, statistics[0].statistics[i].value)" [ngClass]="{
+      'h-3 bg-blue-500': statistics[0].statistics[i].value < statistics[1].statistics[i].value,
+      'h-3 bg-red-500': statistics[0].statistics[i].value > statistics[1].statistics[i].value
+      }"></div>
+      </div>
     </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div class="text-blue-600">
-      %60
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div class="text-blue-600">
-      %60
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div>
-      %40
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div>
-      %40
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div class="text-blue-600">
-      %60
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div class="text-blue-600">
-      %60
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div>
-      %40
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div>
-      %40
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div class="text-blue-600">
-      %60
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div class="text-blue-600">
-      %60
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div>
-      %40
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div>
-      %40
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div class="text-blue-600">
-      %60
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-r-md"></div>
-  </div>
-  <div class="flex flex-row justify-center gap-x-60">
-    <div class="text-blue-600">
-      %60
-    </div>
-    <div>
-      Topla Oynama
-    </div>
-    <div>
-      %40
-    </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <div class="grid justify-items-end">
-      <div [style.width.px]="height1" class="h-3 bg-blue-500 rounded-l-md"></div>
-    </div>
-    <div [style.width.px]="height2" class="h-3 bg-red-500 rounded-r-md"></div>
   </div>
 </div>

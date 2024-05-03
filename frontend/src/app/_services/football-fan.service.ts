@@ -19,4 +19,11 @@ export class FootballFanService {
         lastName: lastName,
         phoneNumber: phoneNumber});
   }
+
+  findFootballFanById(userId: number) {
+    return this.axios.request(
+      "GET",
+      "/api/v1/football-fans/" + userId,
+      {});
+  }
 }

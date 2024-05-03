@@ -24,12 +24,14 @@ public class GameClient {
         this.restTemplate = restTemplate;
     }
 
-    public GameResponse findGames(Optional<String> date, Optional<String> matchId) {
+    public GameResponse findGames(Optional<String> date, Optional<String> matchId, Optional<String> h2h) {
         String url = "";
         if (date.isPresent()) {
             url = String.format("https://%s/games?date=%s", rapidApiProperties.getXRapidApiNbaHost(), date.get());
         } else if (matchId.isPresent()) {
             url = String.format("https://%s/games?id=%s", rapidApiProperties.getXRapidApiNbaHost(), matchId.get());
+        } else if (h2h.isPresent()) {
+            url = String.format("https://%s/games?h2h=%s", rapidApiProperties.getXRapidApiNbaHost(), h2h.get());
         }
 
         HttpHeaders headers = new HttpHeaders();

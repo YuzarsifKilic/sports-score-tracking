@@ -4,6 +4,8 @@ import {Country} from "../_models/country";
 import {LeagueResponse} from "../_models/league";
 import {FootballFixtures, FootballFixturesCustomResponse, FootballFixturesResponse} from "../_models/football-fixtures";
 import {HeadToHeadResponse} from "../_models/head-to-head";
+import {LineUpsResponse} from "../_models/football-lineup";
+import {StatisticResponse} from "../_models/football-statistics";
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +14,10 @@ export class FootballApiService {
 
   constructor(private axios: AxiosService) { }
 
-  async getCountries(): Promise<Country> {
+  async getCountries(): Promise<Country[]> {
     const resp = await this.axios.request(
       "GET",
-      "/api/football-api/countries",
-      {});
-    return resp.data;
-  }
-
-  async getCountriesByName(name: string): Promise<Country> {
-    const resp = await this.axios.request(
-      "GET",
-      "/api/football-api/countries?name=" + name,
+      "/api/v1/countries/all",
       {});
     return resp.data;
   }
@@ -64,6 +58,22 @@ export class FootballApiService {
     const resp = await this.axios.request(
       "GET",
       "/api/football-api/head-to-head?h2h=" + h2h,
+      {});
+    return resp.data;
+  }
+
+  async getLineup(fixtureId: number): Promise<LineUpsResponse> {
+    const resp = await this.axios.request(
+      "GET",
+      "/api/football-api/lineups?fixtureId=" + fixtureId,
+      {});
+    return resp.data;
+  }
+
+  async getStatistics(fixtureId: number): Promise<StatisticResponse> {
+    const resp = await this.axios.request(
+      "GET",
+      "/api/football-api/statistics?fixtureId=" + fixtureId,
       {});
     return resp.data;
   }

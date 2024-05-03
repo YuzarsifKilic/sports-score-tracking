@@ -4,138 +4,32 @@
       <div>
         Karşılaştırma
       </div>
-      <div>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
+      <div *ngFor="let h2h of h2hResponses">
+        <button (click)="matchDetails()" class="grid grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
+          <div class="grid justify-items-start text-sm">
+            {{h2h.date.start.split("T")[0]}}
+          </div>
+          <div class="grid grid-cols-9 col-span-2 w-full">
+            <div class="grid justify-items-end col-span-3">
+              {{h2h.teams.home.name}}
+            </div>
+            <div class="grid justify-items-end">
+              <img src="{{h2h.teams.home.logo}}" width="40" height="40"/>
+            </div>
+            <div class="text-sm mt-1">
+              {{h2h.scores.home.points}} - {{h2h.scores.visitors.points}}
+            </div>
+            <div class="grid justify-items-start">
+              <img src="{{h2h.teams.visitors.logo}}" width="40" height="40"/>
+            </div>
+            <div class="grid justify-items-start col-span-3">
+              {{h2h.teams.visitors.name}}
             </div>
           </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div class="font-bold">
-              Brooklyn Nets
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="hover:border-b hover:border-black">
-              97 - 88
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30" class="pt-2"/>
-            <div>
-              Charlotte Hornets
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div>
-              Brooklyn Nets
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="hover:border-b hover:border-black">
-              88 - 92
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="font-bold">
-              Charlotte Hornets
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
+          <div class="grid justify-items-end">
+            İY {{(parseInt(h2h.scores.home.linescore[0]) + parseInt(h2h.scores.home.linescore[1]))}}-{{(parseInt(h2h.scores.visitors.linescore[0]) + parseInt(h2h.scores.visitors.linescore[1]))}}
           </div>
         </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div class="font-bold">
-              Brooklyn Nets
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="hover:border-b hover:border-black">
-              107 - 98
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30" class="pt-2"/>
-            <div>
-              Charlotte Hornets
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div>
-              Brooklyn Nets
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="hover:border-b hover:border-black">
-              88 - 89
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="font-bold">
-              Charlotte Hornets
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-        <button (click)="matchDetails()" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-          <div class="flex flex-row gap-2 text-sm text-center">
-            <div class="italic">
-              13/03/2024
-            </div>
-          </div>
-          <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-            <div class="font-bold">
-              Brooklyn Nets
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png" width="30" height="30" class="pt-2"/>
-            <div class="hover:border-b hover:border-black">
-              94 - 88
-            </div>
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png" width="30" height="30" class="pt-2"/>
-            <div>
-              Charlotte Hornets
-            </div>
-          </div>
-          <div class="italic text-gray-300 text-sm">
-            İY 1-1
-          </div>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-row justify-center pt-4">
-    <div class="bg-white rounded-xl p-2 w-1/4 border-2">
-      <div>
-        Karşılaştırma
-      </div>
-      <div>
-      </div>
-    </div>
-    <div class="bg-white rounded-xl p-2 w-1/4 border-2">
-      <div>
-        Karşılaştırma
-      </div>
-      <div>
       </div>
     </div>
   </div>

@@ -9,16 +9,21 @@ import {BasketballMatchDetailComponent} from "./basketball/basketball-match-deta
 import {FormulaHomeComponent} from "./formula/formula-home/formula-home.component";
 import {LoginPageComponent} from "./login/login-page/login-page.component";
 import {FavoriteTeamComponent} from "./favorite-team/favorite-team.component";
+import {DriversComponent} from "./formula/drivers/drivers.component";
+import {BasketballPlayerComponent} from "./basketball/basketball-player/basketball-player.component";
+import {FormulaTeamComponent} from "./formula/formula-team/formula-team.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'football-home', pathMatch: 'full' },
   { path: 'football-home', component: FootballHomeComponent },
   { path: 'football-match-detail/:matchId', component: FootballMatchDetailComponent },
   { path: 'football-match-detail/h2h', component: FootballH2hComponent },
   { path: 'basketball-home', component: BasketballHomeComponent },
   { path: 'basketball-match-detail/:matchId', component: BasketballMatchDetailComponent },
+  { path: 'basketball-player/:playerId', component: BasketballPlayerComponent },
   { path: 'formula-home', component: FormulaHomeComponent },
+  { path: 'drivers/:id', component: DriversComponent },
+  { path: 'formula-team/:id', component: FormulaTeamComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'add-favorite-team', component: FavoriteTeamComponent },
 ];

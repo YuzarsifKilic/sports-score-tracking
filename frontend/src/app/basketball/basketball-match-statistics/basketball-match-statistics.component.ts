@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NbaApiService} from "../../_services/nba-api.service";
 import {NbaMatchesStatisticsResponse} from "../../_models/nba-matches-statistics";
 
@@ -15,7 +15,7 @@ export class BasketballMatchStatisticsComponent {
   matchId!: number;
   matchStatistics!: NbaMatchesStatisticsResponse[];
 
-  constructor(private route: ActivatedRoute, private nbaApiService: NbaApiService) { }
+  constructor(private route: ActivatedRoute, private nbaApiService: NbaApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -27,4 +27,7 @@ export class BasketballMatchStatisticsComponent {
       })
   }
 
+  playerDetail(id: number) {
+    this.router.navigate(['/basketball-player/' + id]);
+  }
 }

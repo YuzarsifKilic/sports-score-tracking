@@ -1,6 +1,7 @@
 package com.yuzarsif.api.service;
 
 import com.yuzarsif.api.dto.CreateFootballFanRequest;
+import com.yuzarsif.api.dto.FootballFanDto;
 import com.yuzarsif.api.exception.FootballNotFoundException;
 import com.yuzarsif.api.model.FootballFan;
 import com.yuzarsif.api.model.Role;
@@ -36,5 +37,10 @@ public class FootballFanService {
     protected FootballFan findById(Long id) {
         return footballFanRepository.findById(id)
                 .orElseThrow(() -> new FootballNotFoundException("Football fan not found by id : " + id));
+    }
+
+    public FootballFanDto getById(Long id) {
+        FootballFan footballFan = findById(id);
+        return FootballFanDto.convert(footballFan);
     }
 }

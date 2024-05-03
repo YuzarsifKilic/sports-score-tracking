@@ -11,6 +11,10 @@ import {NbaGamesResponse} from "../../_models/nba-games";
 export class BasketballHomeComponent {
 
   nbaGames!: NbaGamesResponse[];
+  favoriteIcon: string = "assets/images/favorite-empty-star-icon.png";
+  selectedFavoriteIcon: string = "assets/images/favorite-star-icon.png";
+  selected: boolean = false;
+
 
   constructor(private router: Router, private nbaApiService: NbaApiService) { }
 
@@ -32,5 +36,15 @@ export class BasketballHomeComponent {
     let month = ("0" + (current.getMonth() + 1)).slice(-2);
     let year = current.getFullYear();
     return `${year}-${month}-${day}`;
+  }
+
+    protected readonly parseInt = parseInt;
+
+  toggleImage() {
+    this.selected = !this.selected;
+  }
+
+  changeImage() {
+    return this.selected ? this.selectedFavoriteIcon : this.favoriteIcon;
   }
 }

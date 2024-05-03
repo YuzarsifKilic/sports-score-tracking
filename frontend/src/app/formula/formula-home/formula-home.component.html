@@ -17,7 +17,6 @@
     <button (click)="toggleDetails(i)" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
       <div class="flex flex-row text-sm gap-6 justify-start">
         <div class="font-bold">
-          <!--<img src="{{countries[i]}}" width="30" height="30"/> -->
         </div>
         <div class="font-bold">
           {{race.date.replace("T", " ").replace("+00:00", " ")}}
@@ -32,14 +31,13 @@
       </div>
     </button>
     <div [class.hidden]="openDetails !== i">
-      <div class="flex flex-row gap-4 text-sm bg-blue-600">
+      <div class="flex flex-row gap-4 text-sm">
         <div class="py-20">
           <img src="{{race.circuit.image}}" width="350" height="350"/>
         </div>
 
         <div class="flex flex-col divide-y-2">
           <div class="flex flex-row gap-2 py-0.5">
-            <!--<img src="https://media.api-sports.io/flags/bh.svg" width="20" height="20"/> -->
             <div>
               {{race.competition.name}}'i
             </div>
@@ -92,7 +90,7 @@
               <tbody>
               <tr *ngFor="let ranks of ranking$">
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-blueGray-700 gap-1 flex flex-row items-center">
-                  <img src="{{ranks.driver.image}}" width="40" height="40">{{ranks.driver.name}}
+                  <img src="{{ranks.driver.image}}" width="40" height="40"><button (click)="showDriver(ranks.driver.id)" class="hover:text-blue-400">{{ranks.driver.name}}</button>
                 </th>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                   {{ranks.position}}

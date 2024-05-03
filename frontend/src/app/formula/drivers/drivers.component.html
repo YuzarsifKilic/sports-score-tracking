@@ -1,0 +1,97 @@
+<div class="container mx-auto px-40 mt-20">
+  <div class="grid grid-cols-2 w-full bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4">
+    <div class="grid col-span-2 text-xl">
+      {{driver.name}}
+    </div>
+    <div class="grid grid-cols-3 col-span-2">
+      <div class="col-span-2 mt-8">
+        <img src="{{driver.image}}" height="250" width="250" >
+      </div>
+      <div class="grid grid-cols-2 gap-1">
+        <div class="text-gray-400 mt-8">
+          Ülke
+        </div>
+        <div class="mt-8">
+          {{driver.country.name}}
+        </div>
+        <div class="text-gray-400">
+          Millet
+        </div>
+        <div>
+          {{driver.nationality}}
+        </div>
+        <div class="text-gray-400">
+          Doğum Tarihi
+        </div>
+        <div>
+          {{driver.birthdate}}
+        </div>
+        <div class="text-gray-400">
+          Doğum Yeri
+        </div>
+        <div>
+          {{driver.birthplace}}
+        </div>
+        <div class="text-gray-400">
+          Dünya Şampiyonluğu
+        </div>
+        <div>
+          {{driver.world_championships}}
+        </div>
+        <div class="text-gray-400">
+          Grand Prix Yarış Sayısı
+        </div>
+        <div>
+          {{driver.grands_prix_entered}}
+        </div>
+        <div class="text-gray-400">
+          Podium Sayısı
+        </div>
+        <div>
+          {{driver.podiums}}
+        </div>
+        <div class="text-gray-400">
+          En İyi Sıralama
+        </div>
+        <div>
+          {{driver.highest_grid_position}}
+        </div>
+        <div class="text-gray-400">
+          En İyi Sıralama Sayısı
+        </div>
+        <div>
+          {{driver.highest_race_finish.number}}
+        </div>
+        <div class="text-gray-400">
+          Kariyer Puanı
+        </div>
+        <div>
+          {{driver.career_points}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid grid-cols-2 w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2">
+    <div class="grid col-span-2 text-xl">
+      Takımlar
+    </div>
+    <div *ngFor="let team of driver.teams" class="grid col-span-2 mt-2 pt-4">
+      <div class="flex justify-between">
+        <div class="flex justify-start gap-4">
+          <div>
+            <img src="{{team.team.logo}}" width="75" height="75"/>
+          </div>
+          <button (click)="teamDetail(team.team.id)" class="hover:text-blue-400">
+            {{team.team.name}}
+          </button>
+        </div>
+        <div class="text-gray-400">
+          {{team.season}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

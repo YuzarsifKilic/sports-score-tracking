@@ -1,4 +1,7 @@
 import {Component, Renderer2} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {FootballApiService} from "../../_services/football-api.service";
+import {LineUpsResponse} from "../../_models/football-lineup";
 declare var widgets: any;
 @Component({
   selector: 'app-football-match-summary',
@@ -7,19 +10,17 @@ declare var widgets: any;
 })
 export class FootballMatchSummaryComponent {
 
-  constructor(private renderer: Renderer2) { }
+  lineupResponse!: LineUpsResponse;
+
+  constructor(private router: Router, private footballApiService: FootballApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // Yeni bir script elementi oluşturun.
-    const script = this.renderer.createElement('script');
-    script.type = 'module'; // Modül tipini belirtin.
-    script.src = 'https://widgets.api-sports.io/2.0.3/widgets.js'; // Script'in kaynağını belirtin.
-    script.onload = () => {
-      // Script yüklendikten sonra yapılacak işlemler.
-      console.log('API Sports widget script loaded successfully');
-    };
-    // Oluşturulan script elementini document'in head etiketine ekleyin.
-    this.renderer.appendChild(document.head, script);
+    this.route.params.subscribe(params => {
+      this.footballApiService.getLineup(params['matchId'])
+        .then(response => {
+          this.lineupResponse = response;
+        })
+    })
   }
 
 }

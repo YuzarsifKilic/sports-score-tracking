@@ -42,7 +42,11 @@
             {{game.scores.home.linescore[3]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{game.scores.home.points}}
+            <div [ngSwitch]="game.status.long">
+              <div *ngSwitchCase="'Finished'">
+                {{game.scores.home.points}}
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -62,7 +66,11 @@
             {{game.scores.visitors.linescore[3]}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{game.scores.visitors.points}}
+            <div [ngSwitch]="game.status.long">
+              <div *ngSwitchCase="'Finished'">
+                {{game.scores.visitors.points}}
+              </div>
+            </div>
           </td>
         </tr>
         </tbody>

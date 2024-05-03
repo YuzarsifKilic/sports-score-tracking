@@ -9,21 +9,29 @@
           <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
-          <div>
-            {{fixtureDetail.score.fulltime.home}}
-          </div>
-          <div class="items-center">
-            <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
-              MS
+          <div [ngSwitch]="fixtureDetail.fixture.status.short">
+            <div *ngSwitchCase="'FT'">
+              <div>
+                {{fixtureDetail.score.fulltime.home}}
+              </div>
+              <div class="items-center">
+                <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+                  MS
+                </div>
+              </div>
+              <div>
+                {{fixtureDetail.score.fulltime.away}}
+              </div>
+            </div>
+            <div *ngSwitchCase="'NS'">
+              V
             </div>
           </div>
-          <div>
-            {{fixtureDetail.score.fulltime.away}}
-          </div>
+
         </div>
         <div class="p-4">
           <div class="font-bold text-xl">
-            {{fixtureDetail.teams.home.name}}
+            {{fixtureDetail.teams.away.name}}
           </div>
           <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
         </div>

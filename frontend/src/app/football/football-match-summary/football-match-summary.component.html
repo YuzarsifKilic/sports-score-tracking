@@ -5,38 +5,10 @@
         İlk 11
       </div>
       <div>
-        <div class="mt-2">
-           1 - Fred
-        </div>
-        <div>
-           2 - Fred
-        </div>
-        <div>
-          3 - Fred
-        </div>
-        <div>
-          4 - Fred
-        </div>
-        <div>
-          5 - Fred
-        </div>
-        <div>
-          6 - Fred
-        </div>
-        <div>
-          7 - Fred
-        </div>
-        <div>
-          8 - Fred
-        </div>
-        <div>
-          9 - Fred
-        </div>
-        <div>
-          10 - Fred
-        </div>
-        <div>
-          11 - Fred
+        <div *ngFor="let homeTeamStartXI of lineupResponse.response[0].startXI">
+           <div>
+             {{homeTeamStartXI.player.number}} - {{homeTeamStartXI.player.name}}
+           </div>
         </div>
       </div>
     </div>
@@ -45,38 +17,10 @@
         İlk 11
       </div>
       <div>
-        <div class="mt-2">
-          1 - Fred
-        </div>
-        <div>
-          2 - Fred
-        </div>
-        <div>
-          3 - Fred
-        </div>
-        <div>
-          4 - Fred
-        </div>
-        <div>
-          5 - Fred
-        </div>
-        <div>
-          6 - Fred
-        </div>
-        <div>
-          7 - Fred
-        </div>
-        <div>
-          8 - Fred
-        </div>
-        <div>
-          9 - Fred
-        </div>
-        <div>
-          10 - Fred
-        </div>
-        <div>
-          11 - Fred
+        <div *ngFor="let homeTeamStartXI of lineupResponse.response[1].startXI">
+          <div>
+            {{homeTeamStartXI.player.number}} - {{homeTeamStartXI.player.name}}
+          </div>
         </div>
       </div>
     </div>
@@ -87,32 +31,10 @@
         Yedekler
       </div>
       <div>
-        <div class="mt-2">
-          20 - Fred
-        </div>
-        <div>
-          21 - Fred
-        </div>
-        <div>
-          22 - Fred
-        </div>
-        <div>
-          23 - Fred
-        </div>
-        <div>
-          24 - Fred
-        </div>
-        <div>
-          25 - Fred
-        </div>
-        <div>
-          26 - Fred
-        </div>
-        <div>
-          27 - Fred
-        </div>
-        <div>
-          28 - Fred
+        <div *ngFor="let substitutes of lineupResponse.response[0].substitutes">
+          <div>
+            {{substitutes.player.number}} - {{substitutes.player.name}}
+          </div>
         </div>
       </div>
     </div>
@@ -121,35 +43,13 @@
         Yedekler
       </div>
       <div>
-
-        <div class="mt-2">
-          20 - Fred
-        </div>
         <div>
-          21 - Fred
+          <div *ngFor="let substitutes of lineupResponse.response[1].substitutes">
+            <div>
+              {{substitutes.player.number}} - {{substitutes.player.name}}
+            </div>
+          </div>
         </div>
-        <div>
-          22 - Fred
-        </div>
-        <div>
-          23 - Fred
-        </div>
-        <div>
-          24 - Fred
-        </div>
-        <div>
-          25 - Fred
-        </div>
-        <div>
-          26 - Fred
-        </div>
-        <div>
-          27 - Fred
-        </div>
-        <div>
-          28 - Fred
-        </div>
-      </div>
     </div>
   </div>
 </div>

@@ -18,30 +18,53 @@
       Favoriler
     </div>
     <div *ngFor="let game of nbaGames">
-      <button (click)="matchDetails(game.id)" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
-        <div class="flex flex-row gap-2 text-sm text-center">
-          <div class="italic">
-            {{game.date.start.split("T")[1].replace(":00.000Z", "")}}
-          </div>
-          <div class="font-bold">
+      <button (click)="matchDetails(game.id)" class="grid w-full grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-md hover:p-2 hover:my-2">
+        <div class="grid justify-items-start text-sm">
+          <div *ngIf="game.status.long === 'Finished'; else notFinished" >
             MS
           </div>
+          <ng-template #notFinished>
+            {{game.date.start.split("T")[1].replace(":00.000Z", "")}}
+          </ng-template>
         </div>
-        <div class="flex flex-row gap-2 font-quicksand items-center text-sm">
-          <div>
+        <div class="grid grid-cols-9 col-span-2">
+          <div class="grid justify-items-end col-span-3 text-sm mt-1">
             {{game.teams.home.name}}
           </div>
-          <img src="{{game.teams.home.logo}}" width="25" height="25"/>
-          <div>
-            {{game.scores.home.points}} - {{game.scores.visitors.points}}
+          <div class="grid justify-items-end">
+            <img src="{{game.teams.home.logo}}" width="30" height="30"/>
           </div>
-          <div>
+          <div [ngSwitch]="game.status.long" class="text-sm mt-1">
+            <div *ngSwitchCase="'Finished'">
+              {{game.scores.home.points}}-{{game.scores.visitors.points}}
+            </div>
+            <div *ngSwitchCase="'Scheduled'">
+              V
+            </div>
+            <div *ngSwitchCase="'In Play'" class="text-red-600">
+              {{game.status.short}}P
+            </div>
+          </div>
+          <div class="grid justify-items-start">
+            <img src="{{game.teams.visitors.logo}}" width="30" height="30"/>
+          </div>
+          <div class="grid justify-items-start col-span-3 text-sm mt-1">
             {{game.teams.visitors.name}}
           </div>
-          <img src="{{game.teams.visitors.logo}}" width="30" height="30"/>
         </div>
-        <div class="italic text-gray-300 text-sm">
-          İY {{(game.scores.home.linescore[0] + game.scores.home.linescore[1])}}-{{(game.scores.visitors.linescore[0] + game.scores.visitors.linescore[1])}}
+        <div class="flex justify-end">
+          <div *ngIf="game.status.long === 'Finished'; else notFT" class="flex flex-row gap-2">
+            <div class="text-sm">
+              İY
+              {{(parseInt(game.scores.home.linescore[0]) + parseInt(game.scores.home.linescore[1]))}}-{{(parseInt(game.scores.visitors.linescore[0]) + parseInt(game.scores.visitors.linescore[1]))}}
+            </div>
+            <div class="">
+              <img class="" src="assets/images/favorite-empty-star-icon.png"  width="20" height="20">
+            </div>
+          </div>
+          <div class="">
+            <ng-template #notFT><img src="assets/images/favorite-empty-star-icon.png" width="20" height="20" (click)="toggleImage()"></ng-template>
+          </div>
         </div>
       </button>
     </div>

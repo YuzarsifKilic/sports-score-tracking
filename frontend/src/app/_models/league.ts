@@ -1,4 +1,5 @@
-import {CountryResponse} from "./country";
+import {Country} from "./country";
+
 
 export class LeagueResponse {
   response!: Response[];
@@ -7,7 +8,7 @@ export class LeagueResponse {
 
 export class Response {
   league!: League;
-  country!: CountryResponse;
+  country!: Country;
   seasons!: Season[];
 }
 

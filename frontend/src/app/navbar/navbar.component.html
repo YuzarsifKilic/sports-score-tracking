@@ -1,13 +1,32 @@
 <nav class="bg-blue-800 h-24 p-2 text-white text-center divide-y-2">
   <div class="flex justify-between text-xl pb-4">
     <div>
-      MACKOLİK - DEMO
+      SPORT SCORE TRACKER
     </div>
-    <button class="px-2 text-sm p-1 border-white border-2 rounded-md hover:bg-white hover:text-blue-800 hover:border-2 hover:border-blue-800">
-      Giriş Yap
-    </button>
+    <div [ngSwitch]="loggedIn">
+      <div *ngSwitchCase="true" class="relative" #dropdownContainer>
+        <button (click)="toggleDropdown()" class="px-2 text-sm p-1 border-white border-2 rounded-md hover:bg-white hover:text-blue-800 hover:border-2 hover:border-blue-800">{{username}}</button>
+        <div *ngIf="isOpen" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl">
+          <button class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+            Favori Takımları Düzenle
+          </button>
+          <button class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+            Favori Maçları Düzenle
+          </button>
+          <button class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+            Hesap Bilgilerini Düzenle
+          </button>
+          <button class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+            Çıkış Yap
+          </button>
+        </div>
+      </div>
+      <button *ngSwitchCase="false" (click)="loginPage()" class="px-2 text-sm p-1 border-white border-2 rounded-md hover:bg-white hover:text-blue-800 hover:border-2 hover:border-blue-800">
+        Giriş Yap
+      </button>
+    </div>
   </div>
-  <div class="flex flex-row justify-center pt-4 gap-4 divide-x text-sm">
+  <div class="flex flex-row justify-center p-4 gap-4 divide-x text-sm">
     <button (click)="footballHome()" class="hover:text-gray-200">
       FUTBOL
     </button>

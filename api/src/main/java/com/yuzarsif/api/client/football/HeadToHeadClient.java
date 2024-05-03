@@ -23,7 +23,7 @@ public class HeadToHeadClient {
     }
 
     public HeadToHeadResponse findHeadToHead(String h2h) {
-        String url = String.format("https://%s/fixtures/headtohead?h2h=%s", rapidApiProperties.getXRapidApiFootballHost(), h2h);
+        String url = String.format("https://%s/fixtures/headtohead?h2h=%s&last=5", rapidApiProperties.getXRapidApiFootballHost(), h2h);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");

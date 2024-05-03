@@ -16,6 +16,7 @@ export class FootballH2hComponent {
   headToHead!: HeadToHeadResponse;
   homeTeamFixtures!: FootballFixturesCustomResponse[];
   awayTeamFixtures!: FootballFixturesCustomResponse[];
+  fixtureResponse!: FootballFixturesCustomResponse;
 
   constructor(private footballApiService: FootballApiService, private route: ActivatedRoute) { }
 
@@ -25,6 +26,7 @@ export class FootballH2hComponent {
         .then(response => {
           this.homeTeamId = response.teams.home.id;
           this.awayTeamId = response.teams.away.id;
+          this.fixtureResponse = response;
           this.footballApiService.getHeadToHead(this.homeTeamId + '-' + this.awayTeamId)
             .then(response => {
               this.headToHead = response;

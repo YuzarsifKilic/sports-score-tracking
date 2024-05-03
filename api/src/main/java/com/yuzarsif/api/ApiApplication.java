@@ -3,10 +3,8 @@ package com.yuzarsif.api;
 import com.yuzarsif.api.client.football.*;
 import com.yuzarsif.api.client.football.model.*;
 import com.yuzarsif.api.dto.CreateFavoriteTeamRequest;
-import com.yuzarsif.api.model.FavoriteTeam;
-import com.yuzarsif.api.model.FootballFan;
-import com.yuzarsif.api.model.Role;
-import com.yuzarsif.api.model.SportType;
+import com.yuzarsif.api.model.*;
+import com.yuzarsif.api.repository.CountryRepository;
 import com.yuzarsif.api.repository.FavoriteTeamRepository;
 import com.yuzarsif.api.repository.FootballFanRepository;
 import com.yuzarsif.api.service.FavoriteTeamService;
@@ -32,7 +30,8 @@ public class ApiApplication {
                                                LeagueClient leagueClient,
                                                TeamClient teamClient,
                                                StandingsClient standingsClient,
-                                               FixtureClient fixtureClient) {
+                                               FixtureClient fixtureClient,
+                                               CountryRepository repository) {
         return args -> {
         };
     }

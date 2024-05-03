@@ -1,5 +1,6 @@
 <div class="grid grid-cols-1 mt-12 mb-4">
-  <div *ngFor="let fixture of fixtures" class="grid justify-items-center mt-8">
+  <div *ngIf="fixtures2$ | async as fixtures2">
+  <div *ngFor="let fixture of fixtures2" class="grid justify-items-center mt-8">
     <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
       <div class="flex flex-row gap-2 pb-1">
         <img src="{{fixture.league.flag}}" width="20" height="20"/> {{fixture.league.country}} - {{fixture.league.name}}
@@ -14,13 +15,13 @@
               {{fixtureResponse.teams.home.name}}
             </div>
             <div class="grid justify-items-end">
-              <img src="{{fixtureResponse.teams.home.logo}}" width="30" height="30"/>
+              <img [src]="fixtureResponse.teams.home.logo" width="30" height="30"/>
             </div>
             <div>
               {{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}
             </div>
             <div class="grid justify-items-start">
-              <img src="{{fixtureResponse.teams.away.logo}}" width="30" height="30"/>
+              <img [src]="fixtureResponse.teams.away.logo" width="30" height="30"/>
             </div>
             <div class="grid justify-items-start col-span-3 text-sm mt-1">
               {{fixtureResponse.teams.away.name}}
@@ -33,40 +34,5 @@
       </div>
     </div>
   </div>
-</div>
-<!--
-<div class="flex justify-center mt-12 mb-4">
-  <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
-    <div class="flex flex-row gap-2 pb-1">
-      <img src="https://media.api-sports.io/flags/fr.svg" width="20" height="20"/>Fransa
-    </div>
-    <div *ngFor="let fixture of fixtures">
-      <button (click)="matchDetails()" class="grid w-full grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:my-2">
-        <div class="grid justify-items-start text-left">
-            {{fixture.fixture.date.split("T")[1].replace(":00+00:00", "")}}
-        </div>
-        <div class="grid grid-cols-9 col-span-2">
-          <div class="grid justify-items-end col-span-3 text-sm mt-1">
-            {{fixture.teams.home.name}}
-          </div>
-          <div class="grid justify-items-end">
-            <img src="{{fixture.teams.home.logo}}" width="30" height="30"/>
-          </div>
-          <div>
-            2 - 1
-          </div>
-          <div class="grid justify-items-start">
-            <img src="{{fixture.teams.away.logo}}" width="30" height="30"/>
-          </div>
-          <div class="grid justify-items-start col-span-3 text-sm mt-1">
-            {{fixture.teams.away.name}}
-          </div>
-        </div>
-        <div class="italic text-gray-300 text-sm text-right">
-          İY 0-0
-        </div>
-      </button>
-    </div>
   </div>
 </div>
---->

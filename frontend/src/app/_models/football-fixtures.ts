@@ -88,8 +88,8 @@ export class Score {
 }
 
 export class Status {
-  mylong!: string;
-  myshort!: string;
+  long!: string;
+  short!: string;
   elapsed!: number;
 }
 

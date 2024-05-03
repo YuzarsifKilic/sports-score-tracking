@@ -1,0 +1,142 @@
+<div class="container mx-auto px-40 mt-20">
+  <div class="grid grid-cols-1 w-full bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4">
+    <div class="grid justify-items-center text-3xl">
+      {{player.firstname}} {{player.lastname}}
+    </div>
+    <div class="">
+      <div class="grid grid-cols-5 gap-1">
+        <div class="grid justify-items-start text-gray-400 mt-8">
+          Ülke
+        </div>
+        <div class="grid justify-items-start col-span-4 mt-8">
+          {{player.birth.country}}
+        </div>
+        <div class="grid justify-items-start text-gray-400">
+          Doğum Tarihi
+        </div>
+        <div class="grid justify-items-start col-span-4">
+          {{player.birth.date}}
+        </div>
+        <div class="grid justify-items-start text-gray-400">
+          Kolej
+        </div>
+        <div class="grid justify-items-start col-span-4">
+          {{player.college}}
+        </div>
+        <div class="grid justify-items-start text-gray-400">
+          Boyu
+        </div>
+        <div class="grid justify-items-start col-span-4">
+          {{player.height.meters}} m
+        </div>
+        <div class="grid justify-items-start text-gray-400">
+          Kilosu
+        </div>
+        <div class="grid justify-items-start col-span-4">
+          {{player.weight.kilograms}} kg
+        </div>
+        <div class="grid justify-items-start text-gray-400">
+          NBA Başlama Tarihi
+        </div>
+        <div class="grid justify-items-start col-span-4">
+          {{player.nba.start}}
+        </div>
+        <div class="grid justify-items-start text-gray-400">
+          Profesyonel Yılı
+        </div>
+        <div class="grid justify-items-start col-span-4">
+          {{player.nba.pro}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid grid-cols-2 w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div class="text-xl">
+      İstatistikler
+    </div>
+    <div class="grid justify-items-end mb-4">
+      <div class="w-64">
+        <select id="countries" (change)="onSelectYear($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:ring-inset focus:ring-2 focus:border-blue-600 block w-full p-2.5">
+          <option selected>Yıl Seçiniz</option>
+          <option *ngFor="let year of years">{{year}}</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <table class="items-center bg-transparent w-full border-collapse ">
+        <thead>
+        <tr>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+            Takım
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Sayı
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Süre
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Oynadığı Pozisyonlar
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Atak Reb.
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Defans Reb.
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Total Reb.
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Blok
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Top Çalma
+          </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Asist
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 flex flex-row items-center text-center gap-4">
+            <img src="{{statistics.team.logo}}" width="30" height="30" class="pt-2"/> {{statistics.team.name}}
+          </th>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.points}}
+          </td>
+          <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.min}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.pos}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.offReb}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.defReb}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.totReb}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.blocks}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.steals}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+            {{statistics.assists}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

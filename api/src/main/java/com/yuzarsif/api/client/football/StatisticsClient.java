@@ -23,7 +23,7 @@ public class StatisticsClient {
         this.restTemplate = restTemplate;
     }
 
-    public StatisticsResponse findStatistics(Integer fixtureId) {
+    public StatisticResponse findStatistics(Integer fixtureId) {
         String url = String.format("https://%s/fixtures/statistics?fixture=%s", rapidApiProperties.getXRapidApiFootballHost(), fixtureId);
 
         HttpHeaders headers = new HttpHeaders();
@@ -34,7 +34,7 @@ public class StatisticsClient {
         HttpEntity entity = new HttpEntity(headers);
 
         try {
-            ResponseEntity<StatisticsResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticsResponse.class);
+            ResponseEntity<StatisticResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticResponse.class);
             return response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
