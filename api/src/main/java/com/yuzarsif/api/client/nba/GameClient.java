@@ -1,8 +1,13 @@
 package com.yuzarsif.api.client.nba;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yuzarsif.api.client.football.model.StandingsResponse;
 import com.yuzarsif.api.client.nba.response.GameResponse;
-import com.yuzarsif.api.client.nba.response.TeamResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
+import com.yuzarsif.api.exception.ApiSportsException;
+import com.yuzarsif.api.model.ClientResponse;
+import com.yuzarsif.api.service.ClientResponseService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,10 +23,12 @@ public class GameClient {
 
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
+    private final ClientResponseService clientResponseService;
 
-    public GameClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
+    public GameClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
+        this.clientResponseService = clientResponseService;
     }
 
     public GameResponse findGames(Optional<String> date, Optional<String> matchId, Optional<String> h2h) {
@@ -34,6 +41,18 @@ public class GameClient {
             url = String.format("https://%s/games?h2h=%s", rapidApiProperties.getXRapidApiNbaHost(), h2h.get());
         }
 
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                GameResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), GameResponse.class);
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException("Country not found");
+            }
+        }
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         headers.set("x-rapidapi-host", rapidApiProperties.getXRapidApiNbaHost());
@@ -43,10 +62,10 @@ public class GameClient {
 
         try {
             ResponseEntity<GameResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, GameResponse.class);
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
             return response.getBody();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Games not found. Error: %s", e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 }

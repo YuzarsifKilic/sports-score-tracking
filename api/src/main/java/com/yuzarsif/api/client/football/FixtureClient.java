@@ -1,8 +1,14 @@
 package com.yuzarsif.api.client.football;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuzarsif.api.client.football.model.FixtureCustomResponse;
 import com.yuzarsif.api.client.football.model.FixtureResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
+import com.yuzarsif.api.exception.ApiSportsException;
+import com.yuzarsif.api.model.ClientResponse;
+import com.yuzarsif.api.service.ClientResponseService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,24 +17,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FixtureClient {
 
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
+    private final ClientResponseService clientResponseService;
 
-    public FixtureClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
+    public FixtureClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
+        this.clientResponseService = clientResponseService;
     }
 
     public FixtureResponse findFixtures(Integer season, Integer teamId) {
         String url = String.format("https://%s/fixtures?season=%s&team=%s", rapidApiProperties.getXRapidApiFootballHost(), season, teamId);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                FixtureResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), FixtureResponse.class);
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException("Country not found");
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -39,15 +56,27 @@ public class FixtureClient {
 
         try {
             ResponseEntity<FixtureResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, FixtureResponse.class);
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
             return response.getBody();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Fixture not found by season %s and team id %s\nError: %s", season, teamId, e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 
     public FixtureResponse.Response findFixturesById(Integer fixtureId) {
         String url = String.format("https://%s/fixtures?id=%s", rapidApiProperties.getXRapidApiFootballHost(), fixtureId);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                FixtureResponse.Response fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), FixtureResponse.Response.class);
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException("Country not found");
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -60,15 +89,28 @@ public class FixtureClient {
             ResponseEntity<FixtureResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, FixtureResponse.class);
             FixtureResponse body = response.getBody();
             FixtureResponse.Response fixtureResponse = body.getResponse().get(0);
+            clientResponseService.save(url, objectMapper.writeValueAsString(fixtureResponse));
             return fixtureResponse;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Fixture not found by id %s\nError: %s", fixtureId, e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 
     public List<FixtureResponse.Response> find5FixturesByTeamId(Integer teamId) {
         String url = String.format("https://%s/fixtures?team=%s&last=5", rapidApiProperties.getXRapidApiFootballHost(), teamId);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                List<FixtureResponse.Response> fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), new TypeReference<List<FixtureResponse.Response>>(){});
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException(e.getMessage());
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -81,15 +123,28 @@ public class FixtureClient {
             ResponseEntity<FixtureResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, FixtureResponse.class);
             FixtureResponse body = response.getBody();
             assert body != null;
+            clientResponseService.save(url, objectMapper.writeValueAsString(body.getResponse()));
             return body.getResponse();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Fixtures not found by team id %s\nError: %s", teamId, e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 
     public List<FixtureCustomResponse.Response> findFixturesByDate(String date) {
         String url = String.format("https://%s/fixtures?date=%s", rapidApiProperties.getXRapidApiFootballHost(), date);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                List<FixtureCustomResponse.Response> fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), new TypeReference<List<FixtureCustomResponse.Response>>(){});
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException(e.getMessage());
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -118,11 +173,11 @@ public class FixtureClient {
             if (changeOrder(order, "Spain", "La Liga", responses)){
                 order++;
             }
+            clientResponseService.save(url, objectMapper.writeValueAsString(responses));
             return responses;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Fixtures not found by date %s\nError: %s", date, e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 
     private List<FixtureCustomResponse.Response> convertToCustomResponse(List<FixtureResponse.Response> fixtureResponses) {

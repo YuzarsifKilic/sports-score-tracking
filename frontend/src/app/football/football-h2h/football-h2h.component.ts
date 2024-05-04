@@ -18,7 +18,7 @@ export class FootballH2hComponent {
   awayTeamFixtures!: FootballFixturesCustomResponse[];
   fixtureResponse!: FootballFixturesCustomResponse;
 
-  constructor(private footballApiService: FootballApiService, private route: ActivatedRoute) { }
+  constructor(private footballApiService: FootballApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -44,7 +44,7 @@ export class FootballH2hComponent {
     })
   }
 
-  matchDetails() {
-
+  matchDetails(id: number) {
+    this.router.navigate(["/football-match-detail/" + id]);
   }
 }

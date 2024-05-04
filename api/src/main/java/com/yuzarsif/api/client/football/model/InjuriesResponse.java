@@ -1,16 +1,22 @@
 package com.yuzarsif.api.client.football.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class InjuriesResponse {
 
     public ArrayList<Response> response;
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Fixture {
         public int id;
         public String timezone;
@@ -19,6 +25,8 @@ public class InjuriesResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class League {
         public int id;
         public int season;
@@ -29,6 +37,8 @@ public class InjuriesResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Player {
         public int id;
         public String name;
@@ -38,6 +48,8 @@ public class InjuriesResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Response {
         public Player player;
         public Team team;
@@ -46,6 +58,8 @@ public class InjuriesResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Team {
         public int id;
         public String name;

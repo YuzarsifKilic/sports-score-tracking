@@ -1,17 +1,22 @@
 package com.yuzarsif.api.client.football.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HeadToHeadResponse {
 
     public ArrayList<Response> response;
 
-    @Data
+    @AllArgsConstructor
+@NoArgsConstructor
     public static class Away {
         public int id;
         public String name;
@@ -20,12 +25,16 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Extratime {
         public Object home;
         public Object away;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Fixture {
         public int id;
         public String referee;
@@ -38,24 +47,32 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Fulltime {
         public int home;
         public int away;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Goals {
         public int home;
         public int away;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Halftime {
         public int home;
         public int away;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Home {
         public int id;
         public String name;
@@ -64,6 +81,8 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class League {
         public int id;
         public String name;
@@ -75,18 +94,24 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Penalty {
         public Object home;
         public Object away;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Periods {
         public int first;
         public int second;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Response {
         public Fixture fixture;
         public League league;
@@ -96,6 +121,8 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Score {
         public Halftime halftime;
         public Fulltime fulltime;
@@ -104,6 +131,8 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Status {
         @JsonProperty("long")
         public String mylong;
@@ -113,12 +142,16 @@ public class HeadToHeadResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Teams {
         public Home home;
         public Away away;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Venue {
         public int id;
         public String name;

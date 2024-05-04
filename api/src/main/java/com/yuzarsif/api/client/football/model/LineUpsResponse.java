@@ -1,15 +1,21 @@
 package com.yuzarsif.api.client.football.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LineUpsResponse {
 
     public ArrayList<Response> response;
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Coach {
         public int id;
         public String name;
@@ -17,12 +23,16 @@ public class LineUpsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Colors {
         public Player player;
         public Goalkeeper goalkeeper;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Goalkeeper {
         public String primary;
         public String number;
@@ -30,6 +40,8 @@ public class LineUpsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Player {
         public String primary;
         public String number;
@@ -41,6 +53,8 @@ public class LineUpsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Response {
         public Team team;
         public Coach coach;
@@ -50,16 +64,22 @@ public class LineUpsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class StartXI {
         public Player player;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Substitute {
         public Player player;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Team {
         public int id;
         public String name;
