@@ -1,11 +1,10 @@
-<div class="flex flex-col mt-4">
-  <div class="flex justify-center">
-    <div class="bg-white rounded-xl p-2 w-2/4 border-2">
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2 gap-2">
       <div>
         Karşılaştırma
       </div>
       <div *ngFor="let h2h of headToHead.response">
-        <button (click)="matchDetails()" class="grid grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
+        <button (click)="matchDetails(h2h.fixture.id)" class="grid grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:mt-2 hover:mb-2 w-full">
           <div class="grid justify-items-start text-sm">
               {{h2h.fixture.date.split("T")[0]}}
           </div>
@@ -31,61 +30,65 @@
           </div>
         </button>
       </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2">
+  <div class="container mx-auto grid justify-items-end mt-12">
+    <div class="grid bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2 gap-2">
+    <div>
+      Son Maçlar
+    </div>
+    <div *ngFor="let homeTeamFixture of homeTeamFixtures">
+      <div>
+        <button (click)="matchDetails(homeTeamFixture.fixture.id)" class="grid grid-cols-9 w-full mt-2">
+          <div class="grid justify-items-start col-span-3">
+            {{homeTeamFixture.teams.home.name}}
+          </div>
+          <div class="grid justify-items-end">
+            <img src="{{homeTeamFixture.teams.home.logo}}" width="30" height="30"/>
+          </div>
+          <div>
+            {{homeTeamFixture.score.fulltime.home}} - {{homeTeamFixture.score.fulltime.away}}
+          </div>
+          <div class="grid justify-items-start">
+            <img src="{{homeTeamFixture.teams.away.logo}}" width="30" height="30"/>
+          </div>
+          <div class="grid justify-items-end col-span-3">
+            {{homeTeamFixture.teams.away.name}}
+          </div>
+        </button>
+      </div>
+    </div>
     </div>
   </div>
-  <div class="flex flex-row justify-center pt-4">
-    <div class="bg-white rounded-xl p-2 w-1/4 border-2">
-      <div>
-        Son Maçlar
-      </div>
-      <div *ngFor="let homeTeamFixture of homeTeamFixtures">
-        <div>
-          <button class="grid grid-cols-9 w-full mt-2">
-            <div class="grid justify-items-start col-span-3">
-              {{homeTeamFixture.teams.home.name}}
-            </div>
-            <div class="grid justify-items-end">
-              <img src="{{homeTeamFixture.teams.home.logo}}" width="30" height="30"/>
-            </div>
-            <div>
-              {{homeTeamFixture.score.fulltime.home}} - {{homeTeamFixture.score.fulltime.away}}
-            </div>
-            <div class="grid justify-items-start">
-              <img src="{{homeTeamFixture.teams.away.logo}}" width="30" height="30"/>
-            </div>
-            <div class="grid justify-items-end col-span-3">
-              {{homeTeamFixture.teams.away.name}}
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
 
-    <div class="bg-white rounded-xl p-2 w-1/4 border-2">
+  <div class="container grid justify-items-start mx-auto pr-40 mt-12">
+    <div class="grid bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2 gap-2">
+    <div>
+      Son Maçlar
+    </div>
+    <div *ngFor="let awayTeamFixture of awayTeamFixtures">
       <div>
-        Son Maçlar
-      </div>
-      <div *ngFor="let awayTeamFixture of awayTeamFixtures">
-        <div>
-          <button class="grid grid-cols-9 w-full mt-2">
-            <div class="grid justify-items-start col-span-3">
-              {{awayTeamFixture.teams.home.name}}
-            </div>
-            <div class="grid justify-items-end">
-              <img src="{{awayTeamFixture.teams.home.logo}}" width="30" height="30"/>
-            </div>
-            <div>
-              {{awayTeamFixture.score.fulltime.home}} - {{awayTeamFixture.score.fulltime.away}}
-            </div>
-            <div class="grid justify-items-start">
-              <img src="{{awayTeamFixture.teams.away.logo}}" width="30" height="30"/>
-            </div>
-            <div class="grid justify-items-end col-span-3">
-              {{awayTeamFixture.teams.away.name}}
-            </div>
-          </button>
-        </div>
+        <button (click)="matchDetails(awayTeamFixture.fixture.id)" class="grid grid-cols-9 w-full mt-2">
+          <div class="grid justify-items-start col-span-3">
+            {{awayTeamFixture.teams.home.name}}
+          </div>
+          <div class="grid justify-items-end">
+            <img src="{{awayTeamFixture.teams.home.logo}}" width="30" height="30"/>
+          </div>
+          <div>
+            {{awayTeamFixture.score.fulltime.home}} - {{awayTeamFixture.score.fulltime.away}}
+          </div>
+          <div class="grid justify-items-start">
+            <img src="{{awayTeamFixture.teams.away.logo}}" width="30" height="30"/>
+          </div>
+          <div class="grid justify-items-end col-span-3">
+            {{awayTeamFixture.teams.away.name}}
+          </div>
+        </button>
       </div>
     </div>
+  </div>
   </div>
 </div>

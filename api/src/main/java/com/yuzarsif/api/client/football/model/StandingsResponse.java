@@ -1,17 +1,23 @@
 package com.yuzarsif.api.client.football.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class StandingsResponse {
 
     public ArrayList<Response> response;
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class League {
         public int id;
         public String name;
@@ -23,11 +29,15 @@ public class StandingsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Response {
         public League league;
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Standings {
         public int rank;
         public Team team;
@@ -44,6 +54,8 @@ public class StandingsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Team{
         public int id;
         public String name;
@@ -51,6 +63,8 @@ public class StandingsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class All{
         public int played;
         public int win;
@@ -60,6 +74,8 @@ public class StandingsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Away {
         public int played;
         public int win;
@@ -69,6 +85,8 @@ public class StandingsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Goals {
         @JsonProperty("for")
         public int myfor;
@@ -76,6 +94,8 @@ public class StandingsResponse {
     }
 
     @Data
+@AllArgsConstructor
+@NoArgsConstructor
     public static class Home {
         public int played;
         public int win;

@@ -1,9 +1,9 @@
-<div class="flex flex-col mt-12">
-  <div class="flex justify-center">
-    <div class="bg-white rounded-xl p-2 w-full sm:w-2/4 border-2">
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div>
       <div class="flex flex-col sm:flex-row justify-between">
         <div class="p-4">
-          <div class="font-bold text-xl">
+          <div class="font-bold text-xl text-center">
             {{fixtureDetail.teams.home.name}}
           </div>
           <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
@@ -27,10 +27,9 @@
               V
             </div>
           </div>
-
         </div>
         <div class="p-4">
-          <div class="font-bold text-xl">
+          <div class="font-bold text-xl text-center">
             {{fixtureDetail.teams.away.name}}
           </div>
           <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
@@ -58,7 +57,5 @@
       </div>
     </div>
   </div>
-  <div>
-    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
-  </div>
 </div>
+<ng-container *ngComponentOutlet="currentComponent"></ng-container>

@@ -1,7 +1,13 @@
 package com.yuzarsif.api.client.nba;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuzarsif.api.client.nba.response.StatisticsResponse;
+import com.yuzarsif.api.client.nba.response.TeamResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
+import com.yuzarsif.api.exception.ApiSportsException;
+import com.yuzarsif.api.model.ClientResponse;
+import com.yuzarsif.api.service.ClientResponseService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,24 +16,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class BasketballStatisticClient {
 
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
+    private final ClientResponseService clientResponseService;
 
-    public BasketballStatisticClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate) {
+    public BasketballStatisticClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
+        this.clientResponseService = clientResponseService;
     }
 
     public StatisticsResponse findStatistics(Integer gameId) {
         String url = String.format("https://%s/players/statistics?game=%s", rapidApiProperties.getXRapidApiNbaHost(), gameId);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                StatisticsResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), StatisticsResponse.class);
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException("Country not found");
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -38,15 +55,27 @@ public class BasketballStatisticClient {
 
         try {
             ResponseEntity<StatisticsResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticsResponse.class);
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
             return response.getBody();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Statics not found by game id: %s.\nError: %s", gameId, e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 
     public StatisticsResponse.CustomResponse findStatistics(Integer playedId, Integer season) {
         String url = String.format("https://%s/players/statistics?id=%s&season=%s", rapidApiProperties.getXRapidApiNbaHost(), playedId, season);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                StatisticsResponse.CustomResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), StatisticsResponse.CustomResponse.class);
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException("Country not found");
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -58,11 +87,11 @@ public class BasketballStatisticClient {
         try {
             ResponseEntity<StatisticsResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticsResponse.class);
             StatisticsResponse body = response.getBody();
+            clientResponseService.save(url, objectMapper.writeValueAsString(body.getResponse()));
             return getYearStatistics(body.getResponse());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiSportsException(String.format("Statics not found by game id: %s.\nError: %s", playedId, e.getMessage()));
         }
-        throw new EntityNotFoundException("Country not found");
     }
 
     private StatisticsResponse.CustomResponse getYearStatistics(List<StatisticsResponse.Response> responses) {
