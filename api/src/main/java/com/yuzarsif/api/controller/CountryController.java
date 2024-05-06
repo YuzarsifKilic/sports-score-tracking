@@ -26,7 +26,7 @@ public class CountryController {
     }
 
     @GetMapping
-    public Country findByName(@RequestParam String name) {
-        return countryService.findByName(name);
+    public Country findByName(@RequestParam String code) {
+        return countryService.findByCode(code);
     }
 }

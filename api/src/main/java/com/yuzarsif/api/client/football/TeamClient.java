@@ -1,7 +1,9 @@
 package com.yuzarsif.api.client.football;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yuzarsif.api.client.football.model.FixtureCustomResponse;
 import com.yuzarsif.api.client.football.model.FixtureResponse;
 import com.yuzarsif.api.client.football.model.TeamResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,7 +34,7 @@ public class TeamClient {
         this.clientResponseService = clientResponseService;
     }
 
-    public TeamResponse findTeams(Integer season, Integer leagueId) {
+    public List<TeamResponse.Response> findTeams(Integer season, Integer leagueId) {
         String url = String.format("https://%s/teams?season=%s&league=%s", rapidApiProperties.getXRapidApiFootballHost(), season, leagueId);
 
         Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
@@ -39,7 +42,7 @@ public class TeamClient {
 
         if (byRequest.isPresent()) {
             try {
-                TeamResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), TeamResponse.class);
+                List<TeamResponse.Response> fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), new TypeReference<List<TeamResponse.Response>>(){});
                 return fixtureResponse;
             } catch (JsonProcessingException e) {
                 throw new EntityNotFoundException("Country not found");
@@ -54,8 +57,8 @@ public class TeamClient {
         HttpEntity entity = new HttpEntity(headers);
         try {
             ResponseEntity<TeamResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, TeamResponse.class);
-            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
-            return response.getBody();
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody().getResponse()));
+            return response.getBody().getResponse();
         } catch (Exception e) {
             throw new ApiSportsException(String.format("Team not found by season %s and league id %s\nError: %s", season, leagueId, e.getMessage()));
         }

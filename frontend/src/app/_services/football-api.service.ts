@@ -6,6 +6,7 @@ import {FootballFixtures, FootballFixturesCustomResponse, FootballFixturesRespon
 import {HeadToHeadResponse} from "../_models/head-to-head";
 import {LineUpsResponse} from "../_models/football-lineup";
 import {StatisticResponse} from "../_models/football-statistics";
+import {FootballTeam} from "../_models/football-team";
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,14 @@ export class FootballApiService {
     const resp = await this.axios.request(
       "GET",
       "/api/football-api/statistics?fixtureId=" + fixtureId,
+      {});
+    return resp.data;
+  }
+
+  async getTeams(leagueId: number, season: number): Promise<FootballTeam[]> {
+    const resp = await this.axios.request(
+      "GET",
+      "/api/football-api/leagues/teams?leagueId=" + leagueId + "&season=" + season,
       {});
     return resp.data;
   }

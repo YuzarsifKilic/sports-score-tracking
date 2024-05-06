@@ -17,14 +17,22 @@ public class FootballApiController {
     private final HeadToHeadClient headToHeadClient;
     private final LineUpClient lineUpClient;
     private final StatisticsClient statisticsClient;
+    private final TeamClient teamClient;
 
-    public FootballApiController(CountryClient countryClient, LeagueClient leagueClient, FixtureClient fixtureClient, HeadToHeadClient headToHeadClient, LineUpClient lineUpClient, StatisticsClient statisticsClient) {
+    public FootballApiController(CountryClient countryClient,
+                                 LeagueClient leagueClient,
+                                 FixtureClient fixtureClient,
+                                 HeadToHeadClient headToHeadClient,
+                                 LineUpClient lineUpClient,
+                                 StatisticsClient statisticsClient,
+                                 TeamClient teamClient) {
         this.countryClient = countryClient;
         this.leagueClient = leagueClient;
         this.fixtureClient = fixtureClient;
         this.headToHeadClient = headToHeadClient;
         this.lineUpClient = lineUpClient;
         this.statisticsClient = statisticsClient;
+        this.teamClient = teamClient;
     }
 
     @GetMapping("/leagues")
@@ -60,5 +68,10 @@ public class FootballApiController {
     @GetMapping("/statistics")
     public ResponseEntity<StatisticResponse> getStatistics(@RequestParam Integer fixtureId) {
         return ResponseEntity.ok(statisticsClient.findStatistics(fixtureId));
+    }
+
+    @GetMapping("/leagues/teams")
+    public ResponseEntity<List<TeamResponse.Response>> getTeams(@RequestParam Integer season, @RequestParam Integer leagueId) {
+        return ResponseEntity.ok(teamClient.findTeams(season, leagueId));
     }
 }
