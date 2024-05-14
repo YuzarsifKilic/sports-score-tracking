@@ -1,0 +1,90 @@
+<div class="container mx-auto px-40 mt-12">
+  <div class="w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          Takım
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          O
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          G
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          B
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          M
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          A
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          Y
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          AV
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          P
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          Puan
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+          Form
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let leagueStanding of leagueStandings">
+        <th class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap pt-4 text-center items-center  text-blueGray-700 flex flex-row gap-4">
+          <img src="{{leagueStanding.team.logo}}" width="30" height="30" class=""/>
+          <div *ngIf="teamStandings.response[0].league.standings[0][0].team.id === leagueStanding.team.id; else otherTeams" class="text-blue-400 pt-2">
+            {{leagueStanding.team.name}}
+          </div>
+          <ng-template #otherTeams class="pt-2">{{leagueStanding.team.name}}</ng-template>
+        </th>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.played}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.win}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.draw}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.lose}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.goals.for}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.goals.against}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.goalsDiff}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.points}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap ">
+          {{leagueStanding.all.goals.against}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap p-2 grid grid-cols-5 w-full text-center">
+          <div *ngFor="let form of splitForm(leagueStanding.form)" class="gap-1">
+            <div [ngSwitch]="form">
+              <div *ngSwitchCase="'W'" class="bg-brand-green text-white rounded-sm p-1 mx-1">{{form}}</div>
+              <div *ngSwitchCase="'D'" class="bg-gray-600 text-white rounded-sm p-1 mx-1">{{form}}</div>
+              <div *ngSwitchCase="'L'" class="bg-red-600 text-white rounded-sm p-1 mx-1">{{form}}</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

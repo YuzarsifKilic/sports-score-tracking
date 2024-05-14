@@ -32,7 +32,7 @@ public class FixtureClient {
         this.clientResponseService = clientResponseService;
     }
 
-    public FixtureResponse findFixtures(Integer season, Integer teamId) {
+    public List<FixtureCustomResponse.Response> findFixtures(Integer season, Integer teamId) {
         String url = String.format("https://%s/fixtures?season=%s&team=%s", rapidApiProperties.getXRapidApiFootballHost(), season, teamId);
 
         Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
@@ -40,7 +40,7 @@ public class FixtureClient {
 
         if (byRequest.isPresent()) {
             try {
-                FixtureResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), FixtureResponse.class);
+                ArrayList<FixtureCustomResponse.Response> fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), new TypeReference<ArrayList<FixtureCustomResponse.Response>>(){});
                 return fixtureResponse;
             } catch (JsonProcessingException e) {
                 throw new EntityNotFoundException("Country not found");
@@ -56,8 +56,9 @@ public class FixtureClient {
 
         try {
             ResponseEntity<FixtureResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, FixtureResponse.class);
-            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
-            return response.getBody();
+            List<FixtureCustomResponse.Response> customResponse = convertToCustomResponse(response.getBody().getResponse());
+            clientResponseService.save(url, objectMapper.writeValueAsString(customResponse));
+            return customResponse;
         } catch (Exception e) {
             throw new ApiSportsException(String.format("Fixture not found by season %s and team id %s\nError: %s", season, teamId, e.getMessage()));
         }

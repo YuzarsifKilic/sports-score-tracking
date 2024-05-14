@@ -29,6 +29,13 @@ import {LazyLoadImageModule} from "ng-lazyload-image";
 import { DriversComponent } from './formula/drivers/drivers.component';
 import { BasketballPlayerComponent } from './basketball/basketball-player/basketball-player.component';
 import { FormulaTeamComponent } from './formula/formula-team/formula-team.component';
+import { FootballTeamComponent } from './football/football-team/football-team.component';
+import { FootballTeamStandingsComponent } from './football/football-team/football-team-standings/football-team-standings.component';
+import { FootballTeamFixtureComponent } from './football/football-team/football-team-fixture/football-team-fixture.component';
+import { FootballTeamPlayersComponent } from './football/football-team/football-team-players/football-team-players.component';
+import {NgIcon} from "@ng-icons/core";
+import {MatIcon} from "@angular/material/icon";
+import { FootballPlayerComponent } from './football/football-player/football-player.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +62,12 @@ import { FormulaTeamComponent } from './formula/formula-team/formula-team.compon
     FavoriteTeamComponent,
     DriversComponent,
     BasketballPlayerComponent,
-    FormulaTeamComponent
+    FormulaTeamComponent,
+    FootballTeamComponent,
+    FootballTeamStandingsComponent,
+    FootballTeamFixtureComponent,
+    FootballTeamPlayersComponent,
+    FootballPlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +75,9 @@ import { FormulaTeamComponent } from './formula/formula-team/formula-team.compon
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     FormsModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    NgIcon,
+    MatIcon
   ],
   providers: [],
   bootstrap: [AppComponent]
