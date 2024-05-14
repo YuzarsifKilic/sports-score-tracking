@@ -33,15 +33,15 @@
   </div>
 </div>
 
-<div class="grid grid-cols-2">
-  <div class="container mx-auto grid justify-items-end mt-12">
-    <div class="grid bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2 gap-2">
+<div class="container mx-auto px-40 mt-12 grid grid-cols-2 gap-8">
+  <div class="container grid justify-items-end">
+    <div class="grid bg-white w-full shadow-md rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2 gap-2">
     <div>
       Son Maçlar
     </div>
     <div *ngFor="let homeTeamFixture of homeTeamFixtures">
       <div>
-        <button (click)="matchDetails(homeTeamFixture.fixture.id)" class="grid grid-cols-9 w-full mt-2">
+        <button (click)="matchDetails(homeTeamFixture.fixture.id)" class="grid grid-cols-9 text-sm w-full mt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:mt-2 hover:mb-2">
           <div class="grid justify-items-start col-span-3">
             {{homeTeamFixture.teams.home.name}}
           </div>
@@ -63,14 +63,14 @@
     </div>
   </div>
 
-  <div class="container grid justify-items-start mx-auto pr-40 mt-12">
-    <div class="grid bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2 gap-2">
+  <div class="container grid justify-items-start">
+    <div class="grid bg-white shadow-md w-full rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2 gap-2">
     <div>
       Son Maçlar
     </div>
     <div *ngFor="let awayTeamFixture of awayTeamFixtures">
       <div>
-        <button (click)="matchDetails(awayTeamFixture.fixture.id)" class="grid grid-cols-9 w-full mt-2">
+        <button (click)="matchDetails(awayTeamFixture.fixture.id)" class="grid grid-cols-9 text-sm w-full mt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:mt-2 hover:mb-2">
           <div class="grid justify-items-start col-span-3">
             {{awayTeamFixture.teams.home.name}}
           </div>

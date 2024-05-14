@@ -1,11 +1,10 @@
 package com.yuzarsif.api.client.football;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yuzarsif.api.client.football.model.FixtureCustomResponse;
-import com.yuzarsif.api.client.football.model.FixtureResponse;
-import com.yuzarsif.api.client.football.model.TeamResponse;
+import com.yuzarsif.api.client.football.model.HeadToHeadResponse;
+import com.yuzarsif.api.client.football.model.PlayersCustomResponse;
+import com.yuzarsif.api.client.football.model.PlayersResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
 import com.yuzarsif.api.exception.ApiSportsException;
 import com.yuzarsif.api.model.ClientResponse;
@@ -18,34 +17,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TeamClient {
+public class PlayersClient {
 
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
     private final ClientResponseService clientResponseService;
 
-    public TeamClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService) {
+    public PlayersClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
         this.clientResponseService = clientResponseService;
     }
 
-    public List<TeamResponse.Response> findTeams(Integer season, Integer leagueId) {
-        String url = String.format("https://%s/teams?season=%s&league=%s", rapidApiProperties.getXRapidApiFootballHost(), season, leagueId);
+    public PlayersResponse getPlayersByTeamAndSeason(Integer teamId, Integer season, Integer page) {
+        String url = String.format("https://%s/players?team=%s&season=%s&page=%s", rapidApiProperties.getXRapidApiFootballHost(), teamId, season, page);
 
         Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
         ObjectMapper objectMapper = new ObjectMapper();
 
         if (byRequest.isPresent()) {
             try {
-                List<TeamResponse.Response> fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), new TypeReference<List<TeamResponse.Response>>(){});
-                return fixtureResponse;
+                PlayersResponse headToHeadResponse = objectMapper.readValue(byRequest.get().getResponse(), PlayersResponse.class);
+                return headToHeadResponse;
             } catch (JsonProcessingException e) {
-                throw new EntityNotFoundException("Country not found");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
 
@@ -55,27 +53,28 @@ public class TeamClient {
         headers.set("x-rapidapi-key", rapidApiProperties.getXRapidApiKey());
 
         HttpEntity entity = new HttpEntity(headers);
+
         try {
-            ResponseEntity<TeamResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, TeamResponse.class);
-            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody().getResponse()));
-            return response.getBody().getResponse();
+            ResponseEntity<PlayersResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, PlayersResponse.class);
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
+            return response.getBody();
         } catch (Exception e) {
-            throw new ApiSportsException(String.format("Team not found by season %s and league id %s\nError: %s", season, leagueId, e.getMessage()));
+            throw new ApiSportsException(String.format("Players not found by team id %s and season %s\nError: %s", teamId, season, e.getMessage()));
         }
     }
 
-    public TeamResponse.Response findTeamById(Integer teamId) {
-        String url = String.format("https://%s/teams?id=%s", rapidApiProperties.getXRapidApiFootballHost(), teamId);
+    public PlayersCustomResponse getPlayersById(Integer playerId, Integer season) {
+        String url = String.format("https://%s/players?id=%s&season=%s", rapidApiProperties.getXRapidApiFootballHost(), playerId, season);
 
         Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
         ObjectMapper objectMapper = new ObjectMapper();
 
         if (byRequest.isPresent()) {
             try {
-                TeamResponse.Response teamResponse = objectMapper.readValue(byRequest.get().getResponse(), TeamResponse.Response.class);
-                return teamResponse;
+                PlayersCustomResponse headToHeadResponse = objectMapper.readValue(byRequest.get().getResponse(), PlayersCustomResponse.class);
+                return headToHeadResponse;
             } catch (JsonProcessingException e) {
-                throw new EntityNotFoundException("Country not found");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
 
@@ -85,12 +84,13 @@ public class TeamClient {
         headers.set("x-rapidapi-key", rapidApiProperties.getXRapidApiKey());
 
         HttpEntity entity = new HttpEntity(headers);
+
         try {
-            ResponseEntity<TeamResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, TeamResponse.class);
-            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody().getResponse().get(0)));
-            return response.getBody().getResponse().get(0);
+            ResponseEntity<PlayersCustomResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, PlayersCustomResponse.class);
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
+            return response.getBody();
         } catch (Exception e) {
-            throw new ApiSportsException(String.format("Team not found id %s\nError: %s", teamId, e.getMessage()));
+            throw new ApiSportsException(String.format("Players not found by id %s and season %s\nError: %s", playerId, season, e.getMessage()));
         }
     }
 }

@@ -1,18 +1,21 @@
-<div>
-  <div class="flex flex-row justify-center pt-4 gap-48">
-    <div class="bg-white rounded-xl p-2 w-1/5 border-2 divide-y">
+<div class="container mx-auto px-40 mt-12 grid grid-cols-2 gap-20">
+  <div class="container grid justify-items-end">
+    <div class="grid bg-white w-full shadow-md rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2 gap-2">
       <div>
         İlk 11
       </div>
       <div>
         <div *ngFor="let homeTeamStartXI of lineupResponse.response[0].startXI">
-           <div>
-             {{homeTeamStartXI.player.number}} - {{homeTeamStartXI.player.name}}
-           </div>
+          <div>
+            {{homeTeamStartXI.player.number}} - {{homeTeamStartXI.player.name}}
+          </div>
         </div>
       </div>
     </div>
-    <div class="bg-white rounded-xl p-2 w-1/5 border-2 divide-y">
+  </div>
+
+  <div class="container grid justify-items-start">
+    <div class="grid bg-white shadow-md w-full rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2 gap-2">
       <div>
         İlk 11
       </div>
@@ -25,8 +28,10 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-row justify-center pt-4 gap-48">
-    <div class="bg-white rounded-xl p-2 w-1/5 border-2 divide-y">
+</div>
+<div class="container mx-auto px-40 mt-12 grid grid-cols-2 gap-20">
+  <div class="container grid justify-items-end">
+    <div class="grid bg-white w-full shadow-md rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2 gap-2">
       <div>
         Yedekler
       </div>
@@ -38,7 +43,10 @@
         </div>
       </div>
     </div>
-    <div class="bg-white rounded-xl p-2 w-1/5 border-2">
+  </div>
+
+  <div class="container grid justify-items-start">
+    <div class="grid bg-white shadow-md w-full rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2 gap-2">
       <div>
         Yedekler
       </div>
@@ -50,6 +58,7 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>

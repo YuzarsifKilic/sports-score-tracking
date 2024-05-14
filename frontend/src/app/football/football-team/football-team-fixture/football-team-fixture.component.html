@@ -1,0 +1,99 @@
+<div class="container mx-auto px-40 mt-12">
+  <div class="w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2">
+    <div class="grid grid-cols-4 w-full py-4">
+      <div class="grid col-span-3 mt-8 text-3xl">
+        Fikstür
+      </div>
+      <div class="grid justify-items-end">
+        <label for="season-select" class="font-quicksand leading-6 text-gray-900 gap-4">
+          Sezon
+        </label>
+        <div class="mt-4">
+          <select id="season-select" name="season-select" [(ngModel)]="selectedSeason" (change)="onSelectSeason(selectedSeason)" class="block w-48 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option *ngFor="let season of seasons" [ngValue]="season">{{season}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let leagueResponse of fixture">
+      <div class="py-4">
+        <div class="grid justify-items-center text-2xl text-blue-600">
+          {{leagueResponse.league.name}}
+        </div>
+        <div *ngFor="let fixtures of leagueResponse.response">
+          <div class="grid grid-cols-9 mt-4">
+            <div class="text-sm text-gray-400">
+              {{fixtures.fixture.date.split("T")[0]}}
+            </div>
+            <div class="grid col-span-2">
+              {{fixtures.teams.home.name}}
+            </div>
+            <div class="grid justify-items-end">
+              <img src="{{fixtures.teams.home.logo}}" width="30" height="30"/>
+            </div>
+            <div [ngSwitch]="fixtures.fixture.status.short">
+              <div *ngSwitchCase="'FT'" class="grid grid-cols-3">
+                <div class="grid justify-items-end">
+                  {{fixtures.score.fulltime.home}}
+                </div>
+                <div class="grid justify-items-center">
+                  -
+                </div>
+                <div class="grid justify-items-start">
+                  {{fixtures.score.fulltime.away}}
+                </div>
+              </div>
+              <div *ngSwitchCase="'AET'" class="grid grid-cols-3">
+                <div class="grid justify-items-end">
+                  {{fixtures.score.fulltime.home}}
+                </div>
+                <div class="grid justify-items-center">
+                  -
+                </div>
+                <div class="grid justify-items-start">
+                  {{fixtures.score.fulltime.away}}
+                </div>
+              </div>
+              <div *ngSwitchCase="'PEN'" class="grid grid-cols-3">
+                <div class="grid grid-cols-2 justify-items-end">
+                  <div>
+                    {{fixtures.score.fulltime.home}}
+                  </div>
+                  <div class="text-xs text-center">
+                    ({{fixtures.score.penalty.home}})
+                  </div>
+                </div>
+                <div class="grid justify-items-center">
+                  -
+                </div>
+                <div class="grid grid-cols-2 justify-items-start">
+                  <div>
+                    {{fixtures.score.fulltime.away}}
+                  </div>
+                  <div class="text-xs text-center">
+                    ({{fixtures.score.penalty.away}})
+                  </div>
+                </div>
+              </div>
+              <div *ngSwitchCase="'TBD'" class="grid justify-items-center">
+                <div>V</div>
+              </div>
+              <div *ngSwitchCase="'NS'" class="grid justify-items-center">
+                <div>V</div>
+              </div>
+            </div>
+            <div class="grid justify-items-start">
+              <img src="{{fixtures.teams.away.logo}}" width="30" height="30"/>
+            </div>
+            <div class="grid col-span-2 justify-items-end">
+              {{fixtures.teams.away.name}}
+            </div>
+            <div class="grid justify-items-end text-sm text-gray-400">
+              İY {{fixtures.score.halftime.home}}-{{fixtures.score.halftime.away}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

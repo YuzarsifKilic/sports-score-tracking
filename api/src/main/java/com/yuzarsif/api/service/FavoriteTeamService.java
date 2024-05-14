@@ -25,18 +25,22 @@ public class FavoriteTeamService {
 
         Optional<FavoriteTeam> byTeamIdAndSportType = favoriteTeamRepository.findByTeamIdAndSportType(request.teamId(), request.sportType());
         if (byTeamIdAndSportType.isPresent()) {
-            byTeamIdAndSportType.get().getFootballFans().add(footballFan);
-            favoriteTeamRepository.save(byTeamIdAndSportType.get());
-            return;
-        }
-        FavoriteTeam favoriteTeam = FavoriteTeam
-                .builder()
-                .teamId(request.teamId())
-                .sportType(request.sportType())
-                .build();
+            if (byTeamIdAndSportType.get().getFootballFans().isEmpty()) {
+                byTeamIdAndSportType.get().setFootballFans(Set.of(footballFan));
+                favoriteTeamRepository.save(byTeamIdAndSportType.get());
+            } else {
+                byTeamIdAndSportType.get().getFootballFans().add(footballFan);
+                favoriteTeamRepository.save(byTeamIdAndSportType.get());
+            }
+        } else {
+            FavoriteTeam favoriteTeam = FavoriteTeam
+                    .builder()
+                    .teamId(request.teamId())
+                    .sportType(request.sportType())
+                    .footballFans(Set.of(footballFan))
+                    .build();
 
-        FavoriteTeam savedFavoriteTeam = favoriteTeamRepository.save(favoriteTeam);
-        savedFavoriteTeam.getFootballFans().add(footballFan);
-        favoriteTeamRepository.save(savedFavoriteTeam);
+            favoriteTeamRepository.save(favoriteTeam);
+        }
     }
 }

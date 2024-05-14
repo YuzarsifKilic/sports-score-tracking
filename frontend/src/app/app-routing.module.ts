@@ -12,12 +12,16 @@ import {FavoriteTeamComponent} from "./favorite-team/favorite-team.component";
 import {DriversComponent} from "./formula/drivers/drivers.component";
 import {BasketballPlayerComponent} from "./basketball/basketball-player/basketball-player.component";
 import {FormulaTeamComponent} from "./formula/formula-team/formula-team.component";
+import {FootballTeamComponent} from "./football/football-team/football-team.component";
+import {FootballPlayerComponent} from "./football/football-player/football-player.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'football-home', pathMatch: 'full' },
   { path: 'football-home', component: FootballHomeComponent },
   { path: 'football-match-detail/:matchId', component: FootballMatchDetailComponent },
   { path: 'football-match-detail/h2h', component: FootballH2hComponent },
+  { path: 'football-team/:teamId', component: FootballTeamComponent },
+  { path: 'football-player/:playerId', component: FootballPlayerComponent },
   { path: 'basketball-home', component: BasketballHomeComponent },
   { path: 'basketball-match-detail/:matchId', component: BasketballMatchDetailComponent },
   { path: 'basketball-player/:playerId', component: BasketballPlayerComponent },

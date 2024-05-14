@@ -19,8 +19,8 @@ public class CountryService {
         return repository.findAll();
     }
 
-    public Country findByName(String name) {
-        return repository.findByName(name)
-                .orElseThrow(() -> new IllegalArgumentException("Country not found by name : " + name));
+    public Country findByCode(String code) {
+        return repository.findByName(code)
+                .orElseThrow(() -> new IllegalArgumentException("Country not found by name : " + code));
     }
 }

@@ -1,0 +1,95 @@
+<div class="container mx-auto px-40 mt-20">
+  <div class="w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div class="grid grid-cols-4">
+      <div class="grid col-span-4 justify-items-center">
+        {{playerResponse.response[0].player.firstname}} {{playerResponse.response[0].player.lastname}}
+      </div>
+      <div class="grid col-span-2 justify-items-start mt-20">
+        <img src="{{playerResponse.response[0].player.photo}}" width="200" height="200">
+      </div>
+      <div class="grid grid-cols-2 col-span-2 mt-20">
+        <div class="text-gray-400">İsim</div>
+        <div>{{playerResponse.response[0].player.name}}</div>
+        <div class="text-gray-400">Yaş</div>
+        <div>{{playerResponse.response[0].player.age}}</div>
+        <div class="text-gray-400">Doğum Tarihi</div>
+        <div>{{playerResponse.response[0].player.birth.date}}</div>
+        <div class="text-gray-400">Doğduğu Ülke</div>
+        <div>{{playerResponse.response[0].player.birth.country}}</div>
+        <div class="text-gray-400">Milliyet</div>
+        <div>{{playerResponse.response[0].player.nationality}}</div>
+        <div class="text-gray-400">Boy</div>
+        <div>{{playerResponse.response[0].player.height}} cm</div>
+        <div class="text-gray-400">Kilo</div>
+        <div>{{playerResponse.response[0].player.weight}} kg</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-40 mt-12">
+  <div class="w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2">
+    <div class="grid justify-items-end">
+      <label for="season-select" class="font-quicksand leading-6 text-gray-900 gap-4">
+        Sezon
+      </label>
+      <div class="mt-4">
+        <select id="season-select" name="season-select" [(ngModel)]="selectedYear" (change)="onSelectedYear(selectedYear)" class="block w-48 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+          <option *ngFor="let year of years" [ngValue]="year">{{year}}</option>
+        </select>
+      </div>
+    </div>
+    <table class="items-center bg-transparent w-full border-collapse mt-4 text-center">
+      <thead>
+      <tr>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Lig
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          İlk 11
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Süre
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Gol
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Asist
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Kırmızı Kart
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Sarı Kart
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let statistic of statistics">
+        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-blueGray-700 gap-1 flex flex-row items-center">
+          <img src="{{statistic.league.logo}}" width="40" height="40"><button class="hover:text-blue-400">{{statistic.league.name}}</button>
+        </th>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+          {{statistic.games.lineups}}
+        </td>
+        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          {{statistic.games.minutes}}
+        </td>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          {{statistic.goals.total}}
+        </td>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          {{statistic.goals.assists}}
+        </td>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          {{statistic.cards.red}}
+        </td>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          {{statistic.cards.yellow}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

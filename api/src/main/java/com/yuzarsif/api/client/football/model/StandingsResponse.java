@@ -50,7 +50,7 @@ public class StandingsResponse {
         public All all;
         public Home home;
         public Away away;
-        public Date update;
+        public String update;
     }
 
     @Data

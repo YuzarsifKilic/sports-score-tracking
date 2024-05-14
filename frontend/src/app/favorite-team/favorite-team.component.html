@@ -1,32 +1,57 @@
-<div class="container mx-auto px-40 mt-20">
-  <div class="bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4">
-    <div class="flex flex-row justify-between">
-      <div class="sm:col-span-3">
+<div class="container mx-auto px-60 mt-20">
+  <div class="bg-white shadow-md rounded-md px-20 pt-6 pb-8 mb-4 grid justify-items-center gap-8">
+    <div class="text-2xl text-blue-600">
+      Favori Takımınızı Seçiniz
+    </div>
+    <div class="grid grid-cols-1 gap-8 mt-4">
+      <div>
+        <label for="sport-type-select" class="font-quicksand leading-6 text-gray-900 gap-4">
+          Spor Türü
+        </label>
+        <div class="mt-4">
+          <select id="sport-type-select" name="sport-type-select" (change)="onSelectSportType($event)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option>Futbol</option>
+            <option>Basketbol</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="isFootball">
         <div class="flex flex-row">
-          <label for="repository-select" class="block font-quicksand leading-6 text-gray-900">
+          <label for="country-select" class="font-quicksand leading-6 text-gray-900 flex flex-row gap-4">
             Ülke
-            <div [ngSwitch]="selectedCountry" class="flex flex-row">
-              <img *ngSwitchCase="true" src="{{country.flag}}" width="40" height="40">
+            <div [ngSwitch]="selectedCountry">
+              <img *ngSwitchCase="true" src="{{country.flag}}" width="30" height="30">
             </div>
           </label>
         </div>
-        <div class="mt-2">
-          <select id="repository-select" name="repository-select" (change)="onSelectCountry($event)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+        <div class="mt-4">
+          <select id="country-select" name="country-select" [(ngModel)]="country" (change)="onSelectCountry(country)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
             <option>Ülke Seçiniz...</option>
-            <option *ngFor="let country of countries$">{{country.name}}</option>
+            <option *ngFor="let country of countries$" [ngValue]="country">{{country.name}}</option>
           </select>
         </div>
       </div>
-      <div class="sm:col-span-3">
-          <label for="repository-select" class="block font-quicksand leading-6 text-gray-900">
-            Lig
-          </label>
-        <div class="mt-2">
-          <select id="repository-selct" name="repository-select" [ngModel]="league" (change)="onSelectLeague(league)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-            <option *ngFor="let league of leagues$" [ngValue]="league.league">{{league.league.name}}</option>
+      <div *ngIf="isFootball">
+        <label for="league-select" class="font-quicksand leading-6 text-gray-900 gap-4">
+          Lig
+        </label>
+        <div class="mt-4">
+          <select id="league-select" name="league-select" [(ngModel)]="league" (change)="onSelectLeague(league)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option *ngFor="let leagues of leagues$" [ngValue]="leagues">{{leagues.league.name}}</option>
           </select>
         </div>
       </div>
+      <div>
+        <label for="team-select" class="font-quicksand leading-6 text-gray-900 gap-4">
+          Takım
+        </label>
+        <div class="mt-4">
+          <select id="team-select" name="team-select" [(ngModel)]="team" (change)="onSelectTeam(team)" class="block w-96 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option *ngFor="let teams of teams$" [ngValue]="teams">{{teams.team.name}}</option>
+          </select>
+        </div>
+      </div>
+      <button (click)="saveFavoriteTeam()" class="bg-blue-600 text-white rounded-md w-full p-2 hover:bg-white hover:border-2 hover:border-blue-600 hover:text-blue-600">Ekle</button>
     </div>
   </div>
 </div>

@@ -6,20 +6,20 @@
           <div class="font-bold text-xl text-center">
             {{fixtureDetail.teams.home.name}}
           </div>
-          <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
+          <button>
+            <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
+          </button>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
           <div [ngSwitch]="fixtureDetail.fixture.status.short">
-            <div *ngSwitchCase="'FT'">
-              <div>
+            <div *ngSwitchCase="'FT'" class="grid grid-cols-3">
+              <div class="grid justify-items-start">
                 {{fixtureDetail.score.fulltime.home}}
               </div>
-              <div class="items-center">
-                <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
-                  MS
-                </div>
+              <div class="grid justify-items-center rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+                MS
               </div>
-              <div>
+              <div class="grid justify-items-end">
                 {{fixtureDetail.score.fulltime.away}}
               </div>
             </div>
@@ -32,7 +32,9 @@
           <div class="font-bold text-xl text-center">
             {{fixtureDetail.teams.away.name}}
           </div>
-          <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
+          <button>
+            <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
+          </button>
         </div>
       </div>
       <div class="flex justify-center">
