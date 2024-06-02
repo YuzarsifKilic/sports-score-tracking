@@ -1,6 +1,6 @@
 package com.yuzarsif.api.dto;
 
-import com.yuzarsif.api.model.FootballFan;
+import com.yuzarsif.api.model.SportFan;
 
 public record FootballFanDto(
     Long id,
@@ -9,11 +9,11 @@ public record FootballFanDto(
     String lastName
 ) {
 
-    public static FootballFanDto convert(FootballFan footballFan) {
+    public static FootballFanDto convert(SportFan sportFan) {
         return new FootballFanDto(
-            footballFan.getId(),
-            footballFan.getEmail(),
-            footballFan.getFirstName(),
-            footballFan.getLastName());
+            sportFan.getId(),
+            sportFan.getEmail(),
+            sportFan.getFirstName(),
+            sportFan.getLastName());
     }
 }

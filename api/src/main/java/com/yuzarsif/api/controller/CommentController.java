@@ -1,9 +1,14 @@
 package com.yuzarsif.api.controller;
 
+import com.yuzarsif.api.dto.CommentDto;
 import com.yuzarsif.api.dto.CreateCommentRequest;
+import com.yuzarsif.api.model.Comment;
+import com.yuzarsif.api.model.SportType;
 import com.yuzarsif.api.service.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/comments")
@@ -13,6 +18,11 @@ public class CommentController {
 
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CommentDto>> getCommentsByMatchId(@RequestParam Long matchId, @RequestParam SportType sportType) {
+        return ResponseEntity.ok(commentService.getCommentsByMatchId(matchId, sportType));
     }
 
     @PostMapping

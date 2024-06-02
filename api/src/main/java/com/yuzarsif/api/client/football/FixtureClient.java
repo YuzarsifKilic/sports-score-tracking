@@ -6,9 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuzarsif.api.client.football.model.FixtureCustomResponse;
 import com.yuzarsif.api.client.football.model.FixtureResponse;
 import com.yuzarsif.api.config.RapidApiProperties;
+import com.yuzarsif.api.dto.FavoriteTeamDto;
 import com.yuzarsif.api.exception.ApiSportsException;
 import com.yuzarsif.api.model.ClientResponse;
 import com.yuzarsif.api.service.ClientResponseService;
+import com.yuzarsif.api.service.FavoriteTeamService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,11 +27,13 @@ public class FixtureClient {
     private final RapidApiProperties rapidApiProperties;
     private final RestTemplate restTemplate;
     private final ClientResponseService clientResponseService;
+    private final FavoriteTeamService favoriteTeamService;
 
-    public FixtureClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService) {
+    public FixtureClient(RapidApiProperties rapidApiProperties, RestTemplate restTemplate, ClientResponseService clientResponseService, FavoriteTeamService favoriteTeamService) {
         this.rapidApiProperties = rapidApiProperties;
         this.restTemplate = restTemplate;
         this.clientResponseService = clientResponseService;
+        this.favoriteTeamService = favoriteTeamService;
     }
 
     public List<FixtureCustomResponse.Response> findFixtures(Integer season, Integer teamId) {
@@ -128,6 +132,36 @@ public class FixtureClient {
             return body.getResponse();
         } catch (Exception e) {
             throw new ApiSportsException(String.format("Fixtures not found by team id %s\nError: %s", teamId, e.getMessage()));
+        }
+    }
+
+    public FixtureResponse findFavoriteMatchesByUserId(String date, Long userId) {
+        String url = String.format("https://%s/fixtures?date=%s", rapidApiProperties.getXRapidApiFootballHost(), date);
+        List<FavoriteTeamDto> favoriteTeamsByUserId = favoriteTeamService.getFavoriteTeamsByUserId(userId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("x-rapidapi-host", rapidApiProperties.getXRapidApiFootballHost());
+        headers.set("x-rapidapi-key", rapidApiProperties.getXRapidApiKey());
+
+        HttpEntity entity = new HttpEntity(headers);
+
+        try {
+            ResponseEntity<FixtureResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, FixtureResponse.class);
+            FixtureResponse body = response.getBody();
+            ArrayList<FixtureResponse.Response> favoriteMatches = new ArrayList<>();
+            for (FixtureResponse.Response fixture : body.getResponse()) {
+                for (FavoriteTeamDto favoriteTeam : favoriteTeamsByUserId) {
+                    if (favoriteTeam.teamId().equals((long) fixture.teams.home.id) || favoriteTeam.teamId().equals((long) fixture.teams.away.id)) {
+                        favoriteMatches.add(fixture);
+                    }
+                }
+            }
+            FixtureResponse response1 = new FixtureResponse();
+            response1.setResponse(favoriteMatches);
+            return response1;
+        } catch (Exception e) {
+            throw new ApiSportsException(String.format("Fixtures not found by date %s\nError: %s", date, e.getMessage()));
         }
     }
 

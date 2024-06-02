@@ -87,7 +87,7 @@ public class BasketballStatisticClient {
         try {
             ResponseEntity<StatisticsResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatisticsResponse.class);
             StatisticsResponse body = response.getBody();
-            clientResponseService.save(url, objectMapper.writeValueAsString(body.getResponse()));
+            clientResponseService.save(url, objectMapper.writeValueAsString(getYearStatistics(body.getResponse())));
             return getYearStatistics(body.getResponse());
         } catch (Exception e) {
             throw new ApiSportsException(String.format("Statics not found by game id: %s.\nError: %s", playedId, e.getMessage()));

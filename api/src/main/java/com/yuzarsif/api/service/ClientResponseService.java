@@ -4,6 +4,8 @@ import com.yuzarsif.api.model.ClientResponse;
 import com.yuzarsif.api.repository.ClientResponseRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +26,10 @@ public class ClientResponseService {
 
     public Optional<ClientResponse> findByRequest(String request) {
         return clientResponseRepository.findByRequest(request);
+    }
+
+
+    public void deleteAll() {
+        clientResponseRepository.deleteAll();
     }
 }

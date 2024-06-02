@@ -110,4 +110,9 @@ public class FootballApiController {
     public ResponseEntity<PlayersCustomResponse> getPlayersById(@RequestParam Integer playerId, @RequestParam Integer season) {
         return ResponseEntity.ok(playersClient.getPlayersById(playerId, season));
     }
+
+    @GetMapping("/matches/user")
+    public ResponseEntity<FixtureResponse> getMatchesByUser(@RequestParam Long userId, @RequestParam String date) {
+        return ResponseEntity.ok(fixtureClient.findFavoriteMatchesByUserId(date, userId));
+    }
 }
