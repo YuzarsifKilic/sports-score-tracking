@@ -31,8 +31,8 @@ public class RacesClient {
         this.clientResponseService = clientResponseService;
     }
 
-    public RaceResponse findRaces(Integer season) {
-        String url = String.format("https://%s/races?season=%s&type=race", rapidApiProperties.getXRapidApiFormula1Host(), season);
+    public RaceResponse findRaces(Integer season, String raceType) {
+        String url = String.format("https://%s/races?season=%s&type=%s", rapidApiProperties.getXRapidApiFormula1Host(), season, raceType);
 
         Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
         ObjectMapper objectMapper = new ObjectMapper();

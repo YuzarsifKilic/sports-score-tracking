@@ -7,10 +7,6 @@ import java.util.ArrayList;
 @Data
 public class TeamResponse {
 
-    public String get;
-    public ArrayList<Object> parameters;
-    public ArrayList<Object> errors;
-    public int results;
     public ArrayList<Response> response;
 
     @Data

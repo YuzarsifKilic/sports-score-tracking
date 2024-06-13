@@ -30,8 +30,8 @@ public class FormulaApiController {
     }
 
     @GetMapping("/races")
-    public ResponseEntity<RaceResponse> getRaces(@RequestParam(defaultValue = "2024") Integer season) {
-        return ResponseEntity.ok(racesClient.findRaces(season));
+    public ResponseEntity<RaceResponse> getRaces(@RequestParam(defaultValue = "2024") Integer season, @RequestParam String type) {
+        return ResponseEntity.ok(racesClient.findRaces(season, type));
     }
 
     @GetMapping("/rankings/{raceId}")

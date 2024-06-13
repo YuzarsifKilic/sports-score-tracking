@@ -23,10 +23,11 @@ public class Comment {
     private Long id;
     private Long matchId;
     @ManyToOne
-    @JoinColumn(name = "football_fan_id")
-    private FootballFan footballFan;
+    @JoinColumn(name = "sport_fan_id")
+    private SportFan sportFan;
     private String content;
     private Integer likeCount;
+    private SportType sportType;
     @CreationTimestamp
     private LocalDateTime createdDate;
     @UpdateTimestamp
@@ -37,9 +38,10 @@ public class Comment {
         return "Comment{" +
                 "id=" + id +
                 ", matchId=" + matchId +
-                ", footballFan=" + footballFan +
+                ", sportFan=" + sportFan +
                 ", content='" + content + '\'' +
                 ", likeCount=" + likeCount +
+                ", sportType=" + sportType +
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
                 '}';
@@ -50,11 +52,11 @@ public class Comment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) && Objects.equals(matchId, comment.matchId) && Objects.equals(footballFan, comment.footballFan) && Objects.equals(content, comment.content) && Objects.equals(likeCount, comment.likeCount) && Objects.equals(createdDate, comment.createdDate) && Objects.equals(updatedDate, comment.updatedDate);
+        return Objects.equals(id, comment.id) && Objects.equals(matchId, comment.matchId) && Objects.equals(sportFan, comment.sportFan) && Objects.equals(content, comment.content) && Objects.equals(likeCount, comment.likeCount) && Objects.equals(createdDate, comment.createdDate) && Objects.equals(updatedDate, comment.updatedDate) && Objects.equals(sportType, comment.sportType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, matchId, footballFan, content, likeCount, createdDate, updatedDate);
+        return Objects.hash(id, matchId, sportFan, content, likeCount, sportType, createdDate, updatedDate);
     }
 }

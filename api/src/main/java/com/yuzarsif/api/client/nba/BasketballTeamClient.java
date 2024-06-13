@@ -31,8 +31,8 @@ public class BasketballTeamClient {
         this.clientResponseService = clientResponseService;
     }
 
-    public TeamResponse findTeams() {
-        String url = String.format("https://%s/teams", rapidApiProperties.getXRapidApiNbaHost());
+    public TeamResponse findTeamById(Long teamId) {
+        String url = String.format("https://%s/teams?id=%s", rapidApiProperties.getXRapidApiNbaHost(), teamId);
 
         Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
         ObjectMapper objectMapper = new ObjectMapper();

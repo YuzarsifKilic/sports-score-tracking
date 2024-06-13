@@ -22,11 +22,11 @@ public class FavoriteMatch {
     private Long matchId;
     @Enumerated(EnumType.STRING)
     private SportType sportType;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "football_fan_favorite_match",
-            joinColumns = @JoinColumn(name = "football_fan_id"),
-            inverseJoinColumns = @JoinColumn(name = "favorite_match_id"))
-    private Set<FootballFan> footballFans;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinTable(name = "sport_fan_favorite_match",
+            joinColumns = @JoinColumn(name = "favorite_match_id"),
+            inverseJoinColumns = @JoinColumn(name = "sport_fan_id"))
+    private Set<SportFan> sportFans;
 
     @Override
     public String toString() {

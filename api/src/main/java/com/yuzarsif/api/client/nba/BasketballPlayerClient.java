@@ -61,4 +61,35 @@ public class BasketballPlayerClient {
             throw new ApiSportsException(String.format("Basketball player not found by id %s.\nError: %s", id, e.getMessage()));
         }
     }
+
+    public BasketballPlayerResponse findBasketballPlayerByTeam(Integer teamId, Integer season) {
+        String url = String.format("https://%s/players?team=%s&season=%s", rapidApiProperties.getXRapidApiNbaHost(), teamId, season);
+
+        Optional<ClientResponse> byRequest = clientResponseService.findByRequest(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (byRequest.isPresent()) {
+            try {
+                BasketballPlayerResponse fixtureResponse = objectMapper.readValue(byRequest.get().getResponse(), BasketballPlayerResponse.class);
+                return fixtureResponse;
+            } catch (JsonProcessingException e) {
+                throw new EntityNotFoundException("Country not found");
+            }
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("x-rapidapi-host", rapidApiProperties.getXRapidApiNbaHost());
+        headers.set("x-rapidapi-key", rapidApiProperties.getXRapidApiKey());
+
+        HttpEntity entity = new HttpEntity(headers);
+
+        try {
+            ResponseEntity<BasketballPlayerResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, BasketballPlayerResponse.class);
+            clientResponseService.save(url, objectMapper.writeValueAsString(response.getBody()));
+            return response.getBody();
+        } catch (Exception e) {
+            throw new ApiSportsException(String.format("Basketball player not found by team id  %s and season %s.\nError: %s", teamId, season, e.getMessage()));
+        }
+    }
 }

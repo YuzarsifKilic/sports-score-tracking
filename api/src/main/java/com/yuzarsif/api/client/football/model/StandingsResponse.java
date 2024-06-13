@@ -36,8 +36,8 @@ public class StandingsResponse {
     }
 
     @Data
-@AllArgsConstructor
-@NoArgsConstructor
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Standings {
         public int rank;
         public Team team;

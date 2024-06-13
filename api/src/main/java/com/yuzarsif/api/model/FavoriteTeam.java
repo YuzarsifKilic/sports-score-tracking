@@ -24,10 +24,10 @@ public class FavoriteTeam {
     @Enumerated(EnumType.STRING)
     private SportType sportType;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "football_fan_favorite_team",
+    @JoinTable(name = "sport_fan_favorite_team",
             joinColumns = @JoinColumn(name = "favorite_team_id"),
-            inverseJoinColumns = @JoinColumn(name = "football_fan_id"))
-    private Set<FootballFan> footballFans;
+            inverseJoinColumns = @JoinColumn(name = "sport_fan_id"))
+    private Set<SportFan> sportFans;
 
     @Override
     public String toString() {
