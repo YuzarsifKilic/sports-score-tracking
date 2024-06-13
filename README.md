@@ -113,7 +113,7 @@ ng serve
 
 ## API Integration
 * The application integrates with API-SPORTS to fetch real-time data for Football, NBA, and Formula 1.
-* Ensure you have a valid API-SPORTS key and configure it in the backend application properties:
+* Ensure you have a valid API-SPORTS key and configure it in the backend application.yml file:
 ````
 sport-api:
   x-rapidapi-key: ${RAPID_API_KEY}
