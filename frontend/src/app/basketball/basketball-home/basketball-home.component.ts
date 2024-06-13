@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {NbaApiService} from "../../_services/nba-api.service";
-import {NbaGamesResponse} from "../../_models/nba-games";
+import {NbaGames, NbaGamesResponse} from "../../_models/nba-games";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-basketball-home',
@@ -11,6 +12,7 @@ import {NbaGamesResponse} from "../../_models/nba-games";
 export class BasketballHomeComponent {
 
   nbaGames!: NbaGamesResponse[];
+  favoriteGames!: NbaGames;
   favoriteIcon: string = "assets/images/favorite-empty-star-icon.png";
   selectedFavoriteIcon: string = "assets/images/favorite-star-icon.png";
   selected: boolean = false;
@@ -23,11 +25,17 @@ export class BasketballHomeComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.dateConvert());
     this.nbaApiService.getMatchesByDate(this.dateConvert())
       .then(response => {
         this.nbaGames = response.response;
       })
+    if (window.localStorage.getItem("user_id") != null) {
+      this.nbaApiService.getFavoriteMatchesByUser(parseInt(window.localStorage.getItem("user_id")!), this.dateConvert())
+        .then(response => {
+          this.favoriteGames = response;
+        })
+    }
+
   }
 
   dateConvert() {
@@ -46,5 +54,16 @@ export class BasketballHomeComponent {
 
   changeImage() {
     return this.selected ? this.selectedFavoriteIcon : this.favoriteIcon;
+  }
+
+  async setDate() {
+    const { value: date } = await Swal.fire({
+      title: "Fikstür Tarihini Girin",
+      input: "date",
+    });
+    this.nbaApiService.getMatchesByDate(date)
+      .then(response => {
+        this.nbaGames = response.response;
+      })
   }
 }

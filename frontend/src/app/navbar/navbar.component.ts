@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../_services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-navbar',
@@ -53,4 +54,22 @@ export class NavbarComponent {
     }
   }
 
+  logout() {
+    this.authService.logout();
+    Swal.fire({
+      title: "Çıkış Yapıldı",
+      html: "Çıkış Yapıldı anasayfaya yönlendiriliyosunuz...",
+      icon: 'success',
+      timer: 3000,
+      timerProgressBar: true,
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        this.router.navigate(["football-home"]);
+      }
+    });
+  }
+
+  favoriteTeams() {
+    this.router.navigate(["favorite-teams"]);
+  }
 }

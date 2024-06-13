@@ -73,7 +73,7 @@ export class FavoriteTeamComponent {
         this.errorAlert();
       } else {
         console.log(this.sportType)
-        let userId = window.localStorage.getItem("user_id");
+        let userId = parseInt(window.localStorage.getItem("user_id")!);
         this.favoriteTeamService.saveFavoriteTeam(userId, this.team.team.id, this.sportType)
           .then(response => {
             this.successAlert();

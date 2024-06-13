@@ -1,73 +1,23 @@
-<div class="flex justify-center py-4">
-  <div class="bg-white w-1/2 divide-y-2 rounded-xl">
-    <div class="p-2 hover:bg-gray-100 hover:p-2">
-      <div class="flex flex-row justify-between">
-        <div class="text-blue-600 font-semibold">
-          Kullanici Adi
-        </div>
-        <div class="text-gray-400 text-sm">
-          12.02.2024 | 22:19
-        </div>
-      </div>
-      <div class="mt-2 text-sm">
-        Maç çok keyifliydi atak ve hücum organizasyonları gerçekten harikaydı. Bu tür Şeyleri
-        diğer maçlarda da görmek harika olur. Umarım bundan sonraki maçlarda bu maç kadar eğlenceli ve sürükleyici olur.
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div class="grid grid-cols-1">
+      <div class="grid justify-items-end p-2">
+        <button (click)="addComment()" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white">Yorum Ekle</button>
       </div>
     </div>
-    <div class="p-2 hover:bg-gray-100 hover:p-2">
-      <div class="flex flex-row justify-between">
-        <div class="text-blue-600 font-semibold">
-          Kullanici Adi
+    <div *ngFor="let comment of comments">
+      <div class="p-2 hover:bg-gray-100 hover:p-2 mt-2">
+        <div class="flex flex-row justify-between">
+          <div class="text-blue-600 font-semibold">
+            {{comment.footballFan.firstName}} {{comment.footballFan.lastName}}
+          </div>
+          <div class="text-gray-400 text-sm">
+            {{comment.date.split("T")[0]}}
+          </div>
         </div>
-        <div class="text-gray-400 text-sm">
-          12.02.2024 | 22:19
+        <div class="mt-2 text-sm">
+          {{comment.content}}
         </div>
-      </div>
-      <div class="mt-2 text-sm">
-        Maç çok keyifliydi atak ve hücum organizasyonları gerçekten harikaydı. Bu tür Şeyleri
-        diğer maçlarda da görmek harika olur. Umarım bundan sonraki maçlarda bu maç kadar eğlenceli ve sürükleyici olur.
-      </div>
-    </div>
-    <div class="p-2 hover:bg-gray-100 hover:p-2">
-      <div class="flex flex-row justify-between">
-        <div class="text-blue-600 font-semibold">
-          Kullanici Adi
-        </div>
-        <div class="text-gray-400 text-sm">
-          12.02.2024 | 22:19
-        </div>
-      </div>
-      <div class="mt-2 text-sm">
-        Maç çok keyifliydi atak ve hücum organizasyonları gerçekten harikaydı. Bu tür Şeyleri
-        diğer maçlarda da görmek harika olur. Umarım bundan sonraki maçlarda bu maç kadar eğlenceli ve sürükleyici olur.
-      </div>
-    </div>
-    <div class="p-2 hover:bg-gray-100 hover:p-2">
-      <div class="flex flex-row justify-between">
-        <div class="text-blue-600 font-semibold">
-          Kullanici Adi
-        </div>
-        <div class="text-gray-400 text-sm">
-          12.02.2024 | 22:19
-        </div>
-      </div>
-      <div class="mt-2 text-sm">
-        Maç çok keyifliydi atak ve hücum organizasyonları gerçekten harikaydı. Bu tür Şeyleri
-        diğer maçlarda da görmek harika olur. Umarım bundan sonraki maçlarda bu maç kadar eğlenceli ve sürükleyici olur.
-      </div>
-    </div>
-    <div class="p-2 hover:bg-gray-100 hover:p-2">
-      <div class="flex flex-row justify-between">
-        <div class="text-blue-600 font-semibold">
-          Kullanici Adi
-        </div>
-        <div class="text-gray-400 text-sm">
-          12.02.2024 | 22:19
-        </div>
-      </div>
-      <div class="mt-2 text-sm">
-        Maç çok keyifliydi atak ve hücum organizasyonları gerçekten harikaydı. Bu tür Şeyleri
-        diğer maçlarda da görmek harika olur. Umarım bundan sonraki maçlarda bu maç kadar eğlenceli ve sürükleyici olur.
       </div>
     </div>
   </div>

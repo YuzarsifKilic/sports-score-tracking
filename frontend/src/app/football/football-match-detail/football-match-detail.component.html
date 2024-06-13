@@ -1,39 +1,53 @@
-<div class="flex flex-col mt-12">
-  <div class="flex justify-center">
-    <div class="bg-white rounded-xl p-2 w-full sm:w-2/4 border-2">
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div class="flex justify-end">
+      <div *ngIf="!isFavorite; else notFavorite" class="">
+        <button (click)="addFavorite(fixtureDetail.fixture.id)" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white">Favori Ekle</button>
+      </div>
+      <ng-template #notFavorite class="">
+        <button (click)="deleteFavorite()" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white">Favori</button>
+      </ng-template>
+    </div>
+    <div>
       <div class="flex flex-col sm:flex-row justify-between">
         <div class="p-4">
-          <div class="font-bold text-xl">
+          <div class="font-bold text-xl text-center">
             {{fixtureDetail.teams.home.name}}
           </div>
-          <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
+          <button (click)="teamPage(fixtureDetail.teams.home.id)">
+            <img src="{{fixtureDetail.teams.home.logo}}" width="100" height="100" class="pt-4"/>
+          </button>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
           <div [ngSwitch]="fixtureDetail.fixture.status.short">
-            <div *ngSwitchCase="'FT'">
-              <div>
+            <div *ngSwitchCase="'FT'" class="grid grid-cols-3">
+              <div class="grid justify-items-start">
                 {{fixtureDetail.score.fulltime.home}}
               </div>
-              <div class="items-center">
-                <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
-                  MS
-                </div>
+              <div class="grid justify-items-center rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+                MS
               </div>
-              <div>
+              <div class="grid justify-items-end">
                 {{fixtureDetail.score.fulltime.away}}
               </div>
             </div>
-            <div *ngSwitchCase="'NS'">
-              V
+            <div *ngSwitchCase="'NS'" class="flex flex-col text-center">
+              <div class="text-xl text-green-500">
+                {{fixtureDetail.fixture.date.split("T")[1].split("+")[0]}}
+              </div>
+              <div>
+                V
+              </div>
             </div>
           </div>
-
         </div>
         <div class="p-4">
-          <div class="font-bold text-xl">
+          <div class="font-bold text-xl text-center">
             {{fixtureDetail.teams.away.name}}
           </div>
-          <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
+          <button (click)="teamPage(fixtureDetail.teams.away.id)">
+            <img src="{{fixtureDetail.teams.away.logo}}" width="100" height="100"/>
+          </button>
         </div>
       </div>
       <div class="flex justify-center">
@@ -52,13 +66,11 @@
         <button (click)="matchStatistics()" class="hover:bg-gray-200 hover:rounded-md hover:text-black p-2 focus:text-green-400">
           İstatistik
         </button>
-        <button (click)="matchComments()" class="hover:bg-gray-200 hover:rounded-md  hover:text-black p-2 focus:p-1 focus:text-green-400">
+        <button (click)="matchComments()" class="hover:bg-gray-200 hover:rounded-md  hover:text-black p-2 focus:text-green-400">
           Yorum
         </button>
       </div>
     </div>
   </div>
-  <div>
-    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
-  </div>
 </div>
+<ng-container *ngComponentOutlet="currentComponent"></ng-container>

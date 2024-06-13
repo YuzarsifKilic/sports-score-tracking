@@ -1,4 +1,60 @@
-<div class="grid grid-cols-1 mt-12 mb-4">
+<div class="container mx-auto px-80 mt-8">
+  <div class="grid grid-cols-1">
+    <div class="grid justify-items-end">
+      <button (click)="setDate()" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white">
+        Tarih Seç
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="favoriteMatches$ | async as favoriteMatches" class="grid grid-cols-1 mb-4">
+<div *ngIf="favoriteMatches.response.length > 0" class="grid justify-items-center mt-8">
+  <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
+    <div>
+      Favoriler
+    </div>
+    <div *ngFor="let fixtureResponse of favoriteMatches.response">
+      <button (click)="matchDetails(fixtureResponse.fixture.id)" class="grid w-full grid-cols-4 pt-2 hover:bg-gray-200 hover:rounded-xl hover:p-2 hover:my-2">
+        <div class="grid justify-items-start text-left">
+          {{fixtureResponse.fixture.date.split("T")[1].replace(":00+00:00", "")}}
+        </div>
+        <div class="grid grid-cols-9 col-span-2">
+          <div class="grid justify-items-end col-span-3 text-sm mt-1">
+            {{fixtureResponse.teams.home.name}}
+          </div>
+          <div class="grid justify-items-end">
+            <img [src]="fixtureResponse.teams.home.logo" width="30" height="30"/>
+          </div>
+          <div [ngSwitch]="fixtureResponse.fixture.status.short" class="grid justify-items-center text-center">
+            <div *ngSwitchCase="'NS'" class="">V</div>
+            <div *ngSwitchCase="'TBD'" class="">V</div>
+            <div *ngSwitchCase="'CANC'" class="text-red-600">ERT</div>
+            <div *ngSwitchCase="'PST'" class="text-red-600">ERT</div>
+            <div *ngSwitchCase="'FT'">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+            <div *ngSwitchCase="'PEN'" class="grid grid-cols-1">
+              <div>{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+              <div>({{fixtureResponse.score.penalty.home}}) - ({{fixtureResponse.score.penalty.away}})</div>
+            </div>
+            <div *ngSwitchCase="'2H'" class="text-green-500">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+            <div *ngSwitchCase="'1H'" class="text-green-500">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+            <div *ngSwitchCase="'HT'" class="text-green-500">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+          </div>
+          <div class="grid justify-items-start">
+            <img [src]="fixtureResponse.teams.away.logo" width="30" height="30"/>
+          </div>
+          <div class="grid justify-items-start col-span-3 text-sm mt-1">
+            {{fixtureResponse.teams.away.name}}
+          </div>
+        </div>
+        <div class="italic text-gray-300 text-sm text-right">
+          İY {{fixtureResponse.score.halftime.home}}-{{fixtureResponse.score.halftime.away}}
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="grid grid-cols-1 mb-4">
   <div *ngIf="fixtures2$ | async as fixtures2">
   <div *ngFor="let fixture of fixtures2" class="grid justify-items-center mt-8">
     <div class="bg-white rounded-xl p-2 w-2/4 border-2 divide-y space-y-2">
@@ -17,8 +73,19 @@
             <div class="grid justify-items-end">
               <img [src]="fixtureResponse.teams.home.logo" width="30" height="30"/>
             </div>
-            <div>
-              {{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}
+            <div [ngSwitch]="fixtureResponse.fixture.status.short" class="grid justify-items-center text-center">
+              <div *ngSwitchCase="'NS'" class="">V</div>
+              <div *ngSwitchCase="'TBD'" class="">V</div>
+              <div *ngSwitchCase="'CANC'" class="text-red-600">ERT</div>
+              <div *ngSwitchCase="'PST'" class="text-red-600">ERT</div>
+              <div *ngSwitchCase="'FT'">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+              <div *ngSwitchCase="'PEN'" class="grid grid-cols-1">
+                <div>{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+                <div>({{fixtureResponse.score.penalty.home}}) - ({{fixtureResponse.score.penalty.away}})</div>
+              </div>
+              <div *ngSwitchCase="'2H'" class="text-green-500">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+              <div *ngSwitchCase="'1H'" class="text-green-500">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
+              <div *ngSwitchCase="'HT'" class="text-green-500">{{fixtureResponse.goals.home}} - {{fixtureResponse.goals.away}}</div>
             </div>
             <div class="grid justify-items-start">
               <img [src]="fixtureResponse.teams.away.logo" width="30" height="30"/>

@@ -1,5 +1,8 @@
 <div class="container mx-auto px-40 mt-12">
   <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div [ngSwitch]="statistics.length">
+      <div *ngSwitchCase="0" class="text-center">İstatistikler Maç başladıktan sonra yüklenecektir.</div>
+    </div>
     <div *ngFor="let statistic of statistics[0].statistics; let i = index">
       <div class="grid justify-items-center">
         {{statistics[0].statistics[i].type}}
@@ -21,6 +24,12 @@
             {{statistics[1].statistics[i].value}}
           </div>
         </div>
+      </div>
+      <div class="grid grid-cols-2 pb-4" *ngIf="statistics[0].statistics[i].value == statistics[1].statistics[i].value">
+        <div class="grid justify-items-end">
+          <div [style.width.px]="getHeight(statistics[0].statistics[i].value, statistics[1].statistics[i].value)" class="h-3 bg-blue-500"></div>
+        </div>
+        <div [style.width.px]="getHeight(statistics[1].statistics[i].value, statistics[0].statistics[i].value)" class="h-3 bg-blue-500"></div>
       </div>
       <div class="grid grid-cols-2 pb-4">
         <div class="grid justify-items-end">

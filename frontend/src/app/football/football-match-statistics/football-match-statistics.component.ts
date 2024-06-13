@@ -10,13 +10,6 @@ import {Response} from "../../_models/football-statistics";
 })
 export class FootballMatchStatisticsComponent {
 
-  @Input() teamAGoals: number = 6;
-  @Input() teamBGoals: number = 4;
-  @Input() teamAStats: number = 50; // Takım A'nın yüzdesi
-  @Input() teamBStats: number = 50; // Takım B'nın yüzdesi
-  height1 =  200;
-  height2 =  120;
-
   statistics!: Response[];
 
   constructor(private router: Router, private footballApiService: FootballApiService, private route: ActivatedRoute) { }
@@ -27,11 +20,17 @@ export class FootballMatchStatisticsComponent {
         .then(response => {
           this.statistics = response.response;
           console.log(response);
+          console.log(this.statistics.length);
         })
     })
   }
 
   getHeight(statistic1: number, statistic2: number) {
+    if (statistic1 == statistic2) {
+      console.log(statistic1)
+      console.log(statistic2)
+      return 200
+    }
     let sum = statistic1 + statistic2
     console.log((statistic1 / sum) * 300)
     return ((statistic1 / sum) * 300)

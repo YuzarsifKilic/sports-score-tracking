@@ -1,0 +1,54 @@
+<div class="container mx-auto px-40 mt-12">
+  <div class="w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4 divide-y-2">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Takım
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Galibiyet
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Mağlubiyet
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Galibiyet Yüzdesi
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Mağlubiyet Yüzdesi
+        </th>
+        <th class="px-6 bg-blueGray-50 text-blueGray-500 align-text-bottom border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+          Galibiyet Serisi
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let standing of standings.response">
+        <th class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap pt-4 text-center items-center  text-blueGray-700 flex flex-row gap-4">
+          <img src="{{standing.team.logo}}" width="30" height="30" class=""/>
+          <div *ngIf="standing.team.id == teamId; else otherTeams" class="text-blue-400 pt-2">
+            {{standing.team.name}}
+          </div>
+          <ng-template #otherTeams class="pt-2">{{standing.team.name}}</ng-template>
+        </th>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap text-center">
+          {{standing.win.total}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap text-center">
+          {{standing.loss.total}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap text-center">
+          {{standing.win.percentage}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap text-center ">
+          {{standing.loss.percentage}}
+        </td>
+        <td class="border-t-0 px-6 align-text-bottom border-l-0 border-r-0 text-xs whitespace-nowrap text-center">
+          {{standing.streak}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container mx-auto px-40 mt-40">
+  <div class="grid grid-cols-1 bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4 divide-y-2">
+    <div class="flex justify-end">
+      <button (click)="addFavoriteTeam()" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white mb-2">Takım Ekle</button>
+    </div>
+    <div class="grid justify-items-center mb-4">
+      FUTBOL
+    </div>
+    <div *ngFor="let footballTeam of footballTeams" class="grid grid-cols-4 p-2 w-full gap-8">
+      <div class="grid justify-items-end col-span-2">
+        <img src="{{footballTeam.team.logo}}" height="40" width="40"/>
+      </div>
+      <div class="grid justify-items-start">
+        <button (click)="footballTeamPage(footballTeam.team.id)" class="hover:text-blue-400">{{footballTeam.team.name}}</button>
+      </div>
+      <div class="grid justify-items-end">
+        <button (click)="deleteFavoriteTeam(footballTeam.team.id, 'FOOTBALL')" class="border-2 border-red-600 p-1 rounded-md text-red-600 hover:bg-red-600 hover:text-white">Takımı Kaldır</button>
+      </div>
+    </div>
+    <div class="grid justify-items-center pt-4 mb-4">
+      BASKETBOL
+    </div>
+    <div *ngFor="let basketballTeam of basketballTeams" class="grid grid-cols-4 p-2 w-full gap-8">
+      <div class="grid justify-items-end col-span-2">
+        <img src="{{basketballTeam.logo}}" height="40" width="40"/>
+      </div>
+      <div class="grid justify-items-start">
+        <button (click)="footballTeamPage(basketballTeam.id)" class="hover:text-blue-400">{{basketballTeam.name}}</button>
+      </div>
+      <div class="grid justify-items-end">
+        <button (click)="deleteFavoriteTeam(basketballTeam.id, 'BASKETBALL')" class="border-2 border-red-600 p-1 rounded-md text-red-600 hover:bg-red-600 hover:text-white">Takımı Kaldır</button>
+      </div>
+    </div>
+  </div>
+</div>

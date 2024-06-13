@@ -19,6 +19,7 @@ export class FootballMatchSummaryComponent {
       this.footballApiService.getLineup(params['matchId'])
         .then(response => {
           this.lineupResponse = response;
+          console.log(this.lineupResponse.response.length);
         })
     })
   }

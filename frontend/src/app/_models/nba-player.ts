@@ -1,3 +1,7 @@
+export class NbaPlayerResponse {
+  response!: NbaPlayer[];
+}
+
 export class NbaPlayer {
   id!: number;
   firstname!: string;

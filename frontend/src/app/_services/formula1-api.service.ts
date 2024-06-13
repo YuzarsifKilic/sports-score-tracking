@@ -13,18 +13,10 @@ export class Formula1ApiService {
 
   constructor(private axios: AxiosService) { }
 
-  async getRaces(): Promise<Race> {
+  async getRaces(raceType: string): Promise<Race> {
     const resp = await this.axios.request(
       "GET",
-      "/api/formula-api/races",
-      {});
-    return resp.data;
-  }
-
-  async getCountriesByName(name: string): Promise<Country> {
-    const resp = await this.axios.request(
-      "GET",
-      "/api/v1/countries?name=" + name,
+      "/api/formula-api/races?type=" + raceType,
       {});
     return resp.data;
   }

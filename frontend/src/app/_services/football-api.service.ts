@@ -10,6 +10,7 @@ import {FootballTeam} from "../_models/football-team";
 import {FootballStandings, FootballStandingsResponse} from "../_models/football-standings";
 import {PlayersResponse} from "../_models/football-player";
 import {SinglePlayersResponse} from "../_models/football-single-player";
+import {FootballFavoriteMatches, Response} from "../_models/football-favorite-matches";
 
 @Injectable({
   providedIn: 'root'
@@ -143,5 +144,13 @@ export class FootballApiService {
         "/api/football-api/players/id?playerId=" + playerId + "&season=" + season,
         {});
       return resp.data;
+  }
+
+  async getFavoriteMatchesByUser(userId: number, date: string): Promise<FootballFavoriteMatches> {
+    const resp = await this.axios.request(
+      "GET",
+      "/api/football-api/matches/user?userId=" + userId + "&date=" + date,
+      {});
+    return resp.data;
   }
 }

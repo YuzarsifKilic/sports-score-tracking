@@ -1,17 +1,4 @@
-<div class="flex justify-center mt-4">
-  <div class="relative mt-2 rounded-md shadow-sm">
-    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-      <span class="text-gray-500 sm:text-sm"><img src="assets/images/search.svg" width="15" height="15"/></span>
-    </div>
-    <input
-      type="text"
-      name="price"
-      id="price"
-      class="block w-full rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-inset ring-blue-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
-      placeholder="Search..."
-    />
-  </div>
-</div>
+
 <div class="flex flex-col items-center mt-12 px-20">
   <div *ngFor="let race of races$; let i = index" class="bg-white rounded-xl p-2 w-3/4 border-2 mb-4">
     <button (click)="toggleDetails(i)" class="flex justify-between pt-2 items-center hover:bg-gray-200 hover:rounded-xl hover:p-2 w-full">
@@ -62,6 +49,12 @@
             <div class="text-gray-600">
               | {{race.distance}}
             </div>
+          </div>
+          <div class="grid grid-cols-4 gap-4 mb-2 pt-2">
+            <button (click)="changeRace('1st Qualifying')" class="bg-blue-600 text-white p-2 rounded-md hover:bg-white hover:border-blue-600 hover:border-2 hover:text-blue-600">1. Eleme</button>
+            <button (click)="changeRace('2nd Qualifying')" class="bg-blue-600 text-white p-2 rounded-md hover:bg-white hover:border-blue-600 hover:border-2 hover:text-blue-600">2. Eleme</button>
+            <button (click)="changeRace('3rd Qualifying')" class="bg-blue-600 text-white p-2 rounded-md hover:bg-white hover:border-blue-600 hover:border-2 hover:text-blue-600">3. Eleme</button>
+            <button (click)="changeRace('race')" class="bg-blue-600 text-white p-2 rounded-md hover:bg-white hover:border-blue-600 hover:border-2 hover:text-blue-600">Yarış</button>
           </div>
           <div>
             <table class="items-center bg-transparent w-full border-collapse mt-4 text-center">

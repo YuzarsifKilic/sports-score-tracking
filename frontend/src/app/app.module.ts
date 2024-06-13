@@ -36,6 +36,11 @@ import { FootballTeamPlayersComponent } from './football/football-team/football-
 import {NgIcon} from "@ng-icons/core";
 import {MatIcon} from "@angular/material/icon";
 import { FootballPlayerComponent } from './football/football-player/football-player.component';
+import { UserFavoriteTeamComponent } from './favorite-team/user-favorite-team/user-favorite-team.component';
+import { BasketballTeamComponent } from './basketball/basketball-team/basketball-team.component';
+import { BasketballTeamStandingsComponent } from './basketball/basketball-team/basketball-team-standings/basketball-team-standings.component';
+import { BasketballTeamPlayersComponent } from './basketball/basketball-team/basketball-team-players/basketball-team-players.component';
+import { BasketballTeamGamesComponent } from './basketball/basketball-team/basketball-team-games/basketball-team-games.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +73,11 @@ import { FootballPlayerComponent } from './football/football-player/football-pla
     FootballTeamFixtureComponent,
     FootballTeamPlayersComponent,
     FootballPlayerComponent,
+    UserFavoriteTeamComponent,
+    BasketballTeamComponent,
+    BasketballTeamStandingsComponent,
+    BasketballTeamPlayersComponent,
+    BasketballTeamGamesComponent,
   ],
   imports: [
     BrowserModule,

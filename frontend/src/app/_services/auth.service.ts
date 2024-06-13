@@ -37,6 +37,14 @@ export class AuthService {
     })
   }
 
+  logout() {
+    window.localStorage.removeItem("auth_token");
+    window.localStorage.removeItem("auth_role");
+    window.localStorage.removeItem("user_id");
+    this.loggedIn.next(false);
+    this.username.next("");
+  }
+
   successAlert() {
     Swal.fire({
       title: "Giriş Başarılı",

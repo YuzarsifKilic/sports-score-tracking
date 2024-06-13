@@ -1,36 +1,69 @@
-<div class="flex flex-col mt-12">
-  <div class="flex justify-center">
-    <div class="bg-white rounded-xl p-2 w-full sm:w-2/4 border-2">
+<div class="container mx-auto px-40 mt-12">
+  <div class="grid w-full bg-white shadow-md rounded-md px-16 pt-6 pb-8 mb-4">
+    <div class="flex justify-end">
+      <div *ngIf="!isFavorite; else notFavorite" class="">
+        <button (click)="addFavorite()" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white">Favori Ekle</button>
+      </div>
+      <ng-template #notFavorite class="">
+        <button (click)="deleteFavorite()" class="border-2 border-blue-600 text-blue-600 p-1 rounded-md hover:bg-blue-600 hover:text-white">Favori</button>
+      </ng-template>
+    </div>
+    <div>
       <div class="flex flex-col sm:flex-row justify-between">
-        <div class="flex flex-col p-4 items-center">
-          <div class="font-bold text-xl">
+        <div class="p-4">
+          <div class="font-bold text-xl text-center">
             {{game.teams.home.name}}
           </div>
-          <img src="{{game.teams.home.logo}}" width="125" height="125" class="pt-8"/>
+          <button (click)="teamPage(game.teams.home.id)">
+            <img src="{{game.teams.home.logo}}" width="100" height="100" class="pt-4"/>
+          </button>
         </div>
         <div class="flex flex-row items-center text-3xl gap-4 sm:gap-16">
-          <div>
-            {{game.scores.home.points}}
-          </div>
-          <div class="items-center">
-            <div class="rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
-              MS
+          <div [ngSwitch]="game.status.long">
+            <div *ngSwitchCase="'Finished'" class="grid grid-cols-3">
+              <div class="grid justify-items-start">
+                {{game.scores.home.points}}
+              </div>
+              <div class="grid justify-items-center rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+                MS
+              </div>
+              <div class="grid justify-items-end">
+                {{game.scores.visitors.points}}
+              </div>
+            </div>
+            <div *ngSwitchCase="'live'" class="grid grid-cols-3">
+              <div class="grid justify-items-start">
+                {{game.scores.home.points}}
+              </div>
+              <div class="grid justify-items-center rounded-xl bg-gray-400 text-white p-1 w-16 text-center text-2xl">
+                MS
+              </div>
+              <div class="grid justify-items-end">
+                {{game.scores.visitors.points}}
+              </div>
+            </div>
+            <div *ngSwitchCase="'Not Started'" class="flex flex-col text-center">
+              <div class="text-xl text-green-500">
+                {{game.date.start.split("T")[1].split("+")[0]}}
+              </div>
+              <div>
+                V
+              </div>
             </div>
           </div>
-          <div>
-            {{game.scores.visitors.points}}
-          </div>
         </div>
-        <div class="flex flex-col p-4 items-center">
-          <div class="font-bold text-xl">
+        <div class="p-4">
+          <div class="font-bold text-xl text-center">
             {{game.teams.visitors.name}}
           </div>
-          <img src="{{game.teams.visitors.logo}}" width="125" height="125" class="pt-8"/>
+          <button (click)="teamPage(game.teams.visitors.id)">
+            <img src="{{game.teams.visitors.logo}}" width="100" height="100"/>
+          </button>
         </div>
       </div>
       <div class="flex justify-center">
         <div class="flex flex-row text-sm text-gray-500 items-center">
-          {{game.date.start.split("T")[0]}} | Standart | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: {{game.arena.name}}
+          {{game.date.start.split("T")[0].split("+")[0]}} | Standart | <img src="assets/images/stadium-icon.jpg" width="40" height="40"/> Stat: {{game.arena.name}}
           | <img src="assets/images/whistle-icon.jpg" width="25" height="25"/> Hakem: {{game.officials}}
         </div>
       </div>
@@ -50,7 +83,5 @@
       </div>
     </div>
   </div>
-  <div>
-    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
-  </div>
 </div>
+<ng-container *ngComponentOutlet="currentComponent"></ng-container>

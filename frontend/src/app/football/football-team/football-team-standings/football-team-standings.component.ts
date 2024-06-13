@@ -12,6 +12,7 @@ export class FootballTeamStandingsComponent {
 
   teamStandings!: FootballStandingsResponse;
   leagueStandings!: FootballStandings[];
+  leagueId!: number;
 
 
   constructor(private router: Router, private footballApiService: FootballApiService, private route: ActivatedRoute) { }
@@ -21,7 +22,10 @@ export class FootballTeamStandingsComponent {
       this.footballApiService.getStandingsByTeam(params['teamId'], 2023)
         .then(response => {
           this.teamStandings = response;
-          this.footballApiService.getStandings(this.teamStandings.response[0].league.id, 2023)
+          this.teamStandings.response.forEach(item => {
+            if (item.league.country !== "World") this.leagueId = item.league.id;
+          })
+          this.footballApiService.getStandings(this.leagueId, 2023)
             .then(response => {
               this.leagueStandings = response;
             })
