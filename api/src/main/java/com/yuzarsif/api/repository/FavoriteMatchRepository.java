@@ -14,4 +14,6 @@ public interface FavoriteMatchRepository extends JpaRepository<FavoriteMatch, Lo
     Optional<FavoriteMatch> findByMatchIdAndSportType(Long matchId, SportType sportType);
 
     List<FavoriteMatch> findBySportFans(Set<SportFan> sportFans);
+
+    List<FavoriteMatch> findBySportFansAndSportType(Set<SportFan> sportFans, SportType sportType);
 }
