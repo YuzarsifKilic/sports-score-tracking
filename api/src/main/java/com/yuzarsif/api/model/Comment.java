@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -28,6 +29,8 @@ public class Comment {
     private String content;
     private Integer likeCount;
     private SportType sportType;
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+    private Set<Report> comments;
     @CreationTimestamp
     private LocalDateTime createdDate;
     @UpdateTimestamp

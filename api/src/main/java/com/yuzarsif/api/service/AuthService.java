@@ -2,6 +2,7 @@ package com.yuzarsif.api.service;
 
 import com.yuzarsif.api.dto.AuthResponseDto;
 import com.yuzarsif.api.dto.LoginRequest;
+import com.yuzarsif.api.exception.AuthenticationException;
 import com.yuzarsif.api.model.BaseUser;
 import com.yuzarsif.api.repository.BaseUserRepository;
 import com.yuzarsif.api.security.JwtService;
@@ -39,5 +40,12 @@ public class AuthService {
         }
 
         throw new EntityNotFoundException("User not found");
+    }
+
+    public boolean checkIfEmailExists(String email) {
+        if (baseUserRepository.findByEmail(email).isPresent()) {
+            throw new AuthenticationException("Email already exists");
+        }
+        return false;
     }
 }
