@@ -31,6 +31,8 @@ public class SportFan extends BaseUser {
             joinColumns = @JoinColumn(name = "sport_fan_id"),
             inverseJoinColumns = @JoinColumn(name = "favorite_match_id"))
     private Set<FavoriteMatch> favoriteMatches;
+    @OneToMany(mappedBy = "sportFan", cascade = CascadeType.REMOVE)
+    private Set<Report> reports;
 
     @Override
     public String toString() {

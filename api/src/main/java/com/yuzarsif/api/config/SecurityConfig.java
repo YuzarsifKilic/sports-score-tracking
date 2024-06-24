@@ -45,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/comments/**").hasAnyRole("FOOTBALL_FAN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/favorite-matches/**").hasAnyRole("FOOTBALL_FAN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/favorite-teams/**").hasAnyRole("FOOTBALL_FAN")
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
