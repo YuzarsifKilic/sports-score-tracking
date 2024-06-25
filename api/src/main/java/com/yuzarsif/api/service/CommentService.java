@@ -4,9 +4,7 @@ import com.yuzarsif.api.dto.CommentDto;
 import com.yuzarsif.api.dto.CreateCommentRequest;
 import com.yuzarsif.api.exception.CommentFoundException;
 import com.yuzarsif.api.exception.OperationNotAllowedException;
-import com.yuzarsif.api.model.Comment;
-import com.yuzarsif.api.model.SportFan;
-import com.yuzarsif.api.model.SportType;
+import com.yuzarsif.api.model.*;
 import com.yuzarsif.api.repository.CommentRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -62,8 +60,9 @@ public class CommentService {
     }
 
     public void deleteComment(Long commentId, Authentication authentication) {
-        if (!authentication.isAuthenticated()) {
-            throw new OperationNotAllowedException("User has to login first!");
+        BaseUser user = (BaseUser) authentication.getPrincipal();
+        if (!user.getRole().equals(Role.ROLE_ADMIN)) {
+            throw new OperationNotAllowedException("Only admin can delete comment!");
         }
         findById(commentId);
         commentRepository.deleteById(commentId);
