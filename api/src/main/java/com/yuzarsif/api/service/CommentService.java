@@ -3,10 +3,12 @@ package com.yuzarsif.api.service;
 import com.yuzarsif.api.dto.CommentDto;
 import com.yuzarsif.api.dto.CreateCommentRequest;
 import com.yuzarsif.api.exception.CommentFoundException;
+import com.yuzarsif.api.exception.OperationNotAllowedException;
 import com.yuzarsif.api.model.Comment;
 import com.yuzarsif.api.model.SportFan;
 import com.yuzarsif.api.model.SportType;
 import com.yuzarsif.api.repository.CommentRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,8 @@ public class CommentService {
                 .toList();
     }
 
-    public void createComment(CreateCommentRequest request) {
-        SportFan sportFan = sportFanService.findById(request.footballFanId());
+    public void createComment(CreateCommentRequest request, Authentication authentication) {
+        SportFan sportFan = (SportFan) authentication.getPrincipal();
 
         Comment comment = Comment
                 .builder()
@@ -45,7 +47,10 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public void likeComment(Long commentId) {
+    public void likeComment(Long commentId, Authentication authentication) {
+        if (!authentication.isAuthenticated()) {
+            throw new OperationNotAllowedException("User has to login first!");
+        }
         Comment comment = findById(commentId);
         comment.setLikeCount(comment.getLikeCount() + 1);
         commentRepository.save(comment);
@@ -56,7 +61,10 @@ public class CommentService {
                 .orElseThrow(() -> new CommentFoundException("Comment not found by id : " + id));
     }
 
-    public void deleteComment(Long commentId) {
+    public void deleteComment(Long commentId, Authentication authentication) {
+        if (!authentication.isAuthenticated()) {
+            throw new OperationNotAllowedException("User has to login first!");
+        }
         findById(commentId);
         commentRepository.deleteById(commentId);
     }

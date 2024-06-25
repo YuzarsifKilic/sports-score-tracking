@@ -7,6 +7,7 @@ import com.yuzarsif.api.model.FavoriteTeam;
 import com.yuzarsif.api.model.SportFan;
 import com.yuzarsif.api.model.SportType;
 import com.yuzarsif.api.repository.FavoriteTeamRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -26,8 +27,8 @@ public class FavoriteTeamService {
         this.sportFanService = sportFanService;
     }
 
-    public void createFavoriteTeam(CreateFavoriteTeamRequest request) {
-        SportFan sportFan = sportFanService.findById(request.userId());
+    public void createFavoriteTeam(CreateFavoriteTeamRequest request, Authentication authentication) {
+        SportFan sportFan = (SportFan) authentication.getPrincipal();
 
         Optional<FavoriteTeam> byTeamIdAndSportType = favoriteTeamRepository.findByTeamIdAndSportType(request.teamId(), request.sportType());
         if (byTeamIdAndSportType.isPresent()) {
@@ -66,10 +67,12 @@ public class FavoriteTeamService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteFavoriteTeam(DeleteFavoriteTeamRequest request) {
+    public void deleteFavoriteTeam(DeleteFavoriteTeamRequest request, Authentication authentication) {
         Optional<FavoriteTeam> byTeamIdAndSportType = favoriteTeamRepository.findByTeamIdAndSportType(request.teamId(), request.sportType());
         if (byTeamIdAndSportType.isPresent()) {
-            byTeamIdAndSportType.get().getSportFans().remove(sportFanService.findById(request.userId()));
+            SportFan sportFan = (SportFan) authentication.getPrincipal();
+
+            byTeamIdAndSportType.get().getSportFans().remove(sportFan);
             favoriteTeamRepository.save(byTeamIdAndSportType.get());
         }
     }
