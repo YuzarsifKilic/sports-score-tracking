@@ -5,6 +5,7 @@ import com.yuzarsif.api.dto.DeleteFavoriteTeamRequest;
 import com.yuzarsif.api.dto.FavoriteTeamDto;
 import com.yuzarsif.api.service.FavoriteTeamService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,14 +26,14 @@ public class FavoriteTeamController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createFavoriteTeam(@RequestBody CreateFavoriteTeamRequest request) {
-        favoriteTeamService.createFavoriteTeam(request);
+    public ResponseEntity<Void> createFavoriteTeam(@RequestBody CreateFavoriteTeamRequest request, Authentication authentication) {
+        favoriteTeamService.createFavoriteTeam(request, authentication);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteFavoriteTeam(@RequestBody DeleteFavoriteTeamRequest request) {
-        favoriteTeamService.deleteFavoriteTeam(request);
+    public ResponseEntity<Void> deleteFavoriteTeam(@RequestBody DeleteFavoriteTeamRequest request, Authentication authentication) {
+        favoriteTeamService.deleteFavoriteTeam(request, authentication);
         return ResponseEntity.ok().build();
 
     }

@@ -6,6 +6,7 @@ import com.yuzarsif.api.model.Comment;
 import com.yuzarsif.api.model.SportType;
 import com.yuzarsif.api.service.CommentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,20 +27,20 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createComment(@RequestBody CreateCommentRequest request) {
-        commentService.createComment(request);
+    public ResponseEntity<Void> createComment(@RequestBody CreateCommentRequest request, Authentication authentication) {
+        commentService.createComment(request, authentication);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<Void> likeComment(@PathVariable Long commentId) {
-        commentService.likeComment(commentId);
+    public ResponseEntity<Void> likeComment(@PathVariable Long commentId, Authentication authentication) {
+        commentService.likeComment(commentId, authentication);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
-        commentService.deleteComment(commentId);
+    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId, Authentication authentication) {
+        commentService.deleteComment(commentId, authentication);
         return ResponseEntity.ok().build();
     }
 }

@@ -42,10 +42,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/comments/**").hasAnyRole("FOOTBALL_FAN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/favorite-matches/**").hasAnyRole("FOOTBALL_FAN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/favorite-teams/**").hasAnyRole("FOOTBALL_FAN")
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/admin/**").hasAnyRole("ADMIN")
                         .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

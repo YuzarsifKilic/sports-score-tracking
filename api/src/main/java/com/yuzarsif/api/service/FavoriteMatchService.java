@@ -6,6 +6,7 @@ import com.yuzarsif.api.model.FavoriteMatch;
 import com.yuzarsif.api.model.SportFan;
 import com.yuzarsif.api.model.SportType;
 import com.yuzarsif.api.repository.FavoriteMatchRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,8 +23,8 @@ public class FavoriteMatchService {
         this.sportFanService = sportFanService;
     }
 
-    public void createFavoriteMatch(FavoriteMatchRequest request) {
-        SportFan sportFan = sportFanService.findById(request.userId());
+    public void createFavoriteMatch(FavoriteMatchRequest request, Authentication authentication) {
+        SportFan sportFan = (SportFan) authentication.getPrincipal();
 
         Optional<FavoriteMatch> byMatchIdAndSportType = favoriteMatchRepository.findByMatchIdAndSportType(request.matchId(), request.sportType());
         if (byMatchIdAndSportType.isPresent()) {
@@ -57,8 +58,9 @@ public class FavoriteMatchService {
                 .collect(Collectors.toList());
     }
 
-    public Boolean checkFavoriteMatch(FavoriteMatchRequest request) {
-        SportFan sportFan = sportFanService.findById(request.userId());
+    public Boolean checkFavoriteMatch(FavoriteMatchRequest request, Authentication authentication) {
+        SportFan sportFan = (SportFan) authentication.getPrincipal();
+
         List<FavoriteMatch> favoriteMatches = favoriteMatchRepository.findBySportFans(Set.of(sportFan));
         if (request.matchId() == 1074976) {
             System.out.println("Evet");
@@ -71,10 +73,12 @@ public class FavoriteMatchService {
         return false;
     }
 
-    public void deleteFavoriteMatch(FavoriteMatchRequest request) {
+    public void deleteFavoriteMatch(FavoriteMatchRequest request, Authentication authentication) {
         Optional<FavoriteMatch> byMatchIdAndSportType = favoriteMatchRepository.findByMatchIdAndSportType(request.matchId(), request.sportType());
         if (byMatchIdAndSportType.isPresent()) {
-            byMatchIdAndSportType.get().getSportFans().remove(sportFanService.findById(request.userId()));
+            SportFan sportFan = (SportFan) authentication.getPrincipal();
+
+            byMatchIdAndSportType.get().getSportFans().remove(sportFan);
             favoriteMatchRepository.save(byMatchIdAndSportType.get());
         }
     }

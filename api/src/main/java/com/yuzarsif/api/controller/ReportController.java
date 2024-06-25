@@ -19,8 +19,8 @@ public class ReportController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> createReport(@RequestBody CreateReportRequest request) {
-        reportService.createReport(request);
+    public ResponseEntity<?> createReport(@RequestBody CreateReportRequest request, Authentication authentication) {
+        reportService.createReport(request, authentication);
         return ResponseEntity.ok().build();
     }
 }

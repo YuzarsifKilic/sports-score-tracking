@@ -19,14 +19,14 @@ public class SportFan extends BaseUser {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "sport_fan_favorite_team",
             joinColumns = @JoinColumn(name = "sport_fan_id"),
             inverseJoinColumns = @JoinColumn(name = "favorite_team_id"))
     private Set<FavoriteTeam> favoriteTeams;
     @OneToMany(mappedBy = "sportFan", cascade = CascadeType.REMOVE)
     private Set<Comment> comments;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "sport_fan_favorite_match",
             joinColumns = @JoinColumn(name = "sport_fan_id"),
             inverseJoinColumns = @JoinColumn(name = "favorite_match_id"))

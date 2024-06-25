@@ -6,6 +6,7 @@ import com.yuzarsif.api.model.Report;
 import com.yuzarsif.api.model.ReportStatus;
 import com.yuzarsif.api.model.SportFan;
 import com.yuzarsif.api.repository.ReportRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,13 +39,13 @@ public class ReportService {
     }
 
 
-    public void createReport(CreateReportRequest request) {
-        SportFan sportFanById = sportFanService.findById(request.sportFanId());
+    public void createReport(CreateReportRequest request, Authentication authentication) {
+        SportFan sportFan = (SportFan) authentication.getPrincipal();
 
         Report report = Report
                 .builder()
                 .description(request.description())
-                .sportFan(sportFanById)
+                .sportFan(sportFan)
                 .build();
 
         reportRepository.save(report);
